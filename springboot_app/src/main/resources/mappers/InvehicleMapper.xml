@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idv.heimlich.springboot.entity.mapper.InvehicleMapper">
+  <resultMap id="BaseResultMap" type="idv.heimlich.springboot.entity.po.Invehicle">
+    <id column="BONDNO" jdbcType="VARCHAR" property="bondno" />
+    <id column="DECLNO" jdbcType="VARCHAR" property="declno" />
+    <id column="ITEMNO" jdbcType="DECIMAL" property="itemno" />
+    <id column="VEHICLENO" jdbcType="VARCHAR" property="vehicleno" />
+    <result column="VEHICLEOUT" jdbcType="VARCHAR" property="vehicleout" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BONDNO, DECLNO, ITEMNO, VEHICLENO, VEHICLEOUT
+  </sql>
+  <select id="selectByExample" parameterType="idv.heimlich.springboot.entity.po.InvehicleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.INVEHICLE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.InvehicleKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.INVEHICLE
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and DECLNO = #{declno,jdbcType=VARCHAR}
+      and ITEMNO = #{itemno,jdbcType=DECIMAL}
+      and VEHICLENO = #{vehicleno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.InvehicleKey">
+    delete from PCLMSMGR.INVEHICLE
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and DECLNO = #{declno,jdbcType=VARCHAR}
+      and ITEMNO = #{itemno,jdbcType=DECIMAL}
+      and VEHICLENO = #{vehicleno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="idv.heimlich.springboot.entity.po.InvehicleExample">
+    delete from PCLMSMGR.INVEHICLE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="idv.heimlich.springboot.entity.po.Invehicle">
+    insert into PCLMSMGR.INVEHICLE (BONDNO, DECLNO, ITEMNO, 
+      VEHICLENO, VEHICLEOUT)
+    values (#{bondno,jdbcType=VARCHAR}, #{declno,jdbcType=VARCHAR}, #{itemno,jdbcType=DECIMAL}, 
+      #{vehicleno,jdbcType=VARCHAR}, #{vehicleout,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="idv.heimlich.springboot.entity.po.Invehicle">
+    insert into PCLMSMGR.INVEHICLE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        BONDNO,
+      </if>
+      <if test="declno != null">
+        DECLNO,
+      </if>
+      <if test="itemno != null">
+        ITEMNO,
+      </if>
+      <if test="vehicleno != null">
+        VEHICLENO,
+      </if>
+      <if test="vehicleout != null">
+        VEHICLEOUT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        #{bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="declno != null">
+        #{declno,jdbcType=VARCHAR},
+      </if>
+      <if test="itemno != null">
+        #{itemno,jdbcType=DECIMAL},
+      </if>
+      <if test="vehicleno != null">
+        #{vehicleno,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleout != null">
+        #{vehicleout,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="idv.heimlich.springboot.entity.po.InvehicleExample" resultType="java.lang.Long">
+    select count(*) from PCLMSMGR.INVEHICLE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update PCLMSMGR.INVEHICLE
+    <set>
+      <if test="record.bondno != null">
+        BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.declno != null">
+        DECLNO = #{record.declno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemno != null">
+        ITEMNO = #{record.itemno,jdbcType=DECIMAL},
+      </if>
+      <if test="record.vehicleno != null">
+        VEHICLENO = #{record.vehicleno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vehicleout != null">
+        VEHICLEOUT = #{record.vehicleout,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update PCLMSMGR.INVEHICLE
+    set BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      DECLNO = #{record.declno,jdbcType=VARCHAR},
+      ITEMNO = #{record.itemno,jdbcType=DECIMAL},
+      VEHICLENO = #{record.vehicleno,jdbcType=VARCHAR},
+      VEHICLEOUT = #{record.vehicleout,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="idv.heimlich.springboot.entity.po.Invehicle">
+    update PCLMSMGR.INVEHICLE
+    <set>
+      <if test="vehicleout != null">
+        VEHICLEOUT = #{vehicleout,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and DECLNO = #{declno,jdbcType=VARCHAR}
+      and ITEMNO = #{itemno,jdbcType=DECIMAL}
+      and VEHICLENO = #{vehicleno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.Invehicle">
+    update PCLMSMGR.INVEHICLE
+    set VEHICLEOUT = #{vehicleout,jdbcType=VARCHAR}
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and DECLNO = #{declno,jdbcType=VARCHAR}
+      and ITEMNO = #{itemno,jdbcType=DECIMAL}
+      and VEHICLENO = #{vehicleno,jdbcType=VARCHAR}
+  </update>
+</mapper>

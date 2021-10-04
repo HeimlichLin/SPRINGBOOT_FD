@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idv.heimlich.springboot.entity.mapper.TestorderMapper">
+  <resultMap id="BaseResultMap" type="idv.heimlich.springboot.entity.po.Testorder">
+    <id column="BONDNO" jdbcType="VARCHAR" property="bondno" />
+    <id column="TESTNO" jdbcType="VARCHAR" property="testno" />
+    <result column="CTMCODE" jdbcType="VARCHAR" property="ctmcode" />
+    <result column="SUBCODE" jdbcType="VARCHAR" property="subcode" />
+    <result column="REQRDATE" jdbcType="VARCHAR" property="reqrdate" />
+    <result column="APPLYDATE" jdbcType="VARCHAR" property="applydate" />
+    <result column="APPRVNO" jdbcType="VARCHAR" property="apprvno" />
+    <result column="APPROVEDDATE" jdbcType="VARCHAR" property="approveddate" />
+    <result column="DESTPLACE" jdbcType="VARCHAR" property="destplace" />
+    <result column="TESTTYPE" jdbcType="VARCHAR" property="testtype" />
+    <result column="CONFIRMDATE" jdbcType="CHAR" property="confirmdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BONDNO, TESTNO, CTMCODE, SUBCODE, REQRDATE, APPLYDATE, APPRVNO, APPROVEDDATE, DESTPLACE, 
+    TESTTYPE, CONFIRMDATE
+  </sql>
+  <select id="selectByExample" parameterType="idv.heimlich.springboot.entity.po.TestorderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.TESTORDER
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.TestorderKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.TESTORDER
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and TESTNO = #{testno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.TestorderKey">
+    delete from PCLMSMGR.TESTORDER
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and TESTNO = #{testno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="idv.heimlich.springboot.entity.po.TestorderExample">
+    delete from PCLMSMGR.TESTORDER
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="idv.heimlich.springboot.entity.po.Testorder">
+    insert into PCLMSMGR.TESTORDER (BONDNO, TESTNO, CTMCODE, 
+      SUBCODE, REQRDATE, APPLYDATE, 
+      APPRVNO, APPROVEDDATE, DESTPLACE, 
+      TESTTYPE, CONFIRMDATE)
+    values (#{bondno,jdbcType=VARCHAR}, #{testno,jdbcType=VARCHAR}, #{ctmcode,jdbcType=VARCHAR}, 
+      #{subcode,jdbcType=VARCHAR}, #{reqrdate,jdbcType=VARCHAR}, #{applydate,jdbcType=VARCHAR}, 
+      #{apprvno,jdbcType=VARCHAR}, #{approveddate,jdbcType=VARCHAR}, #{destplace,jdbcType=VARCHAR}, 
+      #{testtype,jdbcType=VARCHAR}, #{confirmdate,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="idv.heimlich.springboot.entity.po.Testorder">
+    insert into PCLMSMGR.TESTORDER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        BONDNO,
+      </if>
+      <if test="testno != null">
+        TESTNO,
+      </if>
+      <if test="ctmcode != null">
+        CTMCODE,
+      </if>
+      <if test="subcode != null">
+        SUBCODE,
+      </if>
+      <if test="reqrdate != null">
+        REQRDATE,
+      </if>
+      <if test="applydate != null">
+        APPLYDATE,
+      </if>
+      <if test="apprvno != null">
+        APPRVNO,
+      </if>
+      <if test="approveddate != null">
+        APPROVEDDATE,
+      </if>
+      <if test="destplace != null">
+        DESTPLACE,
+      </if>
+      <if test="testtype != null">
+        TESTTYPE,
+      </if>
+      <if test="confirmdate != null">
+        CONFIRMDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        #{bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="testno != null">
+        #{testno,jdbcType=VARCHAR},
+      </if>
+      <if test="ctmcode != null">
+        #{ctmcode,jdbcType=VARCHAR},
+      </if>
+      <if test="subcode != null">
+        #{subcode,jdbcType=VARCHAR},
+      </if>
+      <if test="reqrdate != null">
+        #{reqrdate,jdbcType=VARCHAR},
+      </if>
+      <if test="applydate != null">
+        #{applydate,jdbcType=VARCHAR},
+      </if>
+      <if test="apprvno != null">
+        #{apprvno,jdbcType=VARCHAR},
+      </if>
+      <if test="approveddate != null">
+        #{approveddate,jdbcType=VARCHAR},
+      </if>
+      <if test="destplace != null">
+        #{destplace,jdbcType=VARCHAR},
+      </if>
+      <if test="testtype != null">
+        #{testtype,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmdate != null">
+        #{confirmdate,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="idv.heimlich.springboot.entity.po.TestorderExample" resultType="java.lang.Long">
+    select count(*) from PCLMSMGR.TESTORDER
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update PCLMSMGR.TESTORDER
+    <set>
+      <if test="record.bondno != null">
+        BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.testno != null">
+        TESTNO = #{record.testno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctmcode != null">
+        CTMCODE = #{record.ctmcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subcode != null">
+        SUBCODE = #{record.subcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reqrdate != null">
+        REQRDATE = #{record.reqrdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applydate != null">
+        APPLYDATE = #{record.applydate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.apprvno != null">
+        APPRVNO = #{record.apprvno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approveddate != null">
+        APPROVEDDATE = #{record.approveddate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.destplace != null">
+        DESTPLACE = #{record.destplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.testtype != null">
+        TESTTYPE = #{record.testtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.confirmdate != null">
+        CONFIRMDATE = #{record.confirmdate,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update PCLMSMGR.TESTORDER
+    set BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      TESTNO = #{record.testno,jdbcType=VARCHAR},
+      CTMCODE = #{record.ctmcode,jdbcType=VARCHAR},
+      SUBCODE = #{record.subcode,jdbcType=VARCHAR},
+      REQRDATE = #{record.reqrdate,jdbcType=VARCHAR},
+      APPLYDATE = #{record.applydate,jdbcType=VARCHAR},
+      APPRVNO = #{record.apprvno,jdbcType=VARCHAR},
+      APPROVEDDATE = #{record.approveddate,jdbcType=VARCHAR},
+      DESTPLACE = #{record.destplace,jdbcType=VARCHAR},
+      TESTTYPE = #{record.testtype,jdbcType=VARCHAR},
+      CONFIRMDATE = #{record.confirmdate,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="idv.heimlich.springboot.entity.po.Testorder">
+    update PCLMSMGR.TESTORDER
+    <set>
+      <if test="ctmcode != null">
+        CTMCODE = #{ctmcode,jdbcType=VARCHAR},
+      </if>
+      <if test="subcode != null">
+        SUBCODE = #{subcode,jdbcType=VARCHAR},
+      </if>
+      <if test="reqrdate != null">
+        REQRDATE = #{reqrdate,jdbcType=VARCHAR},
+      </if>
+      <if test="applydate != null">
+        APPLYDATE = #{applydate,jdbcType=VARCHAR},
+      </if>
+      <if test="apprvno != null">
+        APPRVNO = #{apprvno,jdbcType=VARCHAR},
+      </if>
+      <if test="approveddate != null">
+        APPROVEDDATE = #{approveddate,jdbcType=VARCHAR},
+      </if>
+      <if test="destplace != null">
+        DESTPLACE = #{destplace,jdbcType=VARCHAR},
+      </if>
+      <if test="testtype != null">
+        TESTTYPE = #{testtype,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmdate != null">
+        CONFIRMDATE = #{confirmdate,jdbcType=CHAR},
+      </if>
+    </set>
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and TESTNO = #{testno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.Testorder">
+    update PCLMSMGR.TESTORDER
+    set CTMCODE = #{ctmcode,jdbcType=VARCHAR},
+      SUBCODE = #{subcode,jdbcType=VARCHAR},
+      REQRDATE = #{reqrdate,jdbcType=VARCHAR},
+      APPLYDATE = #{applydate,jdbcType=VARCHAR},
+      APPRVNO = #{apprvno,jdbcType=VARCHAR},
+      APPROVEDDATE = #{approveddate,jdbcType=VARCHAR},
+      DESTPLACE = #{destplace,jdbcType=VARCHAR},
+      TESTTYPE = #{testtype,jdbcType=VARCHAR},
+      CONFIRMDATE = #{confirmdate,jdbcType=CHAR}
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and TESTNO = #{testno,jdbcType=VARCHAR}
+  </update>
+</mapper>

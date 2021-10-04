@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idv.heimlich.springboot.entity.mapper.TestitemMapper">
+  <resultMap id="BaseResultMap" type="idv.heimlich.springboot.entity.po.Testitem">
+    <id column="BONDNO" jdbcType="VARCHAR" property="bondno" />
+    <id column="TESTNO" jdbcType="VARCHAR" property="testno" />
+    <id column="ITEM" jdbcType="DECIMAL" property="item" />
+    <result column="PRDTNO" jdbcType="VARCHAR" property="prdtno" />
+    <result column="PRDTQTY" jdbcType="DECIMAL" property="prdtqty" />
+    <result column="PRDTUNIT" jdbcType="VARCHAR" property="prdtunit" />
+    <result column="RSTRQTY" jdbcType="DECIMAL" property="rstrqty" />
+    <result column="UNITPRICE" jdbcType="DECIMAL" property="unitprice" />
+    <result column="UNINQTY" jdbcType="DECIMAL" property="uninqty" />
+    <result column="DECLNO" jdbcType="VARCHAR" property="declno" />
+    <result column="ITEMNO" jdbcType="DECIMAL" property="itemno" />
+    <result column="OREFBILLNO" jdbcType="VARCHAR" property="orefbillno" />
+    <result column="OITEM" jdbcType="DECIMAL" property="oitem" />
+    <result column="INPOST" jdbcType="VARCHAR" property="inpost" />
+    <result column="DESCRIP" jdbcType="VARCHAR" property="descrip" />
+    <result column="MOITEMNO" jdbcType="DECIMAL" property="moitemno" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BONDNO, TESTNO, ITEM, PRDTNO, PRDTQTY, PRDTUNIT, RSTRQTY, UNITPRICE, UNINQTY, DECLNO, 
+    ITEMNO, OREFBILLNO, OITEM, INPOST, DESCRIP, MOITEMNO
+  </sql>
+  <select id="selectByExample" parameterType="idv.heimlich.springboot.entity.po.TestitemExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.TESTITEM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.TestitemKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.TESTITEM
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and TESTNO = #{testno,jdbcType=VARCHAR}
+      and ITEM = #{item,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.TestitemKey">
+    delete from PCLMSMGR.TESTITEM
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and TESTNO = #{testno,jdbcType=VARCHAR}
+      and ITEM = #{item,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="idv.heimlich.springboot.entity.po.TestitemExample">
+    delete from PCLMSMGR.TESTITEM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="idv.heimlich.springboot.entity.po.Testitem">
+    insert into PCLMSMGR.TESTITEM (BONDNO, TESTNO, ITEM, 
+      PRDTNO, PRDTQTY, PRDTUNIT, 
+      RSTRQTY, UNITPRICE, UNINQTY, 
+      DECLNO, ITEMNO, OREFBILLNO, 
+      OITEM, INPOST, DESCRIP, 
+      MOITEMNO)
+    values (#{bondno,jdbcType=VARCHAR}, #{testno,jdbcType=VARCHAR}, #{item,jdbcType=DECIMAL}, 
+      #{prdtno,jdbcType=VARCHAR}, #{prdtqty,jdbcType=DECIMAL}, #{prdtunit,jdbcType=VARCHAR}, 
+      #{rstrqty,jdbcType=DECIMAL}, #{unitprice,jdbcType=DECIMAL}, #{uninqty,jdbcType=DECIMAL}, 
+      #{declno,jdbcType=VARCHAR}, #{itemno,jdbcType=DECIMAL}, #{orefbillno,jdbcType=VARCHAR}, 
+      #{oitem,jdbcType=DECIMAL}, #{inpost,jdbcType=VARCHAR}, #{descrip,jdbcType=VARCHAR}, 
+      #{moitemno,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="idv.heimlich.springboot.entity.po.Testitem">
+    insert into PCLMSMGR.TESTITEM
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        BONDNO,
+      </if>
+      <if test="testno != null">
+        TESTNO,
+      </if>
+      <if test="item != null">
+        ITEM,
+      </if>
+      <if test="prdtno != null">
+        PRDTNO,
+      </if>
+      <if test="prdtqty != null">
+        PRDTQTY,
+      </if>
+      <if test="prdtunit != null">
+        PRDTUNIT,
+      </if>
+      <if test="rstrqty != null">
+        RSTRQTY,
+      </if>
+      <if test="unitprice != null">
+        UNITPRICE,
+      </if>
+      <if test="uninqty != null">
+        UNINQTY,
+      </if>
+      <if test="declno != null">
+        DECLNO,
+      </if>
+      <if test="itemno != null">
+        ITEMNO,
+      </if>
+      <if test="orefbillno != null">
+        OREFBILLNO,
+      </if>
+      <if test="oitem != null">
+        OITEM,
+      </if>
+      <if test="inpost != null">
+        INPOST,
+      </if>
+      <if test="descrip != null">
+        DESCRIP,
+      </if>
+      <if test="moitemno != null">
+        MOITEMNO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        #{bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="testno != null">
+        #{testno,jdbcType=VARCHAR},
+      </if>
+      <if test="item != null">
+        #{item,jdbcType=DECIMAL},
+      </if>
+      <if test="prdtno != null">
+        #{prdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="prdtqty != null">
+        #{prdtqty,jdbcType=DECIMAL},
+      </if>
+      <if test="prdtunit != null">
+        #{prdtunit,jdbcType=VARCHAR},
+      </if>
+      <if test="rstrqty != null">
+        #{rstrqty,jdbcType=DECIMAL},
+      </if>
+      <if test="unitprice != null">
+        #{unitprice,jdbcType=DECIMAL},
+      </if>
+      <if test="uninqty != null">
+        #{uninqty,jdbcType=DECIMAL},
+      </if>
+      <if test="declno != null">
+        #{declno,jdbcType=VARCHAR},
+      </if>
+      <if test="itemno != null">
+        #{itemno,jdbcType=DECIMAL},
+      </if>
+      <if test="orefbillno != null">
+        #{orefbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="oitem != null">
+        #{oitem,jdbcType=DECIMAL},
+      </if>
+      <if test="inpost != null">
+        #{inpost,jdbcType=VARCHAR},
+      </if>
+      <if test="descrip != null">
+        #{descrip,jdbcType=VARCHAR},
+      </if>
+      <if test="moitemno != null">
+        #{moitemno,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="idv.heimlich.springboot.entity.po.TestitemExample" resultType="java.lang.Long">
+    select count(*) from PCLMSMGR.TESTITEM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update PCLMSMGR.TESTITEM
+    <set>
+      <if test="record.bondno != null">
+        BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.testno != null">
+        TESTNO = #{record.testno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.item != null">
+        ITEM = #{record.item,jdbcType=DECIMAL},
+      </if>
+      <if test="record.prdtno != null">
+        PRDTNO = #{record.prdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prdtqty != null">
+        PRDTQTY = #{record.prdtqty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.prdtunit != null">
+        PRDTUNIT = #{record.prdtunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rstrqty != null">
+        RSTRQTY = #{record.rstrqty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.unitprice != null">
+        UNITPRICE = #{record.unitprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.uninqty != null">
+        UNINQTY = #{record.uninqty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.declno != null">
+        DECLNO = #{record.declno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemno != null">
+        ITEMNO = #{record.itemno,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orefbillno != null">
+        OREFBILLNO = #{record.orefbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oitem != null">
+        OITEM = #{record.oitem,jdbcType=DECIMAL},
+      </if>
+      <if test="record.inpost != null">
+        INPOST = #{record.inpost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.descrip != null">
+        DESCRIP = #{record.descrip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moitemno != null">
+        MOITEMNO = #{record.moitemno,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update PCLMSMGR.TESTITEM
+    set BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      TESTNO = #{record.testno,jdbcType=VARCHAR},
+      ITEM = #{record.item,jdbcType=DECIMAL},
+      PRDTNO = #{record.prdtno,jdbcType=VARCHAR},
+      PRDTQTY = #{record.prdtqty,jdbcType=DECIMAL},
+      PRDTUNIT = #{record.prdtunit,jdbcType=VARCHAR},
+      RSTRQTY = #{record.rstrqty,jdbcType=DECIMAL},
+      UNITPRICE = #{record.unitprice,jdbcType=DECIMAL},
+      UNINQTY = #{record.uninqty,jdbcType=DECIMAL},
+      DECLNO = #{record.declno,jdbcType=VARCHAR},
+      ITEMNO = #{record.itemno,jdbcType=DECIMAL},
+      OREFBILLNO = #{record.orefbillno,jdbcType=VARCHAR},
+      OITEM = #{record.oitem,jdbcType=DECIMAL},
+      INPOST = #{record.inpost,jdbcType=VARCHAR},
+      DESCRIP = #{record.descrip,jdbcType=VARCHAR},
+      MOITEMNO = #{record.moitemno,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="idv.heimlich.springboot.entity.po.Testitem">
+    update PCLMSMGR.TESTITEM
+    <set>
+      <if test="prdtno != null">
+        PRDTNO = #{prdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="prdtqty != null">
+        PRDTQTY = #{prdtqty,jdbcType=DECIMAL},
+      </if>
+      <if test="prdtunit != null">
+        PRDTUNIT = #{prdtunit,jdbcType=VARCHAR},
+      </if>
+      <if test="rstrqty != null">
+        RSTRQTY = #{rstrqty,jdbcType=DECIMAL},
+      </if>
+      <if test="unitprice != null">
+        UNITPRICE = #{unitprice,jdbcType=DECIMAL},
+      </if>
+      <if test="uninqty != null">
+        UNINQTY = #{uninqty,jdbcType=DECIMAL},
+      </if>
+      <if test="declno != null">
+        DECLNO = #{declno,jdbcType=VARCHAR},
+      </if>
+      <if test="itemno != null">
+        ITEMNO = #{itemno,jdbcType=DECIMAL},
+      </if>
+      <if test="orefbillno != null">
+        OREFBILLNO = #{orefbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="oitem != null">
+        OITEM = #{oitem,jdbcType=DECIMAL},
+      </if>
+      <if test="inpost != null">
+        INPOST = #{inpost,jdbcType=VARCHAR},
+      </if>
+      <if test="descrip != null">
+        DESCRIP = #{descrip,jdbcType=VARCHAR},
+      </if>
+      <if test="moitemno != null">
+        MOITEMNO = #{moitemno,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and TESTNO = #{testno,jdbcType=VARCHAR}
+      and ITEM = #{item,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.Testitem">
+    update PCLMSMGR.TESTITEM
+    set PRDTNO = #{prdtno,jdbcType=VARCHAR},
+      PRDTQTY = #{prdtqty,jdbcType=DECIMAL},
+      PRDTUNIT = #{prdtunit,jdbcType=VARCHAR},
+      RSTRQTY = #{rstrqty,jdbcType=DECIMAL},
+      UNITPRICE = #{unitprice,jdbcType=DECIMAL},
+      UNINQTY = #{uninqty,jdbcType=DECIMAL},
+      DECLNO = #{declno,jdbcType=VARCHAR},
+      ITEMNO = #{itemno,jdbcType=DECIMAL},
+      OREFBILLNO = #{orefbillno,jdbcType=VARCHAR},
+      OITEM = #{oitem,jdbcType=DECIMAL},
+      INPOST = #{inpost,jdbcType=VARCHAR},
+      DESCRIP = #{descrip,jdbcType=VARCHAR},
+      MOITEMNO = #{moitemno,jdbcType=DECIMAL}
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and TESTNO = #{testno,jdbcType=VARCHAR}
+      and ITEM = #{item,jdbcType=DECIMAL}
+  </update>
+</mapper>

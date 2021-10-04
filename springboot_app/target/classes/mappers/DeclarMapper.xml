@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idv.heimlich.springboot.entity.mapper.DeclarMapper">
+  <resultMap id="BaseResultMap" type="idv.heimlich.springboot.entity.po.Declar">
+    <id column="BONDNO" jdbcType="VARCHAR" property="bondno" />
+    <id column="DECLNO" jdbcType="VARCHAR" property="declno" />
+    <id column="MSGTYPE" jdbcType="VARCHAR" property="msgtype" />
+    <result column="MSGFUN" jdbcType="VARCHAR" property="msgfun" />
+    <result column="STRTYPE" jdbcType="VARCHAR" property="strtype" />
+    <result column="DECLTYPE" jdbcType="VARCHAR" property="decltype" />
+    <result column="IMPORTDATE" jdbcType="TIMESTAMP" property="importdate" />
+    <result column="DECLDATE" jdbcType="TIMESTAMP" property="decldate" />
+    <result column="RLSTIME" jdbcType="TIMESTAMP" property="rlstime" />
+    <result column="STGPLACE" jdbcType="VARCHAR" property="stgplace" />
+    <result column="NOPKG" jdbcType="DECIMAL" property="nopkg" />
+    <result column="PKGUNIT" jdbcType="VARCHAR" property="pkgunit" />
+    <result column="GWGT" jdbcType="DECIMAL" property="gwgt" />
+    <result column="REFBILLNO" jdbcType="VARCHAR" property="refbillno" />
+    <result column="BOXNO" jdbcType="VARCHAR" property="boxno" />
+    <result column="INBONDNO" jdbcType="VARCHAR" property="inbondno" />
+    <result column="OUTBONDNO" jdbcType="VARCHAR" property="outbondno" />
+    <result column="SENDID" jdbcType="VARCHAR" property="sendid" />
+    <result column="SENDQULF" jdbcType="VARCHAR" property="sendqulf" />
+    <result column="RECVID" jdbcType="VARCHAR" property="recvid" />
+    <result column="RECVQULF" jdbcType="VARCHAR" property="recvqulf" />
+    <result column="RLSFLAG" jdbcType="VARCHAR" property="rlsflag" />
+    <result column="MAWBNO" jdbcType="VARCHAR" property="mawbno" />
+    <result column="HAWBNO" jdbcType="VARCHAR" property="hawbno" />
+    <result column="OWNERBAN" jdbcType="VARCHAR" property="ownerban" />
+    <result column="ICONFIRMED" jdbcType="VARCHAR" property="iconfirmed" />
+    <result column="MONRPT" jdbcType="VARCHAR" property="monrpt" />
+    <result column="UPDTIME" jdbcType="CHAR" property="updtime" />
+    <result column="OTHERS" jdbcType="VARCHAR" property="others" />
+    <result column="BILLINGSTAT" jdbcType="VARCHAR" property="billingstat" />
+    <result column="CHARGEDATE" jdbcType="VARCHAR" property="chargedate" />
+    <result column="MARK" jdbcType="VARCHAR" property="mark" />
+    <result column="ASTYPE" jdbcType="VARCHAR" property="astype" />
+    <result column="VRNO" jdbcType="VARCHAR" property="vrno" />
+    <result column="SONO" jdbcType="VARCHAR" property="sono" />
+    <result column="EXCHANGE_RATE" jdbcType="DECIMAL" property="exchangeRate" />
+    <result column="TOT_FOB_VALUE" jdbcType="DECIMAL" property="totFobValue" />
+    <result column="LOAD_PORT_CODE" jdbcType="VARCHAR" property="loadPortCode" />
+    <result column="INSURANCE_FEE" jdbcType="DECIMAL" property="insuranceFee" />
+    <result column="FREIGHT_FEE" jdbcType="DECIMAL" property="freightFee" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BONDNO, DECLNO, MSGTYPE, MSGFUN, STRTYPE, DECLTYPE, IMPORTDATE, DECLDATE, RLSTIME, 
+    STGPLACE, NOPKG, PKGUNIT, GWGT, REFBILLNO, BOXNO, INBONDNO, OUTBONDNO, SENDID, SENDQULF, 
+    RECVID, RECVQULF, RLSFLAG, MAWBNO, HAWBNO, OWNERBAN, ICONFIRMED, MONRPT, UPDTIME, 
+    OTHERS, BILLINGSTAT, CHARGEDATE, MARK, ASTYPE, VRNO, SONO, EXCHANGE_RATE, TOT_FOB_VALUE, 
+    LOAD_PORT_CODE, INSURANCE_FEE, FREIGHT_FEE
+  </sql>
+  <select id="selectByExample" parameterType="idv.heimlich.springboot.entity.po.DeclarExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.DECLAR
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.DeclarKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.DECLAR
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and DECLNO = #{declno,jdbcType=VARCHAR}
+      and MSGTYPE = #{msgtype,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.DeclarKey">
+    delete from PCLMSMGR.DECLAR
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and DECLNO = #{declno,jdbcType=VARCHAR}
+      and MSGTYPE = #{msgtype,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="idv.heimlich.springboot.entity.po.DeclarExample">
+    delete from PCLMSMGR.DECLAR
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="idv.heimlich.springboot.entity.po.Declar">
+    insert into PCLMSMGR.DECLAR (BONDNO, DECLNO, MSGTYPE, 
+      MSGFUN, STRTYPE, DECLTYPE, 
+      IMPORTDATE, DECLDATE, RLSTIME, 
+      STGPLACE, NOPKG, PKGUNIT, 
+      GWGT, REFBILLNO, BOXNO, 
+      INBONDNO, OUTBONDNO, SENDID, 
+      SENDQULF, RECVID, RECVQULF, 
+      RLSFLAG, MAWBNO, HAWBNO, 
+      OWNERBAN, ICONFIRMED, MONRPT, 
+      UPDTIME, OTHERS, BILLINGSTAT, 
+      CHARGEDATE, MARK, ASTYPE, 
+      VRNO, SONO, EXCHANGE_RATE, 
+      TOT_FOB_VALUE, LOAD_PORT_CODE, INSURANCE_FEE, 
+      FREIGHT_FEE)
+    values (#{bondno,jdbcType=VARCHAR}, #{declno,jdbcType=VARCHAR}, #{msgtype,jdbcType=VARCHAR}, 
+      #{msgfun,jdbcType=VARCHAR}, #{strtype,jdbcType=VARCHAR}, #{decltype,jdbcType=VARCHAR}, 
+      #{importdate,jdbcType=TIMESTAMP}, #{decldate,jdbcType=TIMESTAMP}, #{rlstime,jdbcType=TIMESTAMP}, 
+      #{stgplace,jdbcType=VARCHAR}, #{nopkg,jdbcType=DECIMAL}, #{pkgunit,jdbcType=VARCHAR}, 
+      #{gwgt,jdbcType=DECIMAL}, #{refbillno,jdbcType=VARCHAR}, #{boxno,jdbcType=VARCHAR}, 
+      #{inbondno,jdbcType=VARCHAR}, #{outbondno,jdbcType=VARCHAR}, #{sendid,jdbcType=VARCHAR}, 
+      #{sendqulf,jdbcType=VARCHAR}, #{recvid,jdbcType=VARCHAR}, #{recvqulf,jdbcType=VARCHAR}, 
+      #{rlsflag,jdbcType=VARCHAR}, #{mawbno,jdbcType=VARCHAR}, #{hawbno,jdbcType=VARCHAR}, 
+      #{ownerban,jdbcType=VARCHAR}, #{iconfirmed,jdbcType=VARCHAR}, #{monrpt,jdbcType=VARCHAR}, 
+      #{updtime,jdbcType=CHAR}, #{others,jdbcType=VARCHAR}, #{billingstat,jdbcType=VARCHAR}, 
+      #{chargedate,jdbcType=VARCHAR}, #{mark,jdbcType=VARCHAR}, #{astype,jdbcType=VARCHAR}, 
+      #{vrno,jdbcType=VARCHAR}, #{sono,jdbcType=VARCHAR}, #{exchangeRate,jdbcType=DECIMAL}, 
+      #{totFobValue,jdbcType=DECIMAL}, #{loadPortCode,jdbcType=VARCHAR}, #{insuranceFee,jdbcType=DECIMAL}, 
+      #{freightFee,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="idv.heimlich.springboot.entity.po.Declar">
+    insert into PCLMSMGR.DECLAR
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        BONDNO,
+      </if>
+      <if test="declno != null">
+        DECLNO,
+      </if>
+      <if test="msgtype != null">
+        MSGTYPE,
+      </if>
+      <if test="msgfun != null">
+        MSGFUN,
+      </if>
+      <if test="strtype != null">
+        STRTYPE,
+      </if>
+      <if test="decltype != null">
+        DECLTYPE,
+      </if>
+      <if test="importdate != null">
+        IMPORTDATE,
+      </if>
+      <if test="decldate != null">
+        DECLDATE,
+      </if>
+      <if test="rlstime != null">
+        RLSTIME,
+      </if>
+      <if test="stgplace != null">
+        STGPLACE,
+      </if>
+      <if test="nopkg != null">
+        NOPKG,
+      </if>
+      <if test="pkgunit != null">
+        PKGUNIT,
+      </if>
+      <if test="gwgt != null">
+        GWGT,
+      </if>
+      <if test="refbillno != null">
+        REFBILLNO,
+      </if>
+      <if test="boxno != null">
+        BOXNO,
+      </if>
+      <if test="inbondno != null">
+        INBONDNO,
+      </if>
+      <if test="outbondno != null">
+        OUTBONDNO,
+      </if>
+      <if test="sendid != null">
+        SENDID,
+      </if>
+      <if test="sendqulf != null">
+        SENDQULF,
+      </if>
+      <if test="recvid != null">
+        RECVID,
+      </if>
+      <if test="recvqulf != null">
+        RECVQULF,
+      </if>
+      <if test="rlsflag != null">
+        RLSFLAG,
+      </if>
+      <if test="mawbno != null">
+        MAWBNO,
+      </if>
+      <if test="hawbno != null">
+        HAWBNO,
+      </if>
+      <if test="ownerban != null">
+        OWNERBAN,
+      </if>
+      <if test="iconfirmed != null">
+        ICONFIRMED,
+      </if>
+      <if test="monrpt != null">
+        MONRPT,
+      </if>
+      <if test="updtime != null">
+        UPDTIME,
+      </if>
+      <if test="others != null">
+        OTHERS,
+      </if>
+      <if test="billingstat != null">
+        BILLINGSTAT,
+      </if>
+      <if test="chargedate != null">
+        CHARGEDATE,
+      </if>
+      <if test="mark != null">
+        MARK,
+      </if>
+      <if test="astype != null">
+        ASTYPE,
+      </if>
+      <if test="vrno != null">
+        VRNO,
+      </if>
+      <if test="sono != null">
+        SONO,
+      </if>
+      <if test="exchangeRate != null">
+        EXCHANGE_RATE,
+      </if>
+      <if test="totFobValue != null">
+        TOT_FOB_VALUE,
+      </if>
+      <if test="loadPortCode != null">
+        LOAD_PORT_CODE,
+      </if>
+      <if test="insuranceFee != null">
+        INSURANCE_FEE,
+      </if>
+      <if test="freightFee != null">
+        FREIGHT_FEE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        #{bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="declno != null">
+        #{declno,jdbcType=VARCHAR},
+      </if>
+      <if test="msgtype != null">
+        #{msgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="msgfun != null">
+        #{msgfun,jdbcType=VARCHAR},
+      </if>
+      <if test="strtype != null">
+        #{strtype,jdbcType=VARCHAR},
+      </if>
+      <if test="decltype != null">
+        #{decltype,jdbcType=VARCHAR},
+      </if>
+      <if test="importdate != null">
+        #{importdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="decldate != null">
+        #{decldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rlstime != null">
+        #{rlstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stgplace != null">
+        #{stgplace,jdbcType=VARCHAR},
+      </if>
+      <if test="nopkg != null">
+        #{nopkg,jdbcType=DECIMAL},
+      </if>
+      <if test="pkgunit != null">
+        #{pkgunit,jdbcType=VARCHAR},
+      </if>
+      <if test="gwgt != null">
+        #{gwgt,jdbcType=DECIMAL},
+      </if>
+      <if test="refbillno != null">
+        #{refbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="boxno != null">
+        #{boxno,jdbcType=VARCHAR},
+      </if>
+      <if test="inbondno != null">
+        #{inbondno,jdbcType=VARCHAR},
+      </if>
+      <if test="outbondno != null">
+        #{outbondno,jdbcType=VARCHAR},
+      </if>
+      <if test="sendid != null">
+        #{sendid,jdbcType=VARCHAR},
+      </if>
+      <if test="sendqulf != null">
+        #{sendqulf,jdbcType=VARCHAR},
+      </if>
+      <if test="recvid != null">
+        #{recvid,jdbcType=VARCHAR},
+      </if>
+      <if test="recvqulf != null">
+        #{recvqulf,jdbcType=VARCHAR},
+      </if>
+      <if test="rlsflag != null">
+        #{rlsflag,jdbcType=VARCHAR},
+      </if>
+      <if test="mawbno != null">
+        #{mawbno,jdbcType=VARCHAR},
+      </if>
+      <if test="hawbno != null">
+        #{hawbno,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerban != null">
+        #{ownerban,jdbcType=VARCHAR},
+      </if>
+      <if test="iconfirmed != null">
+        #{iconfirmed,jdbcType=VARCHAR},
+      </if>
+      <if test="monrpt != null">
+        #{monrpt,jdbcType=VARCHAR},
+      </if>
+      <if test="updtime != null">
+        #{updtime,jdbcType=CHAR},
+      </if>
+      <if test="others != null">
+        #{others,jdbcType=VARCHAR},
+      </if>
+      <if test="billingstat != null">
+        #{billingstat,jdbcType=VARCHAR},
+      </if>
+      <if test="chargedate != null">
+        #{chargedate,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null">
+        #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="astype != null">
+        #{astype,jdbcType=VARCHAR},
+      </if>
+      <if test="vrno != null">
+        #{vrno,jdbcType=VARCHAR},
+      </if>
+      <if test="sono != null">
+        #{sono,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeRate != null">
+        #{exchangeRate,jdbcType=DECIMAL},
+      </if>
+      <if test="totFobValue != null">
+        #{totFobValue,jdbcType=DECIMAL},
+      </if>
+      <if test="loadPortCode != null">
+        #{loadPortCode,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceFee != null">
+        #{insuranceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="freightFee != null">
+        #{freightFee,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="idv.heimlich.springboot.entity.po.DeclarExample" resultType="java.lang.Long">
+    select count(*) from PCLMSMGR.DECLAR
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update PCLMSMGR.DECLAR
+    <set>
+      <if test="record.bondno != null">
+        BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.declno != null">
+        DECLNO = #{record.declno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msgtype != null">
+        MSGTYPE = #{record.msgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msgfun != null">
+        MSGFUN = #{record.msgfun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.strtype != null">
+        STRTYPE = #{record.strtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.decltype != null">
+        DECLTYPE = #{record.decltype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.importdate != null">
+        IMPORTDATE = #{record.importdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.decldate != null">
+        DECLDATE = #{record.decldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rlstime != null">
+        RLSTIME = #{record.rlstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.stgplace != null">
+        STGPLACE = #{record.stgplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nopkg != null">
+        NOPKG = #{record.nopkg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.pkgunit != null">
+        PKGUNIT = #{record.pkgunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gwgt != null">
+        GWGT = #{record.gwgt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.refbillno != null">
+        REFBILLNO = #{record.refbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.boxno != null">
+        BOXNO = #{record.boxno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inbondno != null">
+        INBONDNO = #{record.inbondno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outbondno != null">
+        OUTBONDNO = #{record.outbondno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendid != null">
+        SENDID = #{record.sendid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendqulf != null">
+        SENDQULF = #{record.sendqulf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recvid != null">
+        RECVID = #{record.recvid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recvqulf != null">
+        RECVQULF = #{record.recvqulf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rlsflag != null">
+        RLSFLAG = #{record.rlsflag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mawbno != null">
+        MAWBNO = #{record.mawbno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hawbno != null">
+        HAWBNO = #{record.hawbno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownerban != null">
+        OWNERBAN = #{record.ownerban,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iconfirmed != null">
+        ICONFIRMED = #{record.iconfirmed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monrpt != null">
+        MONRPT = #{record.monrpt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updtime != null">
+        UPDTIME = #{record.updtime,jdbcType=CHAR},
+      </if>
+      <if test="record.others != null">
+        OTHERS = #{record.others,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billingstat != null">
+        BILLINGSTAT = #{record.billingstat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chargedate != null">
+        CHARGEDATE = #{record.chargedate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mark != null">
+        MARK = #{record.mark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.astype != null">
+        ASTYPE = #{record.astype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vrno != null">
+        VRNO = #{record.vrno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sono != null">
+        SONO = #{record.sono,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exchangeRate != null">
+        EXCHANGE_RATE = #{record.exchangeRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totFobValue != null">
+        TOT_FOB_VALUE = #{record.totFobValue,jdbcType=DECIMAL},
+      </if>
+      <if test="record.loadPortCode != null">
+        LOAD_PORT_CODE = #{record.loadPortCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insuranceFee != null">
+        INSURANCE_FEE = #{record.insuranceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.freightFee != null">
+        FREIGHT_FEE = #{record.freightFee,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update PCLMSMGR.DECLAR
+    set BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      DECLNO = #{record.declno,jdbcType=VARCHAR},
+      MSGTYPE = #{record.msgtype,jdbcType=VARCHAR},
+      MSGFUN = #{record.msgfun,jdbcType=VARCHAR},
+      STRTYPE = #{record.strtype,jdbcType=VARCHAR},
+      DECLTYPE = #{record.decltype,jdbcType=VARCHAR},
+      IMPORTDATE = #{record.importdate,jdbcType=TIMESTAMP},
+      DECLDATE = #{record.decldate,jdbcType=TIMESTAMP},
+      RLSTIME = #{record.rlstime,jdbcType=TIMESTAMP},
+      STGPLACE = #{record.stgplace,jdbcType=VARCHAR},
+      NOPKG = #{record.nopkg,jdbcType=DECIMAL},
+      PKGUNIT = #{record.pkgunit,jdbcType=VARCHAR},
+      GWGT = #{record.gwgt,jdbcType=DECIMAL},
+      REFBILLNO = #{record.refbillno,jdbcType=VARCHAR},
+      BOXNO = #{record.boxno,jdbcType=VARCHAR},
+      INBONDNO = #{record.inbondno,jdbcType=VARCHAR},
+      OUTBONDNO = #{record.outbondno,jdbcType=VARCHAR},
+      SENDID = #{record.sendid,jdbcType=VARCHAR},
+      SENDQULF = #{record.sendqulf,jdbcType=VARCHAR},
+      RECVID = #{record.recvid,jdbcType=VARCHAR},
+      RECVQULF = #{record.recvqulf,jdbcType=VARCHAR},
+      RLSFLAG = #{record.rlsflag,jdbcType=VARCHAR},
+      MAWBNO = #{record.mawbno,jdbcType=VARCHAR},
+      HAWBNO = #{record.hawbno,jdbcType=VARCHAR},
+      OWNERBAN = #{record.ownerban,jdbcType=VARCHAR},
+      ICONFIRMED = #{record.iconfirmed,jdbcType=VARCHAR},
+      MONRPT = #{record.monrpt,jdbcType=VARCHAR},
+      UPDTIME = #{record.updtime,jdbcType=CHAR},
+      OTHERS = #{record.others,jdbcType=VARCHAR},
+      BILLINGSTAT = #{record.billingstat,jdbcType=VARCHAR},
+      CHARGEDATE = #{record.chargedate,jdbcType=VARCHAR},
+      MARK = #{record.mark,jdbcType=VARCHAR},
+      ASTYPE = #{record.astype,jdbcType=VARCHAR},
+      VRNO = #{record.vrno,jdbcType=VARCHAR},
+      SONO = #{record.sono,jdbcType=VARCHAR},
+      EXCHANGE_RATE = #{record.exchangeRate,jdbcType=DECIMAL},
+      TOT_FOB_VALUE = #{record.totFobValue,jdbcType=DECIMAL},
+      LOAD_PORT_CODE = #{record.loadPortCode,jdbcType=VARCHAR},
+      INSURANCE_FEE = #{record.insuranceFee,jdbcType=DECIMAL},
+      FREIGHT_FEE = #{record.freightFee,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="idv.heimlich.springboot.entity.po.Declar">
+    update PCLMSMGR.DECLAR
+    <set>
+      <if test="msgfun != null">
+        MSGFUN = #{msgfun,jdbcType=VARCHAR},
+      </if>
+      <if test="strtype != null">
+        STRTYPE = #{strtype,jdbcType=VARCHAR},
+      </if>
+      <if test="decltype != null">
+        DECLTYPE = #{decltype,jdbcType=VARCHAR},
+      </if>
+      <if test="importdate != null">
+        IMPORTDATE = #{importdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="decldate != null">
+        DECLDATE = #{decldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rlstime != null">
+        RLSTIME = #{rlstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stgplace != null">
+        STGPLACE = #{stgplace,jdbcType=VARCHAR},
+      </if>
+      <if test="nopkg != null">
+        NOPKG = #{nopkg,jdbcType=DECIMAL},
+      </if>
+      <if test="pkgunit != null">
+        PKGUNIT = #{pkgunit,jdbcType=VARCHAR},
+      </if>
+      <if test="gwgt != null">
+        GWGT = #{gwgt,jdbcType=DECIMAL},
+      </if>
+      <if test="refbillno != null">
+        REFBILLNO = #{refbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="boxno != null">
+        BOXNO = #{boxno,jdbcType=VARCHAR},
+      </if>
+      <if test="inbondno != null">
+        INBONDNO = #{inbondno,jdbcType=VARCHAR},
+      </if>
+      <if test="outbondno != null">
+        OUTBONDNO = #{outbondno,jdbcType=VARCHAR},
+      </if>
+      <if test="sendid != null">
+        SENDID = #{sendid,jdbcType=VARCHAR},
+      </if>
+      <if test="sendqulf != null">
+        SENDQULF = #{sendqulf,jdbcType=VARCHAR},
+      </if>
+      <if test="recvid != null">
+        RECVID = #{recvid,jdbcType=VARCHAR},
+      </if>
+      <if test="recvqulf != null">
+        RECVQULF = #{recvqulf,jdbcType=VARCHAR},
+      </if>
+      <if test="rlsflag != null">
+        RLSFLAG = #{rlsflag,jdbcType=VARCHAR},
+      </if>
+      <if test="mawbno != null">
+        MAWBNO = #{mawbno,jdbcType=VARCHAR},
+      </if>
+      <if test="hawbno != null">
+        HAWBNO = #{hawbno,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerban != null">
+        OWNERBAN = #{ownerban,jdbcType=VARCHAR},
+      </if>
+      <if test="iconfirmed != null">
+        ICONFIRMED = #{iconfirmed,jdbcType=VARCHAR},
+      </if>
+      <if test="monrpt != null">
+        MONRPT = #{monrpt,jdbcType=VARCHAR},
+      </if>
+      <if test="updtime != null">
+        UPDTIME = #{updtime,jdbcType=CHAR},
+      </if>
+      <if test="others != null">
+        OTHERS = #{others,jdbcType=VARCHAR},
+      </if>
+      <if test="billingstat != null">
+        BILLINGSTAT = #{billingstat,jdbcType=VARCHAR},
+      </if>
+      <if test="chargedate != null">
+        CHARGEDATE = #{chargedate,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null">
+        MARK = #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="astype != null">
+        ASTYPE = #{astype,jdbcType=VARCHAR},
+      </if>
+      <if test="vrno != null">
+        VRNO = #{vrno,jdbcType=VARCHAR},
+      </if>
+      <if test="sono != null">
+        SONO = #{sono,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeRate != null">
+        EXCHANGE_RATE = #{exchangeRate,jdbcType=DECIMAL},
+      </if>
+      <if test="totFobValue != null">
+        TOT_FOB_VALUE = #{totFobValue,jdbcType=DECIMAL},
+      </if>
+      <if test="loadPortCode != null">
+        LOAD_PORT_CODE = #{loadPortCode,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceFee != null">
+        INSURANCE_FEE = #{insuranceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="freightFee != null">
+        FREIGHT_FEE = #{freightFee,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and DECLNO = #{declno,jdbcType=VARCHAR}
+      and MSGTYPE = #{msgtype,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.Declar">
+    update PCLMSMGR.DECLAR
+    set MSGFUN = #{msgfun,jdbcType=VARCHAR},
+      STRTYPE = #{strtype,jdbcType=VARCHAR},
+      DECLTYPE = #{decltype,jdbcType=VARCHAR},
+      IMPORTDATE = #{importdate,jdbcType=TIMESTAMP},
+      DECLDATE = #{decldate,jdbcType=TIMESTAMP},
+      RLSTIME = #{rlstime,jdbcType=TIMESTAMP},
+      STGPLACE = #{stgplace,jdbcType=VARCHAR},
+      NOPKG = #{nopkg,jdbcType=DECIMAL},
+      PKGUNIT = #{pkgunit,jdbcType=VARCHAR},
+      GWGT = #{gwgt,jdbcType=DECIMAL},
+      REFBILLNO = #{refbillno,jdbcType=VARCHAR},
+      BOXNO = #{boxno,jdbcType=VARCHAR},
+      INBONDNO = #{inbondno,jdbcType=VARCHAR},
+      OUTBONDNO = #{outbondno,jdbcType=VARCHAR},
+      SENDID = #{sendid,jdbcType=VARCHAR},
+      SENDQULF = #{sendqulf,jdbcType=VARCHAR},
+      RECVID = #{recvid,jdbcType=VARCHAR},
+      RECVQULF = #{recvqulf,jdbcType=VARCHAR},
+      RLSFLAG = #{rlsflag,jdbcType=VARCHAR},
+      MAWBNO = #{mawbno,jdbcType=VARCHAR},
+      HAWBNO = #{hawbno,jdbcType=VARCHAR},
+      OWNERBAN = #{ownerban,jdbcType=VARCHAR},
+      ICONFIRMED = #{iconfirmed,jdbcType=VARCHAR},
+      MONRPT = #{monrpt,jdbcType=VARCHAR},
+      UPDTIME = #{updtime,jdbcType=CHAR},
+      OTHERS = #{others,jdbcType=VARCHAR},
+      BILLINGSTAT = #{billingstat,jdbcType=VARCHAR},
+      CHARGEDATE = #{chargedate,jdbcType=VARCHAR},
+      MARK = #{mark,jdbcType=VARCHAR},
+      ASTYPE = #{astype,jdbcType=VARCHAR},
+      VRNO = #{vrno,jdbcType=VARCHAR},
+      SONO = #{sono,jdbcType=VARCHAR},
+      EXCHANGE_RATE = #{exchangeRate,jdbcType=DECIMAL},
+      TOT_FOB_VALUE = #{totFobValue,jdbcType=DECIMAL},
+      LOAD_PORT_CODE = #{loadPortCode,jdbcType=VARCHAR},
+      INSURANCE_FEE = #{insuranceFee,jdbcType=DECIMAL},
+      FREIGHT_FEE = #{freightFee,jdbcType=DECIMAL}
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and DECLNO = #{declno,jdbcType=VARCHAR}
+      and MSGTYPE = #{msgtype,jdbcType=VARCHAR}
+  </update>
+</mapper>

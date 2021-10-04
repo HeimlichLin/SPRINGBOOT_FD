@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idv.heimlich.springboot.entity.mapper.SendlogMapper">
+  <resultMap id="BaseResultMap" type="idv.heimlich.springboot.entity.po.Sendlog">
+    <result column="BONDNO" jdbcType="VARCHAR" property="bondno" />
+    <result column="DECLNO" jdbcType="VARCHAR" property="declno" />
+    <result column="STRTYPE" jdbcType="VARCHAR" property="strtype" />
+    <result column="SENDFLAG" jdbcType="VARCHAR" property="sendflag" />
+    <result column="CONTROLNO" jdbcType="VARCHAR" property="controlno" />
+    <result column="SENDTIME" jdbcType="TIMESTAMP" property="sendtime" />
+    <result column="MSGFUN" jdbcType="VARCHAR" property="msgfun" />
+    <result column="MSGTYPE" jdbcType="VARCHAR" property="msgtype" />
+    <result column="ASTYPE" jdbcType="VARCHAR" property="astype" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BONDNO, DECLNO, STRTYPE, SENDFLAG, CONTROLNO, SENDTIME, MSGFUN, MSGTYPE, ASTYPE
+  </sql>
+  <select id="selectByExample" parameterType="idv.heimlich.springboot.entity.po.SendlogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.SENDLOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="idv.heimlich.springboot.entity.po.SendlogExample">
+    delete from PCLMSMGR.SENDLOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="idv.heimlich.springboot.entity.po.Sendlog">
+    insert into PCLMSMGR.SENDLOG (BONDNO, DECLNO, STRTYPE, 
+      SENDFLAG, CONTROLNO, SENDTIME, 
+      MSGFUN, MSGTYPE, ASTYPE
+      )
+    values (#{bondno,jdbcType=VARCHAR}, #{declno,jdbcType=VARCHAR}, #{strtype,jdbcType=VARCHAR}, 
+      #{sendflag,jdbcType=VARCHAR}, #{controlno,jdbcType=VARCHAR}, #{sendtime,jdbcType=TIMESTAMP}, 
+      #{msgfun,jdbcType=VARCHAR}, #{msgtype,jdbcType=VARCHAR}, #{astype,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="idv.heimlich.springboot.entity.po.Sendlog">
+    insert into PCLMSMGR.SENDLOG
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        BONDNO,
+      </if>
+      <if test="declno != null">
+        DECLNO,
+      </if>
+      <if test="strtype != null">
+        STRTYPE,
+      </if>
+      <if test="sendflag != null">
+        SENDFLAG,
+      </if>
+      <if test="controlno != null">
+        CONTROLNO,
+      </if>
+      <if test="sendtime != null">
+        SENDTIME,
+      </if>
+      <if test="msgfun != null">
+        MSGFUN,
+      </if>
+      <if test="msgtype != null">
+        MSGTYPE,
+      </if>
+      <if test="astype != null">
+        ASTYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        #{bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="declno != null">
+        #{declno,jdbcType=VARCHAR},
+      </if>
+      <if test="strtype != null">
+        #{strtype,jdbcType=VARCHAR},
+      </if>
+      <if test="sendflag != null">
+        #{sendflag,jdbcType=VARCHAR},
+      </if>
+      <if test="controlno != null">
+        #{controlno,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null">
+        #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msgfun != null">
+        #{msgfun,jdbcType=VARCHAR},
+      </if>
+      <if test="msgtype != null">
+        #{msgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="astype != null">
+        #{astype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="idv.heimlich.springboot.entity.po.SendlogExample" resultType="java.lang.Long">
+    select count(*) from PCLMSMGR.SENDLOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update PCLMSMGR.SENDLOG
+    <set>
+      <if test="record.bondno != null">
+        BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.declno != null">
+        DECLNO = #{record.declno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.strtype != null">
+        STRTYPE = #{record.strtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendflag != null">
+        SENDFLAG = #{record.sendflag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.controlno != null">
+        CONTROLNO = #{record.controlno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendtime != null">
+        SENDTIME = #{record.sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.msgfun != null">
+        MSGFUN = #{record.msgfun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msgtype != null">
+        MSGTYPE = #{record.msgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.astype != null">
+        ASTYPE = #{record.astype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update PCLMSMGR.SENDLOG
+    set BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      DECLNO = #{record.declno,jdbcType=VARCHAR},
+      STRTYPE = #{record.strtype,jdbcType=VARCHAR},
+      SENDFLAG = #{record.sendflag,jdbcType=VARCHAR},
+      CONTROLNO = #{record.controlno,jdbcType=VARCHAR},
+      SENDTIME = #{record.sendtime,jdbcType=TIMESTAMP},
+      MSGFUN = #{record.msgfun,jdbcType=VARCHAR},
+      MSGTYPE = #{record.msgtype,jdbcType=VARCHAR},
+      ASTYPE = #{record.astype,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idv.heimlich.springboot.entity.mapper.BatchJobMapper">
+  <resultMap id="BaseResultMap" type="idv.heimlich.springboot.entity.po.BatchJob">
+    <id column="TRANSACTION" jdbcType="VARCHAR" property="transaction" />
+    <id column="EX_CODE" jdbcType="VARCHAR" property="exCode" />
+    <id column="CREATER" jdbcType="VARCHAR" property="creater" />
+    <result column="EX_GROUP" jdbcType="VARCHAR" property="exGroup" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="START_TIME" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="END_TIME" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="PARAMETER" jdbcType="VARCHAR" property="parameter" />
+    <result column="PARAMETER_CLASS" jdbcType="VARCHAR" property="parameterClass" />
+    <result column="TARGET_CLASS" jdbcType="VARCHAR" property="targetClass" />
+    <result column="HAS_FILE" jdbcType="VARCHAR" property="hasFile" />
+    <result column="IS_READ" jdbcType="VARCHAR" property="isRead" />
+    <result column="MAIL" jdbcType="VARCHAR" property="mail" />
+    <result column="MESSAGE" jdbcType="VARCHAR" property="message" />
+    <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="idv.heimlich.springboot.entity.po.BatchJob">
+    <result column="FILE_CONTENT" jdbcType="BLOB" property="fileContent" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    TRANSACTION, EX_CODE, CREATER, EX_GROUP, CREATE_TIME, START_TIME, END_TIME, STATUS, 
+    PARAMETER, PARAMETER_CLASS, TARGET_CLASS, HAS_FILE, IS_READ, MAIL, MESSAGE, FILE_NAME
+  </sql>
+  <sql id="Blob_Column_List">
+    FILE_CONTENT
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="idv.heimlich.springboot.entity.po.BatchJobExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from PCLMSMGR.BATCH_JOB
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="idv.heimlich.springboot.entity.po.BatchJobExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.BATCH_JOB
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.BatchJobKey" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from PCLMSMGR.BATCH_JOB
+    where TRANSACTION = #{transaction,jdbcType=VARCHAR}
+      and EX_CODE = #{exCode,jdbcType=VARCHAR}
+      and CREATER = #{creater,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.BatchJobKey">
+    delete from PCLMSMGR.BATCH_JOB
+    where TRANSACTION = #{transaction,jdbcType=VARCHAR}
+      and EX_CODE = #{exCode,jdbcType=VARCHAR}
+      and CREATER = #{creater,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="idv.heimlich.springboot.entity.po.BatchJobExample">
+    delete from PCLMSMGR.BATCH_JOB
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="idv.heimlich.springboot.entity.po.BatchJob">
+    insert into PCLMSMGR.BATCH_JOB (TRANSACTION, EX_CODE, CREATER, 
+      EX_GROUP, CREATE_TIME, START_TIME, 
+      END_TIME, STATUS, PARAMETER, 
+      PARAMETER_CLASS, TARGET_CLASS, HAS_FILE, 
+      IS_READ, MAIL, MESSAGE, 
+      FILE_NAME, FILE_CONTENT)
+    values (#{transaction,jdbcType=VARCHAR}, #{exCode,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, 
+      #{exGroup,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{parameter,jdbcType=VARCHAR}, 
+      #{parameterClass,jdbcType=VARCHAR}, #{targetClass,jdbcType=VARCHAR}, #{hasFile,jdbcType=VARCHAR}, 
+      #{isRead,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, #{message,jdbcType=VARCHAR}, 
+      #{fileName,jdbcType=VARCHAR}, #{fileContent,jdbcType=BLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="idv.heimlich.springboot.entity.po.BatchJob">
+    insert into PCLMSMGR.BATCH_JOB
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="transaction != null">
+        TRANSACTION,
+      </if>
+      <if test="exCode != null">
+        EX_CODE,
+      </if>
+      <if test="creater != null">
+        CREATER,
+      </if>
+      <if test="exGroup != null">
+        EX_GROUP,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="startTime != null">
+        START_TIME,
+      </if>
+      <if test="endTime != null">
+        END_TIME,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="parameter != null">
+        PARAMETER,
+      </if>
+      <if test="parameterClass != null">
+        PARAMETER_CLASS,
+      </if>
+      <if test="targetClass != null">
+        TARGET_CLASS,
+      </if>
+      <if test="hasFile != null">
+        HAS_FILE,
+      </if>
+      <if test="isRead != null">
+        IS_READ,
+      </if>
+      <if test="mail != null">
+        MAIL,
+      </if>
+      <if test="message != null">
+        MESSAGE,
+      </if>
+      <if test="fileName != null">
+        FILE_NAME,
+      </if>
+      <if test="fileContent != null">
+        FILE_CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="transaction != null">
+        #{transaction,jdbcType=VARCHAR},
+      </if>
+      <if test="exCode != null">
+        #{exCode,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="exGroup != null">
+        #{exGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter != null">
+        #{parameter,jdbcType=VARCHAR},
+      </if>
+      <if test="parameterClass != null">
+        #{parameterClass,jdbcType=VARCHAR},
+      </if>
+      <if test="targetClass != null">
+        #{targetClass,jdbcType=VARCHAR},
+      </if>
+      <if test="hasFile != null">
+        #{hasFile,jdbcType=VARCHAR},
+      </if>
+      <if test="isRead != null">
+        #{isRead,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null">
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null">
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileContent != null">
+        #{fileContent,jdbcType=BLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="idv.heimlich.springboot.entity.po.BatchJobExample" resultType="java.lang.Long">
+    select count(*) from PCLMSMGR.BATCH_JOB
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update PCLMSMGR.BATCH_JOB
+    <set>
+      <if test="record.transaction != null">
+        TRANSACTION = #{record.transaction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exCode != null">
+        EX_CODE = #{record.exCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null">
+        CREATER = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exGroup != null">
+        EX_GROUP = #{record.exGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.startTime != null">
+        START_TIME = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null">
+        END_TIME = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parameter != null">
+        PARAMETER = #{record.parameter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parameterClass != null">
+        PARAMETER_CLASS = #{record.parameterClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.targetClass != null">
+        TARGET_CLASS = #{record.targetClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hasFile != null">
+        HAS_FILE = #{record.hasFile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isRead != null">
+        IS_READ = #{record.isRead,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mail != null">
+        MAIL = #{record.mail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.message != null">
+        MESSAGE = #{record.message,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileName != null">
+        FILE_NAME = #{record.fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileContent != null">
+        FILE_CONTENT = #{record.fileContent,jdbcType=BLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update PCLMSMGR.BATCH_JOB
+    set TRANSACTION = #{record.transaction,jdbcType=VARCHAR},
+      EX_CODE = #{record.exCode,jdbcType=VARCHAR},
+      CREATER = #{record.creater,jdbcType=VARCHAR},
+      EX_GROUP = #{record.exGroup,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      START_TIME = #{record.startTime,jdbcType=TIMESTAMP},
+      END_TIME = #{record.endTime,jdbcType=TIMESTAMP},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      PARAMETER = #{record.parameter,jdbcType=VARCHAR},
+      PARAMETER_CLASS = #{record.parameterClass,jdbcType=VARCHAR},
+      TARGET_CLASS = #{record.targetClass,jdbcType=VARCHAR},
+      HAS_FILE = #{record.hasFile,jdbcType=VARCHAR},
+      IS_READ = #{record.isRead,jdbcType=VARCHAR},
+      MAIL = #{record.mail,jdbcType=VARCHAR},
+      MESSAGE = #{record.message,jdbcType=VARCHAR},
+      FILE_NAME = #{record.fileName,jdbcType=VARCHAR},
+      FILE_CONTENT = #{record.fileContent,jdbcType=BLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update PCLMSMGR.BATCH_JOB
+    set TRANSACTION = #{record.transaction,jdbcType=VARCHAR},
+      EX_CODE = #{record.exCode,jdbcType=VARCHAR},
+      CREATER = #{record.creater,jdbcType=VARCHAR},
+      EX_GROUP = #{record.exGroup,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      START_TIME = #{record.startTime,jdbcType=TIMESTAMP},
+      END_TIME = #{record.endTime,jdbcType=TIMESTAMP},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      PARAMETER = #{record.parameter,jdbcType=VARCHAR},
+      PARAMETER_CLASS = #{record.parameterClass,jdbcType=VARCHAR},
+      TARGET_CLASS = #{record.targetClass,jdbcType=VARCHAR},
+      HAS_FILE = #{record.hasFile,jdbcType=VARCHAR},
+      IS_READ = #{record.isRead,jdbcType=VARCHAR},
+      MAIL = #{record.mail,jdbcType=VARCHAR},
+      MESSAGE = #{record.message,jdbcType=VARCHAR},
+      FILE_NAME = #{record.fileName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="idv.heimlich.springboot.entity.po.BatchJob">
+    update PCLMSMGR.BATCH_JOB
+    <set>
+      <if test="exGroup != null">
+        EX_GROUP = #{exGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startTime != null">
+        START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter != null">
+        PARAMETER = #{parameter,jdbcType=VARCHAR},
+      </if>
+      <if test="parameterClass != null">
+        PARAMETER_CLASS = #{parameterClass,jdbcType=VARCHAR},
+      </if>
+      <if test="targetClass != null">
+        TARGET_CLASS = #{targetClass,jdbcType=VARCHAR},
+      </if>
+      <if test="hasFile != null">
+        HAS_FILE = #{hasFile,jdbcType=VARCHAR},
+      </if>
+      <if test="isRead != null">
+        IS_READ = #{isRead,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null">
+        MAIL = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null">
+        MESSAGE = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        FILE_NAME = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileContent != null">
+        FILE_CONTENT = #{fileContent,jdbcType=BLOB},
+      </if>
+    </set>
+    where TRANSACTION = #{transaction,jdbcType=VARCHAR}
+      and EX_CODE = #{exCode,jdbcType=VARCHAR}
+      and CREATER = #{creater,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="idv.heimlich.springboot.entity.po.BatchJob">
+    update PCLMSMGR.BATCH_JOB
+    set EX_GROUP = #{exGroup,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=VARCHAR},
+      PARAMETER = #{parameter,jdbcType=VARCHAR},
+      PARAMETER_CLASS = #{parameterClass,jdbcType=VARCHAR},
+      TARGET_CLASS = #{targetClass,jdbcType=VARCHAR},
+      HAS_FILE = #{hasFile,jdbcType=VARCHAR},
+      IS_READ = #{isRead,jdbcType=VARCHAR},
+      MAIL = #{mail,jdbcType=VARCHAR},
+      MESSAGE = #{message,jdbcType=VARCHAR},
+      FILE_NAME = #{fileName,jdbcType=VARCHAR},
+      FILE_CONTENT = #{fileContent,jdbcType=BLOB}
+    where TRANSACTION = #{transaction,jdbcType=VARCHAR}
+      and EX_CODE = #{exCode,jdbcType=VARCHAR}
+      and CREATER = #{creater,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.BatchJob">
+    update PCLMSMGR.BATCH_JOB
+    set EX_GROUP = #{exGroup,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=VARCHAR},
+      PARAMETER = #{parameter,jdbcType=VARCHAR},
+      PARAMETER_CLASS = #{parameterClass,jdbcType=VARCHAR},
+      TARGET_CLASS = #{targetClass,jdbcType=VARCHAR},
+      HAS_FILE = #{hasFile,jdbcType=VARCHAR},
+      IS_READ = #{isRead,jdbcType=VARCHAR},
+      MAIL = #{mail,jdbcType=VARCHAR},
+      MESSAGE = #{message,jdbcType=VARCHAR},
+      FILE_NAME = #{fileName,jdbcType=VARCHAR}
+    where TRANSACTION = #{transaction,jdbcType=VARCHAR}
+      and EX_CODE = #{exCode,jdbcType=VARCHAR}
+      and CREATER = #{creater,jdbcType=VARCHAR}
+  </update>
+</mapper>

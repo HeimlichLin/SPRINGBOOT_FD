@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idv.heimlich.springboot.entity.mapper.RecvlogMapper">
+  <resultMap id="BaseResultMap" type="idv.heimlich.springboot.entity.po.Recvlog">
+    <result column="BONDNO" jdbcType="VARCHAR" property="bondno" />
+    <result column="RECVTYPE" jdbcType="VARCHAR" property="recvtype" />
+    <result column="KEYWORD" jdbcType="VARCHAR" property="keyword" />
+    <result column="MSGTYPE" jdbcType="VARCHAR" property="msgtype" />
+    <result column="PROCTIME" jdbcType="TIMESTAMP" property="proctime" />
+    <result column="PROCSTATUS" jdbcType="DECIMAL" property="procstatus" />
+    <result column="PROCRMK" jdbcType="VARCHAR" property="procrmk" />
+    <result column="CONTROLNO" jdbcType="VARCHAR" property="controlno" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BONDNO, RECVTYPE, KEYWORD, MSGTYPE, PROCTIME, PROCSTATUS, PROCRMK, CONTROLNO
+  </sql>
+  <select id="selectByExample" parameterType="idv.heimlich.springboot.entity.po.RecvlogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.RECVLOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="idv.heimlich.springboot.entity.po.RecvlogExample">
+    delete from PCLMSMGR.RECVLOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="idv.heimlich.springboot.entity.po.Recvlog">
+    insert into PCLMSMGR.RECVLOG (BONDNO, RECVTYPE, KEYWORD, 
+      MSGTYPE, PROCTIME, PROCSTATUS, 
+      PROCRMK, CONTROLNO)
+    values (#{bondno,jdbcType=VARCHAR}, #{recvtype,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, 
+      #{msgtype,jdbcType=VARCHAR}, #{proctime,jdbcType=TIMESTAMP}, #{procstatus,jdbcType=DECIMAL}, 
+      #{procrmk,jdbcType=VARCHAR}, #{controlno,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="idv.heimlich.springboot.entity.po.Recvlog">
+    insert into PCLMSMGR.RECVLOG
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        BONDNO,
+      </if>
+      <if test="recvtype != null">
+        RECVTYPE,
+      </if>
+      <if test="keyword != null">
+        KEYWORD,
+      </if>
+      <if test="msgtype != null">
+        MSGTYPE,
+      </if>
+      <if test="proctime != null">
+        PROCTIME,
+      </if>
+      <if test="procstatus != null">
+        PROCSTATUS,
+      </if>
+      <if test="procrmk != null">
+        PROCRMK,
+      </if>
+      <if test="controlno != null">
+        CONTROLNO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        #{bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="recvtype != null">
+        #{recvtype,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null">
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="msgtype != null">
+        #{msgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="proctime != null">
+        #{proctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="procstatus != null">
+        #{procstatus,jdbcType=DECIMAL},
+      </if>
+      <if test="procrmk != null">
+        #{procrmk,jdbcType=VARCHAR},
+      </if>
+      <if test="controlno != null">
+        #{controlno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="idv.heimlich.springboot.entity.po.RecvlogExample" resultType="java.lang.Long">
+    select count(*) from PCLMSMGR.RECVLOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update PCLMSMGR.RECVLOG
+    <set>
+      <if test="record.bondno != null">
+        BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recvtype != null">
+        RECVTYPE = #{record.recvtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyword != null">
+        KEYWORD = #{record.keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msgtype != null">
+        MSGTYPE = #{record.msgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proctime != null">
+        PROCTIME = #{record.proctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.procstatus != null">
+        PROCSTATUS = #{record.procstatus,jdbcType=DECIMAL},
+      </if>
+      <if test="record.procrmk != null">
+        PROCRMK = #{record.procrmk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.controlno != null">
+        CONTROLNO = #{record.controlno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update PCLMSMGR.RECVLOG
+    set BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      RECVTYPE = #{record.recvtype,jdbcType=VARCHAR},
+      KEYWORD = #{record.keyword,jdbcType=VARCHAR},
+      MSGTYPE = #{record.msgtype,jdbcType=VARCHAR},
+      PROCTIME = #{record.proctime,jdbcType=TIMESTAMP},
+      PROCSTATUS = #{record.procstatus,jdbcType=DECIMAL},
+      PROCRMK = #{record.procrmk,jdbcType=VARCHAR},
+      CONTROLNO = #{record.controlno,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

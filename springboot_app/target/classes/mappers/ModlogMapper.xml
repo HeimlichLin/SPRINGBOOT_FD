@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idv.heimlich.springboot.entity.mapper.ModlogMapper">
+  <resultMap id="BaseResultMap" type="idv.heimlich.springboot.entity.po.Modlog">
+    <result column="BONDNO" jdbcType="VARCHAR" property="bondno" />
+    <result column="REFBILLNO" jdbcType="VARCHAR" property="refbillno" />
+    <result column="ITEM" jdbcType="DECIMAL" property="item" />
+    <result column="POST" jdbcType="VARCHAR" property="post" />
+    <result column="STRTYPE" jdbcType="VARCHAR" property="strtype" />
+    <result column="MODIFER" jdbcType="VARCHAR" property="modifer" />
+    <result column="MODTIME" jdbcType="TIMESTAMP" property="modtime" />
+    <result column="MODITEM" jdbcType="VARCHAR" property="moditem" />
+    <result column="ORIDATA" jdbcType="VARCHAR" property="oridata" />
+    <result column="MODDATA" jdbcType="VARCHAR" property="moddata" />
+    <result column="MODFILE" jdbcType="VARCHAR" property="modfile" />
+    <result column="REMKS" jdbcType="VARCHAR" property="remks" />
+    <result column="DECLNO" jdbcType="VARCHAR" property="declno" />
+    <result column="ITEMNO" jdbcType="DECIMAL" property="itemno" />
+    <result column="ODECLNO" jdbcType="VARCHAR" property="odeclno" />
+    <result column="OITEMNO" jdbcType="VARCHAR" property="oitemno" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BONDNO, REFBILLNO, ITEM, POST, STRTYPE, MODIFER, MODTIME, MODITEM, ORIDATA, MODDATA, 
+    MODFILE, REMKS, DECLNO, ITEMNO, ODECLNO, OITEMNO
+  </sql>
+  <select id="selectByExample" parameterType="idv.heimlich.springboot.entity.po.ModlogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.MODLOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="idv.heimlich.springboot.entity.po.ModlogExample">
+    delete from PCLMSMGR.MODLOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="idv.heimlich.springboot.entity.po.Modlog">
+    insert into PCLMSMGR.MODLOG (BONDNO, REFBILLNO, ITEM, 
+      POST, STRTYPE, MODIFER, 
+      MODTIME, MODITEM, ORIDATA, 
+      MODDATA, MODFILE, REMKS, 
+      DECLNO, ITEMNO, ODECLNO, 
+      OITEMNO)
+    values (#{bondno,jdbcType=VARCHAR}, #{refbillno,jdbcType=VARCHAR}, #{item,jdbcType=DECIMAL}, 
+      #{post,jdbcType=VARCHAR}, #{strtype,jdbcType=VARCHAR}, #{modifer,jdbcType=VARCHAR}, 
+      #{modtime,jdbcType=TIMESTAMP}, #{moditem,jdbcType=VARCHAR}, #{oridata,jdbcType=VARCHAR}, 
+      #{moddata,jdbcType=VARCHAR}, #{modfile,jdbcType=VARCHAR}, #{remks,jdbcType=VARCHAR}, 
+      #{declno,jdbcType=VARCHAR}, #{itemno,jdbcType=DECIMAL}, #{odeclno,jdbcType=VARCHAR}, 
+      #{oitemno,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="idv.heimlich.springboot.entity.po.Modlog">
+    insert into PCLMSMGR.MODLOG
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        BONDNO,
+      </if>
+      <if test="refbillno != null">
+        REFBILLNO,
+      </if>
+      <if test="item != null">
+        ITEM,
+      </if>
+      <if test="post != null">
+        POST,
+      </if>
+      <if test="strtype != null">
+        STRTYPE,
+      </if>
+      <if test="modifer != null">
+        MODIFER,
+      </if>
+      <if test="modtime != null">
+        MODTIME,
+      </if>
+      <if test="moditem != null">
+        MODITEM,
+      </if>
+      <if test="oridata != null">
+        ORIDATA,
+      </if>
+      <if test="moddata != null">
+        MODDATA,
+      </if>
+      <if test="modfile != null">
+        MODFILE,
+      </if>
+      <if test="remks != null">
+        REMKS,
+      </if>
+      <if test="declno != null">
+        DECLNO,
+      </if>
+      <if test="itemno != null">
+        ITEMNO,
+      </if>
+      <if test="odeclno != null">
+        ODECLNO,
+      </if>
+      <if test="oitemno != null">
+        OITEMNO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        #{bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="refbillno != null">
+        #{refbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="item != null">
+        #{item,jdbcType=DECIMAL},
+      </if>
+      <if test="post != null">
+        #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="strtype != null">
+        #{strtype,jdbcType=VARCHAR},
+      </if>
+      <if test="modifer != null">
+        #{modifer,jdbcType=VARCHAR},
+      </if>
+      <if test="modtime != null">
+        #{modtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="moditem != null">
+        #{moditem,jdbcType=VARCHAR},
+      </if>
+      <if test="oridata != null">
+        #{oridata,jdbcType=VARCHAR},
+      </if>
+      <if test="moddata != null">
+        #{moddata,jdbcType=VARCHAR},
+      </if>
+      <if test="modfile != null">
+        #{modfile,jdbcType=VARCHAR},
+      </if>
+      <if test="remks != null">
+        #{remks,jdbcType=VARCHAR},
+      </if>
+      <if test="declno != null">
+        #{declno,jdbcType=VARCHAR},
+      </if>
+      <if test="itemno != null">
+        #{itemno,jdbcType=DECIMAL},
+      </if>
+      <if test="odeclno != null">
+        #{odeclno,jdbcType=VARCHAR},
+      </if>
+      <if test="oitemno != null">
+        #{oitemno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="idv.heimlich.springboot.entity.po.ModlogExample" resultType="java.lang.Long">
+    select count(*) from PCLMSMGR.MODLOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update PCLMSMGR.MODLOG
+    <set>
+      <if test="record.bondno != null">
+        BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refbillno != null">
+        REFBILLNO = #{record.refbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.item != null">
+        ITEM = #{record.item,jdbcType=DECIMAL},
+      </if>
+      <if test="record.post != null">
+        POST = #{record.post,jdbcType=VARCHAR},
+      </if>
+      <if test="record.strtype != null">
+        STRTYPE = #{record.strtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifer != null">
+        MODIFER = #{record.modifer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modtime != null">
+        MODTIME = #{record.modtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.moditem != null">
+        MODITEM = #{record.moditem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oridata != null">
+        ORIDATA = #{record.oridata,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moddata != null">
+        MODDATA = #{record.moddata,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modfile != null">
+        MODFILE = #{record.modfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remks != null">
+        REMKS = #{record.remks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.declno != null">
+        DECLNO = #{record.declno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemno != null">
+        ITEMNO = #{record.itemno,jdbcType=DECIMAL},
+      </if>
+      <if test="record.odeclno != null">
+        ODECLNO = #{record.odeclno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oitemno != null">
+        OITEMNO = #{record.oitemno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update PCLMSMGR.MODLOG
+    set BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      REFBILLNO = #{record.refbillno,jdbcType=VARCHAR},
+      ITEM = #{record.item,jdbcType=DECIMAL},
+      POST = #{record.post,jdbcType=VARCHAR},
+      STRTYPE = #{record.strtype,jdbcType=VARCHAR},
+      MODIFER = #{record.modifer,jdbcType=VARCHAR},
+      MODTIME = #{record.modtime,jdbcType=TIMESTAMP},
+      MODITEM = #{record.moditem,jdbcType=VARCHAR},
+      ORIDATA = #{record.oridata,jdbcType=VARCHAR},
+      MODDATA = #{record.moddata,jdbcType=VARCHAR},
+      MODFILE = #{record.modfile,jdbcType=VARCHAR},
+      REMKS = #{record.remks,jdbcType=VARCHAR},
+      DECLNO = #{record.declno,jdbcType=VARCHAR},
+      ITEMNO = #{record.itemno,jdbcType=DECIMAL},
+      ODECLNO = #{record.odeclno,jdbcType=VARCHAR},
+      OITEMNO = #{record.oitemno,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

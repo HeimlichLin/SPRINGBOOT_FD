@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="idv.heimlich.springboot.entity.mapper.WarehseMapper">
+	<resultMap id="BaseResultMap"
+		type="idv.heimlich.springboot.entity.po.Warehse">
+		<id column="BONDID" jdbcType="VARCHAR" property="bondid" />
+		<id column="BONDNO" jdbcType="VARCHAR" property="bondno" />
+		<result column="POSTCODE" jdbcType="VARCHAR"
+			property="postcode" />
+		<result column="BONDBAN" jdbcType="VARCHAR" property="bondban" />
+		<result column="BONDNAME" jdbcType="VARCHAR"
+			property="bondname" />
+		<result column="SPECIALST" jdbcType="VARCHAR"
+			property="specialst" />
+		<result column="BONDADD" jdbcType="VARCHAR" property="bondadd" />
+		<result column="BONDPW" jdbcType="VARCHAR" property="bondpw" />
+		<result column="AUTHORITY" jdbcType="VARCHAR"
+			property="authority" />
+		<result column="RCVID" jdbcType="VARCHAR" property="rcvid" />
+		<result column="SEPID" jdbcType="VARCHAR" property="sepid" />
+		<result column="CUSTOMSOFFICE" jdbcType="VARCHAR"
+			property="customsoffice" />
+		<result column="RECV_FLAG" jdbcType="VARCHAR"
+			property="recvFlag" />
+		<result column="BONDTYPE" jdbcType="VARCHAR"
+			property="bondtype" />
+		<result column="STATUS" jdbcType="VARCHAR" property="status" />
+		<result column="ACTIVEDATE" jdbcType="TIMESTAMP"
+			property="activedate" />
+		<result column="ENDDATE" jdbcType="TIMESTAMP"
+			property="enddate" />
+		<result column="CHARGEDATE" jdbcType="TIMESTAMP"
+			property="chargedate" />
+		<result column="TEL" jdbcType="VARCHAR" property="tel" />
+		<result column="FAX" jdbcType="VARCHAR" property="fax" />
+		<result column="COFFICER" jdbcType="VARCHAR"
+			property="cofficer" />
+		<result column="CUSTOM_FLAG" jdbcType="VARCHAR"
+			property="customFlag" />
+		<result column="AUTOCONFIRM" jdbcType="VARCHAR"
+			property="autoconfirm" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		BONDID, BONDNO, POSTCODE, BONDBAN, BONDNAME, SPECIALST,
+		BONDADD, BONDPW,
+		AUTHORITY,
+		RCVID, SEPID, CUSTOMSOFFICE, RECV_FLAG,
+		BONDTYPE, STATUS, ACTIVEDATE,
+		ENDDATE, CHARGEDATE,
+		TEL, FAX, COFFICER,
+		CUSTOM_FLAG, AUTOCONFIRM
+	</sql>
+	<select id="selectByExample"
+		parameterType="idv.heimlich.springboot.entity.po.WarehseExample"
+		resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		'true' as QUERYID,
+		<include refid="Base_Column_List" />
+		from PCLMSMGR.WAREHSE
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+
+
+	<sql id="FetchWarehse">
+		postcode, w.bondno, bondname, bondtype,
+		customsoffice,
+		w.status, tel,
+		specialst,to_char(activedate,'yyyy/mm/dd') as
+		activedateString
+
+	</sql>
+
+<!-- 	<resultMap id="FetchWarehseMap" -->
+<!-- 		type="idv.heimlich.springboot.entity.warehse.WarehseEntity"> -->
+<!-- 		<id column="postcode" jdbcType="VARCHAR" property="postcode" /> -->
+<!-- 		<id column="bondno" jdbcType="VARCHAR" property="bondno" /> -->
+<!-- 		<id column="bondname" jdbcType="VARCHAR" property="bondname" /> -->
+<!-- 		<id column="bondtype" jdbcType="VARCHAR" property="bondtype" /> -->
+<!-- 		<id column="customsoffice" jdbcType="VARCHAR" -->
+<!-- 			property="customsoffice" /> -->
+<!-- 		<id column="status" jdbcType="VARCHAR" property="status" /> -->
+<!-- 		<id column="tel" jdbcType="VARCHAR" property="tel" /> -->
+<!-- 		<id column="specialst" jdbcType="VARCHAR" property="specialst" /> -->
+<!-- 		<id column="activedateString" jdbcType="VARCHAR" -->
+<!-- 			property="activedateString" /> -->
+<!-- 	</resultMap> -->
+
+<!-- 	<select id="selectByRoot" -->
+<!-- 		parameterType="idv.heimlich.springboot.usercase.mode.FetchWarehseInputDTO" -->
+
+<!-- 		resultMap="FetchWarehseMap"> -->
+<!-- 		select -->
+<!-- 		<include refid="FetchWarehse"></include> -->
+<!-- 		from -->
+<!-- 		WareHse w -->
+<!-- 		where -->
+<!-- 		w.status in -->
+<!-- 		('1','2','3','4') -->
+
+<!-- 		<if test="bondno != null and bondno != ''"> -->
+<!-- 			and w.bondno=#{bondno,jdbcType=VARCHAR} -->
+
+<!-- 		</if> -->
+<!-- 		<if test="bondname != null and bondname != '' "> -->
+<!-- 			and w.bondname like '%${bondname}%' -->
+<!-- 		</if> -->
+<!-- 		<if test="bondtype != null  and bondtype != ''"> -->
+<!-- 			and w.bondtype=#{bondtype,jdbcType=VARCHAR} -->
+<!-- 		</if> -->
+
+<!-- 		ORDER BY w.customsoffice,w.postcode,w.bondno -->
+<!-- 	</select> -->
+<!-- 	<select id="selectByUser" -->
+<!-- 		parameterType="idv.heimlich.springboot.usercase.mode.FetchWarehseInputDTO" -->
+
+<!-- 		resultMap="FetchWarehseMap"> -->
+<!-- 		select -->
+<!-- 		<include refid="FetchWarehse"></include> -->
+<!-- 		from -->
+<!-- 		userbondno u,WareHse w -->
+<!-- 		where -->
+<!-- 		u.bondno=w.bondno -->
+<!-- 		AND w.status in -->
+<!-- 		('1','2','3','4') -->
+
+<!-- 		<if test="bondno != null and bondno != ''"> -->
+<!-- 			and w.bondno=#{bondno,jdbcType=VARCHAR} -->
+
+<!-- 		</if> -->
+<!-- 		<if test="bondname != null and bondname != ''"> -->
+<!-- 			and w.bondname like '%${bondname}%' -->
+<!-- 		</if> -->
+<!-- 		<if test="bondtype != null and bondtype != ''"> -->
+<!-- 			and w.bondtype=#{bondtype,jdbcType=VARCHAR} -->
+<!-- 		</if> -->
+<!-- 		<if test="userid != null and userid != ''"> -->
+<!-- 			and u.userid=#{userid,jdbcType=VARCHAR} -->
+<!-- 		</if> -->
+
+<!-- 		ORDER BY w.customsoffice,w.postcode,w.bondno -->
+<!-- 	</select> -->
+
+
+	<select id="selectByPrimaryKey"
+		parameterType="idv.heimlich.springboot.entity.po.WarehseKey"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from PCLMSMGR.WAREHSE
+		where BONDID = #{bondid,jdbcType=VARCHAR}
+		and
+		BONDNO = #{bondno,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="idv.heimlich.springboot.entity.po.WarehseKey">
+		delete from PCLMSMGR.WAREHSE
+		where BONDID =
+		#{bondid,jdbcType=VARCHAR}
+		and BONDNO = #{bondno,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample"
+		parameterType="idv.heimlich.springboot.entity.po.WarehseExample">
+		delete from PCLMSMGR.WAREHSE
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert"
+		parameterType="idv.heimlich.springboot.entity.po.Warehse">
+		insert into PCLMSMGR.WAREHSE (BONDID, BONDNO, POSTCODE,
+		BONDBAN, BONDNAME, SPECIALST,
+		BONDADD, BONDPW, AUTHORITY,
+		RCVID, SEPID,
+		CUSTOMSOFFICE,
+		RECV_FLAG, BONDTYPE, STATUS,
+		ACTIVEDATE, ENDDATE,
+		CHARGEDATE,
+		TEL, FAX, COFFICER,
+		CUSTOM_FLAG, AUTOCONFIRM)
+		values
+		(#{bondid,jdbcType=VARCHAR}, #{bondno,jdbcType=VARCHAR},
+		#{postcode,jdbcType=VARCHAR},
+		#{bondban,jdbcType=VARCHAR},
+		#{bondname,jdbcType=VARCHAR}, #{specialst,jdbcType=VARCHAR},
+		#{bondadd,jdbcType=VARCHAR}, #{bondpw,jdbcType=VARCHAR},
+		#{authority,jdbcType=VARCHAR},
+		#{rcvid,jdbcType=VARCHAR},
+		#{sepid,jdbcType=VARCHAR}, #{customsoffice,jdbcType=VARCHAR},
+		#{recvFlag,jdbcType=VARCHAR}, #{bondtype,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR},
+		#{activedate,jdbcType=TIMESTAMP},
+		#{enddate,jdbcType=TIMESTAMP}, #{chargedate,jdbcType=TIMESTAMP},
+		#{tel,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR},
+		#{cofficer,jdbcType=VARCHAR},
+		#{customFlag,jdbcType=VARCHAR},
+		#{autoconfirm,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="idv.heimlich.springboot.entity.po.Warehse">
+		insert into PCLMSMGR.WAREHSE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="bondid != null">
+				BONDID,
+			</if>
+			<if test="bondno != null">
+				BONDNO,
+			</if>
+			<if test="postcode != null">
+				POSTCODE,
+			</if>
+			<if test="bondban != null">
+				BONDBAN,
+			</if>
+			<if test="bondname != null">
+				BONDNAME,
+			</if>
+			<if test="specialst != null">
+				SPECIALST,
+			</if>
+			<if test="bondadd != null">
+				BONDADD,
+			</if>
+			<if test="bondpw != null">
+				BONDPW,
+			</if>
+			<if test="authority != null">
+				AUTHORITY,
+			</if>
+			<if test="rcvid != null">
+				RCVID,
+			</if>
+			<if test="sepid != null">
+				SEPID,
+			</if>
+			<if test="customsoffice != null">
+				CUSTOMSOFFICE,
+			</if>
+			<if test="recvFlag != null">
+				RECV_FLAG,
+			</if>
+			<if test="bondtype != null">
+				BONDTYPE,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="activedate != null">
+				ACTIVEDATE,
+			</if>
+			<if test="enddate != null">
+				ENDDATE,
+			</if>
+			<if test="chargedate != null">
+				CHARGEDATE,
+			</if>
+			<if test="tel != null">
+				TEL,
+			</if>
+			<if test="fax != null">
+				FAX,
+			</if>
+			<if test="cofficer != null">
+				COFFICER,
+			</if>
+			<if test="customFlag != null">
+				CUSTOM_FLAG,
+			</if>
+			<if test="autoconfirm != null">
+				AUTOCONFIRM,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="bondid != null">
+				#{bondid,jdbcType=VARCHAR},
+			</if>
+			<if test="bondno != null">
+				#{bondno,jdbcType=VARCHAR},
+			</if>
+			<if test="postcode != null">
+				#{postcode,jdbcType=VARCHAR},
+			</if>
+			<if test="bondban != null">
+				#{bondban,jdbcType=VARCHAR},
+			</if>
+			<if test="bondname != null">
+				#{bondname,jdbcType=VARCHAR},
+			</if>
+			<if test="specialst != null">
+				#{specialst,jdbcType=VARCHAR},
+			</if>
+			<if test="bondadd != null">
+				#{bondadd,jdbcType=VARCHAR},
+			</if>
+			<if test="bondpw != null">
+				#{bondpw,jdbcType=VARCHAR},
+			</if>
+			<if test="authority != null">
+				#{authority,jdbcType=VARCHAR},
+			</if>
+			<if test="rcvid != null">
+				#{rcvid,jdbcType=VARCHAR},
+			</if>
+			<if test="sepid != null">
+				#{sepid,jdbcType=VARCHAR},
+			</if>
+			<if test="customsoffice != null">
+				#{customsoffice,jdbcType=VARCHAR},
+			</if>
+			<if test="recvFlag != null">
+				#{recvFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="bondtype != null">
+				#{bondtype,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="activedate != null">
+				#{activedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="enddate != null">
+				#{enddate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="chargedate != null">
+				#{chargedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="tel != null">
+				#{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="fax != null">
+				#{fax,jdbcType=VARCHAR},
+			</if>
+			<if test="cofficer != null">
+				#{cofficer,jdbcType=VARCHAR},
+			</if>
+			<if test="customFlag != null">
+				#{customFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="autoconfirm != null">
+				#{autoconfirm,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample"
+		parameterType="idv.heimlich.springboot.entity.po.WarehseExample"
+		resultType="java.lang.Long">
+		select count(*) from PCLMSMGR.WAREHSE
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update PCLMSMGR.WAREHSE
+		<set>
+			<if test="record.bondid != null">
+				BONDID = #{record.bondid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.bondno != null">
+				BONDNO = #{record.bondno,jdbcType=VARCHAR},
+			</if>
+			<if test="record.postcode != null">
+				POSTCODE = #{record.postcode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.bondban != null">
+				BONDBAN = #{record.bondban,jdbcType=VARCHAR},
+			</if>
+			<if test="record.bondname != null">
+				BONDNAME = #{record.bondname,jdbcType=VARCHAR},
+			</if>
+			<if test="record.specialst != null">
+				SPECIALST = #{record.specialst,jdbcType=VARCHAR},
+			</if>
+			<if test="record.bondadd != null">
+				BONDADD = #{record.bondadd,jdbcType=VARCHAR},
+			</if>
+			<if test="record.bondpw != null">
+				BONDPW = #{record.bondpw,jdbcType=VARCHAR},
+			</if>
+			<if test="record.authority != null">
+				AUTHORITY = #{record.authority,jdbcType=VARCHAR},
+			</if>
+			<if test="record.rcvid != null">
+				RCVID = #{record.rcvid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sepid != null">
+				SEPID = #{record.sepid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.customsoffice != null">
+				CUSTOMSOFFICE = #{record.customsoffice,jdbcType=VARCHAR},
+			</if>
+			<if test="record.recvFlag != null">
+				RECV_FLAG = #{record.recvFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="record.bondtype != null">
+				BONDTYPE = #{record.bondtype,jdbcType=VARCHAR},
+			</if>
+			<if test="record.status != null">
+				STATUS = #{record.status,jdbcType=VARCHAR},
+			</if>
+			<if test="record.activedate != null">
+				ACTIVEDATE = #{record.activedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.enddate != null">
+				ENDDATE = #{record.enddate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.chargedate != null">
+				CHARGEDATE = #{record.chargedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.tel != null">
+				TEL = #{record.tel,jdbcType=VARCHAR},
+			</if>
+			<if test="record.fax != null">
+				FAX = #{record.fax,jdbcType=VARCHAR},
+			</if>
+			<if test="record.cofficer != null">
+				COFFICER = #{record.cofficer,jdbcType=VARCHAR},
+			</if>
+			<if test="record.customFlag != null">
+				CUSTOM_FLAG = #{record.customFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="record.autoconfirm != null">
+				AUTOCONFIRM = #{record.autoconfirm,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update PCLMSMGR.WAREHSE
+		set BONDID = #{record.bondid,jdbcType=VARCHAR},
+		BONDNO = #{record.bondno,jdbcType=VARCHAR},
+		POSTCODE =
+		#{record.postcode,jdbcType=VARCHAR},
+		BONDBAN =
+		#{record.bondban,jdbcType=VARCHAR},
+		BONDNAME =
+		#{record.bondname,jdbcType=VARCHAR},
+		SPECIALST =
+		#{record.specialst,jdbcType=VARCHAR},
+		BONDADD =
+		#{record.bondadd,jdbcType=VARCHAR},
+		BONDPW =
+		#{record.bondpw,jdbcType=VARCHAR},
+		AUTHORITY =
+		#{record.authority,jdbcType=VARCHAR},
+		RCVID =
+		#{record.rcvid,jdbcType=VARCHAR},
+		SEPID =
+		#{record.sepid,jdbcType=VARCHAR},
+		CUSTOMSOFFICE =
+		#{record.customsoffice,jdbcType=VARCHAR},
+		RECV_FLAG =
+		#{record.recvFlag,jdbcType=VARCHAR},
+		BONDTYPE =
+		#{record.bondtype,jdbcType=VARCHAR},
+		STATUS =
+		#{record.status,jdbcType=VARCHAR},
+		ACTIVEDATE =
+		#{record.activedate,jdbcType=TIMESTAMP},
+		ENDDATE =
+		#{record.enddate,jdbcType=TIMESTAMP},
+		CHARGEDATE =
+		#{record.chargedate,jdbcType=TIMESTAMP},
+		TEL =
+		#{record.tel,jdbcType=VARCHAR},
+		FAX = #{record.fax,jdbcType=VARCHAR},
+		COFFICER = #{record.cofficer,jdbcType=VARCHAR},
+		CUSTOM_FLAG =
+		#{record.customFlag,jdbcType=VARCHAR},
+		AUTOCONFIRM =
+		#{record.autoconfirm,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="idv.heimlich.springboot.entity.po.Warehse">
+		update PCLMSMGR.WAREHSE
+		<set>
+			<if test="postcode != null">
+				POSTCODE = #{postcode,jdbcType=VARCHAR},
+			</if>
+			<if test="bondban != null">
+				BONDBAN = #{bondban,jdbcType=VARCHAR},
+			</if>
+			<if test="bondname != null">
+				BONDNAME = #{bondname,jdbcType=VARCHAR},
+			</if>
+			<if test="specialst != null">
+				SPECIALST = #{specialst,jdbcType=VARCHAR},
+			</if>
+			<if test="bondadd != null">
+				BONDADD = #{bondadd,jdbcType=VARCHAR},
+			</if>
+			<if test="bondpw != null">
+				BONDPW = #{bondpw,jdbcType=VARCHAR},
+			</if>
+			<if test="authority != null">
+				AUTHORITY = #{authority,jdbcType=VARCHAR},
+			</if>
+			<if test="rcvid != null">
+				RCVID = #{rcvid,jdbcType=VARCHAR},
+			</if>
+			<if test="sepid != null">
+				SEPID = #{sepid,jdbcType=VARCHAR},
+			</if>
+			<if test="customsoffice != null">
+				CUSTOMSOFFICE = #{customsoffice,jdbcType=VARCHAR},
+			</if>
+			<if test="recvFlag != null">
+				RECV_FLAG = #{recvFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="bondtype != null">
+				BONDTYPE = #{bondtype,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="activedate != null">
+				ACTIVEDATE = #{activedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="enddate != null">
+				ENDDATE = #{enddate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="chargedate != null">
+				CHARGEDATE = #{chargedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="tel != null">
+				TEL = #{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="fax != null">
+				FAX = #{fax,jdbcType=VARCHAR},
+			</if>
+			<if test="cofficer != null">
+				COFFICER = #{cofficer,jdbcType=VARCHAR},
+			</if>
+			<if test="customFlag != null">
+				CUSTOM_FLAG = #{customFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="autoconfirm != null">
+				AUTOCONFIRM = #{autoconfirm,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where BONDID = #{bondid,jdbcType=VARCHAR}
+		and BONDNO =
+		#{bondno,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="idv.heimlich.springboot.entity.po.Warehse">
+		update PCLMSMGR.WAREHSE
+		set POSTCODE =
+		#{postcode,jdbcType=VARCHAR},
+		BONDBAN = #{bondban,jdbcType=VARCHAR},
+		BONDNAME = #{bondname,jdbcType=VARCHAR},
+		SPECIALST =
+		#{specialst,jdbcType=VARCHAR},
+		BONDADD = #{bondadd,jdbcType=VARCHAR},
+		BONDPW = #{bondpw,jdbcType=VARCHAR},
+		AUTHORITY =
+		#{authority,jdbcType=VARCHAR},
+		RCVID = #{rcvid,jdbcType=VARCHAR},
+		SEPID
+		= #{sepid,jdbcType=VARCHAR},
+		CUSTOMSOFFICE =
+		#{customsoffice,jdbcType=VARCHAR},
+		RECV_FLAG =
+		#{recvFlag,jdbcType=VARCHAR},
+		BONDTYPE = #{bondtype,jdbcType=VARCHAR},
+		STATUS = #{status,jdbcType=VARCHAR},
+		ACTIVEDATE =
+		#{activedate,jdbcType=TIMESTAMP},
+		ENDDATE =
+		#{enddate,jdbcType=TIMESTAMP},
+		CHARGEDATE =
+		#{chargedate,jdbcType=TIMESTAMP},
+		TEL = #{tel,jdbcType=VARCHAR},
+		FAX =
+		#{fax,jdbcType=VARCHAR},
+		COFFICER = #{cofficer,jdbcType=VARCHAR},
+		CUSTOM_FLAG = #{customFlag,jdbcType=VARCHAR},
+		AUTOCONFIRM =
+		#{autoconfirm,jdbcType=VARCHAR}
+		where BONDID =
+		#{bondid,jdbcType=VARCHAR}
+		and BONDNO = #{bondno,jdbcType=VARCHAR}
+	</update>
+</mapper>

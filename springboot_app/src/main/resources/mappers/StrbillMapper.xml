@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idv.heimlich.springboot.entity.mapper.StrbillMapper">
+  <resultMap id="BaseResultMap" type="idv.heimlich.springboot.entity.po.Strbill">
+    <id column="BONDNO" jdbcType="VARCHAR" property="bondno" />
+    <id column="REFBILLNO" jdbcType="VARCHAR" property="refbillno" />
+    <id column="STRTYPE" jdbcType="VARCHAR" property="strtype" />
+    <result column="MSGFUN" jdbcType="VARCHAR" property="msgfun" />
+    <result column="GDSTYPE" jdbcType="VARCHAR" property="gdstype" />
+    <result column="CTMCODE" jdbcType="VARCHAR" property="ctmcode" />
+    <result column="SUBCON" jdbcType="VARCHAR" property="subcon" />
+    <result column="OTHERS" jdbcType="VARCHAR" property="others" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BONDNO, REFBILLNO, STRTYPE, MSGFUN, GDSTYPE, CTMCODE, SUBCON, OTHERS
+  </sql>
+  <select id="selectByExample" parameterType="idv.heimlich.springboot.entity.po.StrbillExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.STRBILL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.StrbillKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.STRBILL
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and REFBILLNO = #{refbillno,jdbcType=VARCHAR}
+      and STRTYPE = #{strtype,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.StrbillKey">
+    delete from PCLMSMGR.STRBILL
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and REFBILLNO = #{refbillno,jdbcType=VARCHAR}
+      and STRTYPE = #{strtype,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="idv.heimlich.springboot.entity.po.StrbillExample">
+    delete from PCLMSMGR.STRBILL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="idv.heimlich.springboot.entity.po.Strbill">
+    insert into PCLMSMGR.STRBILL (BONDNO, REFBILLNO, STRTYPE, 
+      MSGFUN, GDSTYPE, CTMCODE, 
+      SUBCON, OTHERS)
+    values (#{bondno,jdbcType=VARCHAR}, #{refbillno,jdbcType=VARCHAR}, #{strtype,jdbcType=VARCHAR}, 
+      #{msgfun,jdbcType=VARCHAR}, #{gdstype,jdbcType=VARCHAR}, #{ctmcode,jdbcType=VARCHAR}, 
+      #{subcon,jdbcType=VARCHAR}, #{others,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="idv.heimlich.springboot.entity.po.Strbill">
+    insert into PCLMSMGR.STRBILL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        BONDNO,
+      </if>
+      <if test="refbillno != null">
+        REFBILLNO,
+      </if>
+      <if test="strtype != null">
+        STRTYPE,
+      </if>
+      <if test="msgfun != null">
+        MSGFUN,
+      </if>
+      <if test="gdstype != null">
+        GDSTYPE,
+      </if>
+      <if test="ctmcode != null">
+        CTMCODE,
+      </if>
+      <if test="subcon != null">
+        SUBCON,
+      </if>
+      <if test="others != null">
+        OTHERS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        #{bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="refbillno != null">
+        #{refbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="strtype != null">
+        #{strtype,jdbcType=VARCHAR},
+      </if>
+      <if test="msgfun != null">
+        #{msgfun,jdbcType=VARCHAR},
+      </if>
+      <if test="gdstype != null">
+        #{gdstype,jdbcType=VARCHAR},
+      </if>
+      <if test="ctmcode != null">
+        #{ctmcode,jdbcType=VARCHAR},
+      </if>
+      <if test="subcon != null">
+        #{subcon,jdbcType=VARCHAR},
+      </if>
+      <if test="others != null">
+        #{others,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="idv.heimlich.springboot.entity.po.StrbillExample" resultType="java.lang.Long">
+    select count(*) from PCLMSMGR.STRBILL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update PCLMSMGR.STRBILL
+    <set>
+      <if test="record.bondno != null">
+        BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refbillno != null">
+        REFBILLNO = #{record.refbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.strtype != null">
+        STRTYPE = #{record.strtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msgfun != null">
+        MSGFUN = #{record.msgfun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gdstype != null">
+        GDSTYPE = #{record.gdstype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctmcode != null">
+        CTMCODE = #{record.ctmcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subcon != null">
+        SUBCON = #{record.subcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.others != null">
+        OTHERS = #{record.others,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update PCLMSMGR.STRBILL
+    set BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      REFBILLNO = #{record.refbillno,jdbcType=VARCHAR},
+      STRTYPE = #{record.strtype,jdbcType=VARCHAR},
+      MSGFUN = #{record.msgfun,jdbcType=VARCHAR},
+      GDSTYPE = #{record.gdstype,jdbcType=VARCHAR},
+      CTMCODE = #{record.ctmcode,jdbcType=VARCHAR},
+      SUBCON = #{record.subcon,jdbcType=VARCHAR},
+      OTHERS = #{record.others,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="idv.heimlich.springboot.entity.po.Strbill">
+    update PCLMSMGR.STRBILL
+    <set>
+      <if test="msgfun != null">
+        MSGFUN = #{msgfun,jdbcType=VARCHAR},
+      </if>
+      <if test="gdstype != null">
+        GDSTYPE = #{gdstype,jdbcType=VARCHAR},
+      </if>
+      <if test="ctmcode != null">
+        CTMCODE = #{ctmcode,jdbcType=VARCHAR},
+      </if>
+      <if test="subcon != null">
+        SUBCON = #{subcon,jdbcType=VARCHAR},
+      </if>
+      <if test="others != null">
+        OTHERS = #{others,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and REFBILLNO = #{refbillno,jdbcType=VARCHAR}
+      and STRTYPE = #{strtype,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.Strbill">
+    update PCLMSMGR.STRBILL
+    set MSGFUN = #{msgfun,jdbcType=VARCHAR},
+      GDSTYPE = #{gdstype,jdbcType=VARCHAR},
+      CTMCODE = #{ctmcode,jdbcType=VARCHAR},
+      SUBCON = #{subcon,jdbcType=VARCHAR},
+      OTHERS = #{others,jdbcType=VARCHAR}
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and REFBILLNO = #{refbillno,jdbcType=VARCHAR}
+      and STRTYPE = #{strtype,jdbcType=VARCHAR}
+  </update>
+</mapper>

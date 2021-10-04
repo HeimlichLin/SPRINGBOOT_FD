@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idv.heimlich.springboot.entity.mapper.WorkorderMapper">
+  <resultMap id="BaseResultMap" type="idv.heimlich.springboot.entity.po.Workorder">
+    <id column="BONDNO" jdbcType="VARCHAR" property="bondno" />
+    <id column="WORKNO" jdbcType="VARCHAR" property="workno" />
+    <id column="CTMCODE" jdbcType="VARCHAR" property="ctmcode" />
+    <result column="PRDTNO" jdbcType="VARCHAR" property="prdtno" />
+    <result column="PRDTQTY" jdbcType="DECIMAL" property="prdtqty" />
+    <result column="RSTRQTY" jdbcType="DECIMAL" property="rstrqty" />
+    <result column="PRDTUNIT" jdbcType="VARCHAR" property="prdtunit" />
+    <result column="REQRDATE" jdbcType="VARCHAR" property="reqrdate" />
+    <result column="APPLYDATE" jdbcType="VARCHAR" property="applydate" />
+    <result column="APPROVEDNO" jdbcType="VARCHAR" property="approvedno" />
+    <result column="APPROVEDDATE" jdbcType="VARCHAR" property="approveddate" />
+    <result column="PRDTNAME" jdbcType="VARCHAR" property="prdtname" />
+    <result column="PRDTSPEC" jdbcType="VARCHAR" property="prdtspec" />
+    <result column="PROCESS" jdbcType="VARCHAR" property="process" />
+    <result column="D8DATE" jdbcType="VARCHAR" property="d8date" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BONDNO, WORKNO, CTMCODE, PRDTNO, PRDTQTY, RSTRQTY, PRDTUNIT, REQRDATE, APPLYDATE, 
+    APPROVEDNO, APPROVEDDATE, PRDTNAME, PRDTSPEC, PROCESS, D8DATE
+  </sql>
+  <select id="selectByExample" parameterType="idv.heimlich.springboot.entity.po.WorkorderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.WORKORDER
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.WorkorderKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.WORKORDER
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and WORKNO = #{workno,jdbcType=VARCHAR}
+      and CTMCODE = #{ctmcode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.WorkorderKey">
+    delete from PCLMSMGR.WORKORDER
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and WORKNO = #{workno,jdbcType=VARCHAR}
+      and CTMCODE = #{ctmcode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="idv.heimlich.springboot.entity.po.WorkorderExample">
+    delete from PCLMSMGR.WORKORDER
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="idv.heimlich.springboot.entity.po.Workorder">
+    insert into PCLMSMGR.WORKORDER (BONDNO, WORKNO, CTMCODE, 
+      PRDTNO, PRDTQTY, RSTRQTY, 
+      PRDTUNIT, REQRDATE, APPLYDATE, 
+      APPROVEDNO, APPROVEDDATE, PRDTNAME, 
+      PRDTSPEC, PROCESS, D8DATE
+      )
+    values (#{bondno,jdbcType=VARCHAR}, #{workno,jdbcType=VARCHAR}, #{ctmcode,jdbcType=VARCHAR}, 
+      #{prdtno,jdbcType=VARCHAR}, #{prdtqty,jdbcType=DECIMAL}, #{rstrqty,jdbcType=DECIMAL}, 
+      #{prdtunit,jdbcType=VARCHAR}, #{reqrdate,jdbcType=VARCHAR}, #{applydate,jdbcType=VARCHAR}, 
+      #{approvedno,jdbcType=VARCHAR}, #{approveddate,jdbcType=VARCHAR}, #{prdtname,jdbcType=VARCHAR}, 
+      #{prdtspec,jdbcType=VARCHAR}, #{process,jdbcType=VARCHAR}, #{d8date,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="idv.heimlich.springboot.entity.po.Workorder">
+    insert into PCLMSMGR.WORKORDER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        BONDNO,
+      </if>
+      <if test="workno != null">
+        WORKNO,
+      </if>
+      <if test="ctmcode != null">
+        CTMCODE,
+      </if>
+      <if test="prdtno != null">
+        PRDTNO,
+      </if>
+      <if test="prdtqty != null">
+        PRDTQTY,
+      </if>
+      <if test="rstrqty != null">
+        RSTRQTY,
+      </if>
+      <if test="prdtunit != null">
+        PRDTUNIT,
+      </if>
+      <if test="reqrdate != null">
+        REQRDATE,
+      </if>
+      <if test="applydate != null">
+        APPLYDATE,
+      </if>
+      <if test="approvedno != null">
+        APPROVEDNO,
+      </if>
+      <if test="approveddate != null">
+        APPROVEDDATE,
+      </if>
+      <if test="prdtname != null">
+        PRDTNAME,
+      </if>
+      <if test="prdtspec != null">
+        PRDTSPEC,
+      </if>
+      <if test="process != null">
+        PROCESS,
+      </if>
+      <if test="d8date != null">
+        D8DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        #{bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="workno != null">
+        #{workno,jdbcType=VARCHAR},
+      </if>
+      <if test="ctmcode != null">
+        #{ctmcode,jdbcType=VARCHAR},
+      </if>
+      <if test="prdtno != null">
+        #{prdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="prdtqty != null">
+        #{prdtqty,jdbcType=DECIMAL},
+      </if>
+      <if test="rstrqty != null">
+        #{rstrqty,jdbcType=DECIMAL},
+      </if>
+      <if test="prdtunit != null">
+        #{prdtunit,jdbcType=VARCHAR},
+      </if>
+      <if test="reqrdate != null">
+        #{reqrdate,jdbcType=VARCHAR},
+      </if>
+      <if test="applydate != null">
+        #{applydate,jdbcType=VARCHAR},
+      </if>
+      <if test="approvedno != null">
+        #{approvedno,jdbcType=VARCHAR},
+      </if>
+      <if test="approveddate != null">
+        #{approveddate,jdbcType=VARCHAR},
+      </if>
+      <if test="prdtname != null">
+        #{prdtname,jdbcType=VARCHAR},
+      </if>
+      <if test="prdtspec != null">
+        #{prdtspec,jdbcType=VARCHAR},
+      </if>
+      <if test="process != null">
+        #{process,jdbcType=VARCHAR},
+      </if>
+      <if test="d8date != null">
+        #{d8date,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="idv.heimlich.springboot.entity.po.WorkorderExample" resultType="java.lang.Long">
+    select count(*) from PCLMSMGR.WORKORDER
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update PCLMSMGR.WORKORDER
+    <set>
+      <if test="record.bondno != null">
+        BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workno != null">
+        WORKNO = #{record.workno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctmcode != null">
+        CTMCODE = #{record.ctmcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prdtno != null">
+        PRDTNO = #{record.prdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prdtqty != null">
+        PRDTQTY = #{record.prdtqty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.rstrqty != null">
+        RSTRQTY = #{record.rstrqty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.prdtunit != null">
+        PRDTUNIT = #{record.prdtunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reqrdate != null">
+        REQRDATE = #{record.reqrdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applydate != null">
+        APPLYDATE = #{record.applydate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approvedno != null">
+        APPROVEDNO = #{record.approvedno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approveddate != null">
+        APPROVEDDATE = #{record.approveddate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prdtname != null">
+        PRDTNAME = #{record.prdtname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prdtspec != null">
+        PRDTSPEC = #{record.prdtspec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.process != null">
+        PROCESS = #{record.process,jdbcType=VARCHAR},
+      </if>
+      <if test="record.d8date != null">
+        D8DATE = #{record.d8date,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update PCLMSMGR.WORKORDER
+    set BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      WORKNO = #{record.workno,jdbcType=VARCHAR},
+      CTMCODE = #{record.ctmcode,jdbcType=VARCHAR},
+      PRDTNO = #{record.prdtno,jdbcType=VARCHAR},
+      PRDTQTY = #{record.prdtqty,jdbcType=DECIMAL},
+      RSTRQTY = #{record.rstrqty,jdbcType=DECIMAL},
+      PRDTUNIT = #{record.prdtunit,jdbcType=VARCHAR},
+      REQRDATE = #{record.reqrdate,jdbcType=VARCHAR},
+      APPLYDATE = #{record.applydate,jdbcType=VARCHAR},
+      APPROVEDNO = #{record.approvedno,jdbcType=VARCHAR},
+      APPROVEDDATE = #{record.approveddate,jdbcType=VARCHAR},
+      PRDTNAME = #{record.prdtname,jdbcType=VARCHAR},
+      PRDTSPEC = #{record.prdtspec,jdbcType=VARCHAR},
+      PROCESS = #{record.process,jdbcType=VARCHAR},
+      D8DATE = #{record.d8date,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="idv.heimlich.springboot.entity.po.Workorder">
+    update PCLMSMGR.WORKORDER
+    <set>
+      <if test="prdtno != null">
+        PRDTNO = #{prdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="prdtqty != null">
+        PRDTQTY = #{prdtqty,jdbcType=DECIMAL},
+      </if>
+      <if test="rstrqty != null">
+        RSTRQTY = #{rstrqty,jdbcType=DECIMAL},
+      </if>
+      <if test="prdtunit != null">
+        PRDTUNIT = #{prdtunit,jdbcType=VARCHAR},
+      </if>
+      <if test="reqrdate != null">
+        REQRDATE = #{reqrdate,jdbcType=VARCHAR},
+      </if>
+      <if test="applydate != null">
+        APPLYDATE = #{applydate,jdbcType=VARCHAR},
+      </if>
+      <if test="approvedno != null">
+        APPROVEDNO = #{approvedno,jdbcType=VARCHAR},
+      </if>
+      <if test="approveddate != null">
+        APPROVEDDATE = #{approveddate,jdbcType=VARCHAR},
+      </if>
+      <if test="prdtname != null">
+        PRDTNAME = #{prdtname,jdbcType=VARCHAR},
+      </if>
+      <if test="prdtspec != null">
+        PRDTSPEC = #{prdtspec,jdbcType=VARCHAR},
+      </if>
+      <if test="process != null">
+        PROCESS = #{process,jdbcType=VARCHAR},
+      </if>
+      <if test="d8date != null">
+        D8DATE = #{d8date,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and WORKNO = #{workno,jdbcType=VARCHAR}
+      and CTMCODE = #{ctmcode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.Workorder">
+    update PCLMSMGR.WORKORDER
+    set PRDTNO = #{prdtno,jdbcType=VARCHAR},
+      PRDTQTY = #{prdtqty,jdbcType=DECIMAL},
+      RSTRQTY = #{rstrqty,jdbcType=DECIMAL},
+      PRDTUNIT = #{prdtunit,jdbcType=VARCHAR},
+      REQRDATE = #{reqrdate,jdbcType=VARCHAR},
+      APPLYDATE = #{applydate,jdbcType=VARCHAR},
+      APPROVEDNO = #{approvedno,jdbcType=VARCHAR},
+      APPROVEDDATE = #{approveddate,jdbcType=VARCHAR},
+      PRDTNAME = #{prdtname,jdbcType=VARCHAR},
+      PRDTSPEC = #{prdtspec,jdbcType=VARCHAR},
+      PROCESS = #{process,jdbcType=VARCHAR},
+      D8DATE = #{d8date,jdbcType=VARCHAR}
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and WORKNO = #{workno,jdbcType=VARCHAR}
+      and CTMCODE = #{ctmcode,jdbcType=VARCHAR}
+  </update>
+</mapper>

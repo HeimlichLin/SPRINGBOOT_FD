@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idv.heimlich.springboot.entity.mapper.UserinfMapper">
+  <resultMap id="BaseResultMap" type="idv.heimlich.springboot.entity.po.Userinf">
+    <id column="USERID" jdbcType="VARCHAR" property="userid" />
+    <result column="USERPW" jdbcType="VARCHAR" property="userpw" />
+    <result column="AUTHID" jdbcType="CHAR" property="authid" />
+    <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+    <result column="USEROFFICE" jdbcType="CHAR" property="useroffice" />
+    <result column="STATUS" jdbcType="CHAR" property="status" />
+    <result column="ACTIVEDATE" jdbcType="VARCHAR" property="activedate" />
+    <result column="ENDDATE" jdbcType="VARCHAR" property="enddate" />
+    <result column="DEPARTMENT" jdbcType="VARCHAR" property="department" />
+    <result column="TEL" jdbcType="VARCHAR" property="tel" />
+    <result column="LASTLOGIN" jdbcType="VARCHAR" property="lastlogin" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    USERID, USERPW, AUTHID, USERNAME, USEROFFICE, STATUS, ACTIVEDATE, ENDDATE, DEPARTMENT, 
+    TEL, LASTLOGIN
+  </sql>
+  <select id="selectByExample" parameterType="idv.heimlich.springboot.entity.po.UserinfExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.USERINF
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.USERINF
+    where USERID = #{userid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from PCLMSMGR.USERINF
+    where USERID = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="idv.heimlich.springboot.entity.po.UserinfExample">
+    delete from PCLMSMGR.USERINF
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="idv.heimlich.springboot.entity.po.Userinf">
+    insert into PCLMSMGR.USERINF (USERID, USERPW, AUTHID, 
+      USERNAME, USEROFFICE, STATUS, 
+      ACTIVEDATE, ENDDATE, DEPARTMENT, 
+      TEL, LASTLOGIN)
+    values (#{userid,jdbcType=VARCHAR}, #{userpw,jdbcType=VARCHAR}, #{authid,jdbcType=CHAR}, 
+      #{username,jdbcType=VARCHAR}, #{useroffice,jdbcType=CHAR}, #{status,jdbcType=CHAR}, 
+      #{activedate,jdbcType=VARCHAR}, #{enddate,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=VARCHAR}, #{lastlogin,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="idv.heimlich.springboot.entity.po.Userinf">
+    insert into PCLMSMGR.USERINF
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        USERID,
+      </if>
+      <if test="userpw != null">
+        USERPW,
+      </if>
+      <if test="authid != null">
+        AUTHID,
+      </if>
+      <if test="username != null">
+        USERNAME,
+      </if>
+      <if test="useroffice != null">
+        USEROFFICE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="activedate != null">
+        ACTIVEDATE,
+      </if>
+      <if test="enddate != null">
+        ENDDATE,
+      </if>
+      <if test="department != null">
+        DEPARTMENT,
+      </if>
+      <if test="tel != null">
+        TEL,
+      </if>
+      <if test="lastlogin != null">
+        LASTLOGIN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="userpw != null">
+        #{userpw,jdbcType=VARCHAR},
+      </if>
+      <if test="authid != null">
+        #{authid,jdbcType=CHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="useroffice != null">
+        #{useroffice,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="activedate != null">
+        #{activedate,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="lastlogin != null">
+        #{lastlogin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="idv.heimlich.springboot.entity.po.UserinfExample" resultType="java.lang.Long">
+    select count(*) from PCLMSMGR.USERINF
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update PCLMSMGR.USERINF
+    <set>
+      <if test="record.userid != null">
+        USERID = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userpw != null">
+        USERPW = #{record.userpw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authid != null">
+        AUTHID = #{record.authid,jdbcType=CHAR},
+      </if>
+      <if test="record.username != null">
+        USERNAME = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useroffice != null">
+        USEROFFICE = #{record.useroffice,jdbcType=CHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.activedate != null">
+        ACTIVEDATE = #{record.activedate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enddate != null">
+        ENDDATE = #{record.enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.department != null">
+        DEPARTMENT = #{record.department,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null">
+        TEL = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastlogin != null">
+        LASTLOGIN = #{record.lastlogin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update PCLMSMGR.USERINF
+    set USERID = #{record.userid,jdbcType=VARCHAR},
+      USERPW = #{record.userpw,jdbcType=VARCHAR},
+      AUTHID = #{record.authid,jdbcType=CHAR},
+      USERNAME = #{record.username,jdbcType=VARCHAR},
+      USEROFFICE = #{record.useroffice,jdbcType=CHAR},
+      STATUS = #{record.status,jdbcType=CHAR},
+      ACTIVEDATE = #{record.activedate,jdbcType=VARCHAR},
+      ENDDATE = #{record.enddate,jdbcType=VARCHAR},
+      DEPARTMENT = #{record.department,jdbcType=VARCHAR},
+      TEL = #{record.tel,jdbcType=VARCHAR},
+      LASTLOGIN = #{record.lastlogin,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="idv.heimlich.springboot.entity.po.Userinf">
+    update PCLMSMGR.USERINF
+    <set>
+      <if test="userpw != null">
+        USERPW = #{userpw,jdbcType=VARCHAR},
+      </if>
+      <if test="authid != null">
+        AUTHID = #{authid,jdbcType=CHAR},
+      </if>
+      <if test="username != null">
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="useroffice != null">
+        USEROFFICE = #{useroffice,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=CHAR},
+      </if>
+      <if test="activedate != null">
+        ACTIVEDATE = #{activedate,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null">
+        ENDDATE = #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        DEPARTMENT = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        TEL = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="lastlogin != null">
+        LASTLOGIN = #{lastlogin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USERID = #{userid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.Userinf">
+    update PCLMSMGR.USERINF
+    set USERPW = #{userpw,jdbcType=VARCHAR},
+      AUTHID = #{authid,jdbcType=CHAR},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      USEROFFICE = #{useroffice,jdbcType=CHAR},
+      STATUS = #{status,jdbcType=CHAR},
+      ACTIVEDATE = #{activedate,jdbcType=VARCHAR},
+      ENDDATE = #{enddate,jdbcType=VARCHAR},
+      DEPARTMENT = #{department,jdbcType=VARCHAR},
+      TEL = #{tel,jdbcType=VARCHAR},
+      LASTLOGIN = #{lastlogin,jdbcType=VARCHAR}
+    where USERID = #{userid,jdbcType=VARCHAR}
+  </update>
+</mapper>

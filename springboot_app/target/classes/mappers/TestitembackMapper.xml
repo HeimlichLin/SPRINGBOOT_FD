@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idv.heimlich.springboot.entity.mapper.TestitembackMapper">
+  <resultMap id="BaseResultMap" type="idv.heimlich.springboot.entity.po.Testitemback">
+    <id column="BONDNO" jdbcType="VARCHAR" property="bondno" />
+    <id column="TESTNO" jdbcType="VARCHAR" property="testno" />
+    <id column="PRDTNO" jdbcType="VARCHAR" property="prdtno" />
+    <id column="SERIALNO" jdbcType="VARCHAR" property="serialno" />
+    <id column="ITEM" jdbcType="DECIMAL" property="item" />
+    <result column="BACKQTY" jdbcType="DECIMAL" property="backqty" />
+    <result column="BACKDATE" jdbcType="VARCHAR" property="backdate" />
+    <result column="BACKPOST" jdbcType="VARCHAR" property="backpost" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BONDNO, TESTNO, PRDTNO, SERIALNO, ITEM, BACKQTY, BACKDATE, BACKPOST
+  </sql>
+  <select id="selectByExample" parameterType="idv.heimlich.springboot.entity.po.TestitembackExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.TESTITEMBACK
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.TestitembackKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.TESTITEMBACK
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and TESTNO = #{testno,jdbcType=VARCHAR}
+      and PRDTNO = #{prdtno,jdbcType=VARCHAR}
+      and SERIALNO = #{serialno,jdbcType=VARCHAR}
+      and ITEM = #{item,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.TestitembackKey">
+    delete from PCLMSMGR.TESTITEMBACK
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and TESTNO = #{testno,jdbcType=VARCHAR}
+      and PRDTNO = #{prdtno,jdbcType=VARCHAR}
+      and SERIALNO = #{serialno,jdbcType=VARCHAR}
+      and ITEM = #{item,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="idv.heimlich.springboot.entity.po.TestitembackExample">
+    delete from PCLMSMGR.TESTITEMBACK
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="idv.heimlich.springboot.entity.po.Testitemback">
+    insert into PCLMSMGR.TESTITEMBACK (BONDNO, TESTNO, PRDTNO, 
+      SERIALNO, ITEM, BACKQTY, 
+      BACKDATE, BACKPOST)
+    values (#{bondno,jdbcType=VARCHAR}, #{testno,jdbcType=VARCHAR}, #{prdtno,jdbcType=VARCHAR}, 
+      #{serialno,jdbcType=VARCHAR}, #{item,jdbcType=DECIMAL}, #{backqty,jdbcType=DECIMAL}, 
+      #{backdate,jdbcType=VARCHAR}, #{backpost,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="idv.heimlich.springboot.entity.po.Testitemback">
+    insert into PCLMSMGR.TESTITEMBACK
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        BONDNO,
+      </if>
+      <if test="testno != null">
+        TESTNO,
+      </if>
+      <if test="prdtno != null">
+        PRDTNO,
+      </if>
+      <if test="serialno != null">
+        SERIALNO,
+      </if>
+      <if test="item != null">
+        ITEM,
+      </if>
+      <if test="backqty != null">
+        BACKQTY,
+      </if>
+      <if test="backdate != null">
+        BACKDATE,
+      </if>
+      <if test="backpost != null">
+        BACKPOST,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        #{bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="testno != null">
+        #{testno,jdbcType=VARCHAR},
+      </if>
+      <if test="prdtno != null">
+        #{prdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="serialno != null">
+        #{serialno,jdbcType=VARCHAR},
+      </if>
+      <if test="item != null">
+        #{item,jdbcType=DECIMAL},
+      </if>
+      <if test="backqty != null">
+        #{backqty,jdbcType=DECIMAL},
+      </if>
+      <if test="backdate != null">
+        #{backdate,jdbcType=VARCHAR},
+      </if>
+      <if test="backpost != null">
+        #{backpost,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="idv.heimlich.springboot.entity.po.TestitembackExample" resultType="java.lang.Long">
+    select count(*) from PCLMSMGR.TESTITEMBACK
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update PCLMSMGR.TESTITEMBACK
+    <set>
+      <if test="record.bondno != null">
+        BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.testno != null">
+        TESTNO = #{record.testno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prdtno != null">
+        PRDTNO = #{record.prdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serialno != null">
+        SERIALNO = #{record.serialno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.item != null">
+        ITEM = #{record.item,jdbcType=DECIMAL},
+      </if>
+      <if test="record.backqty != null">
+        BACKQTY = #{record.backqty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.backdate != null">
+        BACKDATE = #{record.backdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backpost != null">
+        BACKPOST = #{record.backpost,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update PCLMSMGR.TESTITEMBACK
+    set BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      TESTNO = #{record.testno,jdbcType=VARCHAR},
+      PRDTNO = #{record.prdtno,jdbcType=VARCHAR},
+      SERIALNO = #{record.serialno,jdbcType=VARCHAR},
+      ITEM = #{record.item,jdbcType=DECIMAL},
+      BACKQTY = #{record.backqty,jdbcType=DECIMAL},
+      BACKDATE = #{record.backdate,jdbcType=VARCHAR},
+      BACKPOST = #{record.backpost,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="idv.heimlich.springboot.entity.po.Testitemback">
+    update PCLMSMGR.TESTITEMBACK
+    <set>
+      <if test="backqty != null">
+        BACKQTY = #{backqty,jdbcType=DECIMAL},
+      </if>
+      <if test="backdate != null">
+        BACKDATE = #{backdate,jdbcType=VARCHAR},
+      </if>
+      <if test="backpost != null">
+        BACKPOST = #{backpost,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and TESTNO = #{testno,jdbcType=VARCHAR}
+      and PRDTNO = #{prdtno,jdbcType=VARCHAR}
+      and SERIALNO = #{serialno,jdbcType=VARCHAR}
+      and ITEM = #{item,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.Testitemback">
+    update PCLMSMGR.TESTITEMBACK
+    set BACKQTY = #{backqty,jdbcType=DECIMAL},
+      BACKDATE = #{backdate,jdbcType=VARCHAR},
+      BACKPOST = #{backpost,jdbcType=VARCHAR}
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and TESTNO = #{testno,jdbcType=VARCHAR}
+      and PRDTNO = #{prdtno,jdbcType=VARCHAR}
+      and SERIALNO = #{serialno,jdbcType=VARCHAR}
+      and ITEM = #{item,jdbcType=DECIMAL}
+  </update>
+</mapper>

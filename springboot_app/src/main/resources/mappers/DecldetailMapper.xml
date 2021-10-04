@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idv.heimlich.springboot.entity.mapper.DecldetailMapper">
+  <resultMap id="BaseResultMap" type="idv.heimlich.springboot.entity.po.Decldetail">
+    <id column="BONDNO" jdbcType="VARCHAR" property="bondno" />
+    <id column="DECLNO" jdbcType="VARCHAR" property="declno" />
+    <id column="ITEMNO" jdbcType="DECIMAL" property="itemno" />
+    <id column="MSGTYPE" jdbcType="VARCHAR" property="msgtype" />
+    <result column="PRDTNO" jdbcType="VARCHAR" property="prdtno" />
+    <result column="DESCRIP" jdbcType="VARCHAR" property="descrip" />
+    <result column="BRAND" jdbcType="VARCHAR" property="brand" />
+    <result column="MODEL" jdbcType="VARCHAR" property="model" />
+    <result column="SPEC" jdbcType="VARCHAR" property="spec" />
+    <result column="QTY" jdbcType="DECIMAL" property="qty" />
+    <result column="UNIT" jdbcType="VARCHAR" property="unit" />
+    <result column="UPRICE" jdbcType="DECIMAL" property="uprice" />
+    <result column="CUR" jdbcType="VARCHAR" property="cur" />
+    <result column="VALUEAMT" jdbcType="DECIMAL" property="valueamt" />
+    <result column="VALUEQTY" jdbcType="DECIMAL" property="valueqty" />
+    <result column="DUTYRATE" jdbcType="DECIMAL" property="dutyrate" />
+    <result column="UNITDUTY" jdbcType="DECIMAL" property="unitduty" />
+    <result column="ODECLNO" jdbcType="VARCHAR" property="odeclno" />
+    <result column="OITEMNO" jdbcType="DECIMAL" property="oitemno" />
+    <result column="CCCCODE" jdbcType="VARCHAR" property="ccccode" />
+    <result column="COMDTAXRATE" jdbcType="DECIMAL" property="comdtaxrate" />
+    <result column="STRTYPE" jdbcType="VARCHAR" property="strtype" />
+    <result column="DUTYTYPE" jdbcType="VARCHAR" property="dutytype" />
+    <result column="STATMODE" jdbcType="VARCHAR" property="statmode" />
+    <result column="D8DATE" jdbcType="VARCHAR" property="d8date" />
+    <result column="PRODCOUNTRY" jdbcType="VARCHAR" property="prodcountry" />
+    <result column="D8DECLNO" jdbcType="VARCHAR" property="d8declno" />
+    <result column="NWGHT" jdbcType="DECIMAL" property="nwght" />
+    <result column="OEXDECLNO" jdbcType="VARCHAR" property="oexdeclno" />
+    <result column="OEXITEMNO" jdbcType="DECIMAL" property="oexitemno" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BONDNO, DECLNO, ITEMNO, MSGTYPE, PRDTNO, DESCRIP, BRAND, MODEL, SPEC, QTY, UNIT, 
+    UPRICE, CUR, VALUEAMT, VALUEQTY, DUTYRATE, UNITDUTY, ODECLNO, OITEMNO, CCCCODE, COMDTAXRATE, 
+    STRTYPE, DUTYTYPE, STATMODE, D8DATE, PRODCOUNTRY, D8DECLNO, NWGHT, OEXDECLNO, OEXITEMNO
+  </sql>
+  <select id="selectByExample" parameterType="idv.heimlich.springboot.entity.po.DecldetailExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.DECLDETAIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.DecldetailKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.DECLDETAIL
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and DECLNO = #{declno,jdbcType=VARCHAR}
+      and ITEMNO = #{itemno,jdbcType=DECIMAL}
+      and MSGTYPE = #{msgtype,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.DecldetailKey">
+    delete from PCLMSMGR.DECLDETAIL
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and DECLNO = #{declno,jdbcType=VARCHAR}
+      and ITEMNO = #{itemno,jdbcType=DECIMAL}
+      and MSGTYPE = #{msgtype,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="idv.heimlich.springboot.entity.po.DecldetailExample">
+    delete from PCLMSMGR.DECLDETAIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="idv.heimlich.springboot.entity.po.Decldetail">
+    insert into PCLMSMGR.DECLDETAIL (BONDNO, DECLNO, ITEMNO, 
+      MSGTYPE, PRDTNO, DESCRIP, 
+      BRAND, MODEL, SPEC, 
+      QTY, UNIT, UPRICE, 
+      CUR, VALUEAMT, VALUEQTY, 
+      DUTYRATE, UNITDUTY, ODECLNO, 
+      OITEMNO, CCCCODE, COMDTAXRATE, 
+      STRTYPE, DUTYTYPE, STATMODE, 
+      D8DATE, PRODCOUNTRY, D8DECLNO, 
+      NWGHT, OEXDECLNO, OEXITEMNO
+      )
+    values (#{bondno,jdbcType=VARCHAR}, #{declno,jdbcType=VARCHAR}, #{itemno,jdbcType=DECIMAL}, 
+      #{msgtype,jdbcType=VARCHAR}, #{prdtno,jdbcType=VARCHAR}, #{descrip,jdbcType=VARCHAR}, 
+      #{brand,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{spec,jdbcType=VARCHAR}, 
+      #{qty,jdbcType=DECIMAL}, #{unit,jdbcType=VARCHAR}, #{uprice,jdbcType=DECIMAL}, 
+      #{cur,jdbcType=VARCHAR}, #{valueamt,jdbcType=DECIMAL}, #{valueqty,jdbcType=DECIMAL}, 
+      #{dutyrate,jdbcType=DECIMAL}, #{unitduty,jdbcType=DECIMAL}, #{odeclno,jdbcType=VARCHAR}, 
+      #{oitemno,jdbcType=DECIMAL}, #{ccccode,jdbcType=VARCHAR}, #{comdtaxrate,jdbcType=DECIMAL}, 
+      #{strtype,jdbcType=VARCHAR}, #{dutytype,jdbcType=VARCHAR}, #{statmode,jdbcType=VARCHAR}, 
+      #{d8date,jdbcType=VARCHAR}, #{prodcountry,jdbcType=VARCHAR}, #{d8declno,jdbcType=VARCHAR}, 
+      #{nwght,jdbcType=DECIMAL}, #{oexdeclno,jdbcType=VARCHAR}, #{oexitemno,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="idv.heimlich.springboot.entity.po.Decldetail">
+    insert into PCLMSMGR.DECLDETAIL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        BONDNO,
+      </if>
+      <if test="declno != null">
+        DECLNO,
+      </if>
+      <if test="itemno != null">
+        ITEMNO,
+      </if>
+      <if test="msgtype != null">
+        MSGTYPE,
+      </if>
+      <if test="prdtno != null">
+        PRDTNO,
+      </if>
+      <if test="descrip != null">
+        DESCRIP,
+      </if>
+      <if test="brand != null">
+        BRAND,
+      </if>
+      <if test="model != null">
+        MODEL,
+      </if>
+      <if test="spec != null">
+        SPEC,
+      </if>
+      <if test="qty != null">
+        QTY,
+      </if>
+      <if test="unit != null">
+        UNIT,
+      </if>
+      <if test="uprice != null">
+        UPRICE,
+      </if>
+      <if test="cur != null">
+        CUR,
+      </if>
+      <if test="valueamt != null">
+        VALUEAMT,
+      </if>
+      <if test="valueqty != null">
+        VALUEQTY,
+      </if>
+      <if test="dutyrate != null">
+        DUTYRATE,
+      </if>
+      <if test="unitduty != null">
+        UNITDUTY,
+      </if>
+      <if test="odeclno != null">
+        ODECLNO,
+      </if>
+      <if test="oitemno != null">
+        OITEMNO,
+      </if>
+      <if test="ccccode != null">
+        CCCCODE,
+      </if>
+      <if test="comdtaxrate != null">
+        COMDTAXRATE,
+      </if>
+      <if test="strtype != null">
+        STRTYPE,
+      </if>
+      <if test="dutytype != null">
+        DUTYTYPE,
+      </if>
+      <if test="statmode != null">
+        STATMODE,
+      </if>
+      <if test="d8date != null">
+        D8DATE,
+      </if>
+      <if test="prodcountry != null">
+        PRODCOUNTRY,
+      </if>
+      <if test="d8declno != null">
+        D8DECLNO,
+      </if>
+      <if test="nwght != null">
+        NWGHT,
+      </if>
+      <if test="oexdeclno != null">
+        OEXDECLNO,
+      </if>
+      <if test="oexitemno != null">
+        OEXITEMNO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        #{bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="declno != null">
+        #{declno,jdbcType=VARCHAR},
+      </if>
+      <if test="itemno != null">
+        #{itemno,jdbcType=DECIMAL},
+      </if>
+      <if test="msgtype != null">
+        #{msgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="prdtno != null">
+        #{prdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="descrip != null">
+        #{descrip,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="spec != null">
+        #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null">
+        #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="uprice != null">
+        #{uprice,jdbcType=DECIMAL},
+      </if>
+      <if test="cur != null">
+        #{cur,jdbcType=VARCHAR},
+      </if>
+      <if test="valueamt != null">
+        #{valueamt,jdbcType=DECIMAL},
+      </if>
+      <if test="valueqty != null">
+        #{valueqty,jdbcType=DECIMAL},
+      </if>
+      <if test="dutyrate != null">
+        #{dutyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="unitduty != null">
+        #{unitduty,jdbcType=DECIMAL},
+      </if>
+      <if test="odeclno != null">
+        #{odeclno,jdbcType=VARCHAR},
+      </if>
+      <if test="oitemno != null">
+        #{oitemno,jdbcType=DECIMAL},
+      </if>
+      <if test="ccccode != null">
+        #{ccccode,jdbcType=VARCHAR},
+      </if>
+      <if test="comdtaxrate != null">
+        #{comdtaxrate,jdbcType=DECIMAL},
+      </if>
+      <if test="strtype != null">
+        #{strtype,jdbcType=VARCHAR},
+      </if>
+      <if test="dutytype != null">
+        #{dutytype,jdbcType=VARCHAR},
+      </if>
+      <if test="statmode != null">
+        #{statmode,jdbcType=VARCHAR},
+      </if>
+      <if test="d8date != null">
+        #{d8date,jdbcType=VARCHAR},
+      </if>
+      <if test="prodcountry != null">
+        #{prodcountry,jdbcType=VARCHAR},
+      </if>
+      <if test="d8declno != null">
+        #{d8declno,jdbcType=VARCHAR},
+      </if>
+      <if test="nwght != null">
+        #{nwght,jdbcType=DECIMAL},
+      </if>
+      <if test="oexdeclno != null">
+        #{oexdeclno,jdbcType=VARCHAR},
+      </if>
+      <if test="oexitemno != null">
+        #{oexitemno,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="idv.heimlich.springboot.entity.po.DecldetailExample" resultType="java.lang.Long">
+    select count(*) from PCLMSMGR.DECLDETAIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update PCLMSMGR.DECLDETAIL
+    <set>
+      <if test="record.bondno != null">
+        BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.declno != null">
+        DECLNO = #{record.declno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemno != null">
+        ITEMNO = #{record.itemno,jdbcType=DECIMAL},
+      </if>
+      <if test="record.msgtype != null">
+        MSGTYPE = #{record.msgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prdtno != null">
+        PRDTNO = #{record.prdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.descrip != null">
+        DESCRIP = #{record.descrip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brand != null">
+        BRAND = #{record.brand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null">
+        MODEL = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spec != null">
+        SPEC = #{record.spec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qty != null">
+        QTY = #{record.qty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.unit != null">
+        UNIT = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uprice != null">
+        UPRICE = #{record.uprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cur != null">
+        CUR = #{record.cur,jdbcType=VARCHAR},
+      </if>
+      <if test="record.valueamt != null">
+        VALUEAMT = #{record.valueamt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.valueqty != null">
+        VALUEQTY = #{record.valueqty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dutyrate != null">
+        DUTYRATE = #{record.dutyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.unitduty != null">
+        UNITDUTY = #{record.unitduty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.odeclno != null">
+        ODECLNO = #{record.odeclno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oitemno != null">
+        OITEMNO = #{record.oitemno,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ccccode != null">
+        CCCCODE = #{record.ccccode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comdtaxrate != null">
+        COMDTAXRATE = #{record.comdtaxrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.strtype != null">
+        STRTYPE = #{record.strtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dutytype != null">
+        DUTYTYPE = #{record.dutytype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.statmode != null">
+        STATMODE = #{record.statmode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.d8date != null">
+        D8DATE = #{record.d8date,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodcountry != null">
+        PRODCOUNTRY = #{record.prodcountry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.d8declno != null">
+        D8DECLNO = #{record.d8declno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nwght != null">
+        NWGHT = #{record.nwght,jdbcType=DECIMAL},
+      </if>
+      <if test="record.oexdeclno != null">
+        OEXDECLNO = #{record.oexdeclno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oexitemno != null">
+        OEXITEMNO = #{record.oexitemno,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update PCLMSMGR.DECLDETAIL
+    set BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      DECLNO = #{record.declno,jdbcType=VARCHAR},
+      ITEMNO = #{record.itemno,jdbcType=DECIMAL},
+      MSGTYPE = #{record.msgtype,jdbcType=VARCHAR},
+      PRDTNO = #{record.prdtno,jdbcType=VARCHAR},
+      DESCRIP = #{record.descrip,jdbcType=VARCHAR},
+      BRAND = #{record.brand,jdbcType=VARCHAR},
+      MODEL = #{record.model,jdbcType=VARCHAR},
+      SPEC = #{record.spec,jdbcType=VARCHAR},
+      QTY = #{record.qty,jdbcType=DECIMAL},
+      UNIT = #{record.unit,jdbcType=VARCHAR},
+      UPRICE = #{record.uprice,jdbcType=DECIMAL},
+      CUR = #{record.cur,jdbcType=VARCHAR},
+      VALUEAMT = #{record.valueamt,jdbcType=DECIMAL},
+      VALUEQTY = #{record.valueqty,jdbcType=DECIMAL},
+      DUTYRATE = #{record.dutyrate,jdbcType=DECIMAL},
+      UNITDUTY = #{record.unitduty,jdbcType=DECIMAL},
+      ODECLNO = #{record.odeclno,jdbcType=VARCHAR},
+      OITEMNO = #{record.oitemno,jdbcType=DECIMAL},
+      CCCCODE = #{record.ccccode,jdbcType=VARCHAR},
+      COMDTAXRATE = #{record.comdtaxrate,jdbcType=DECIMAL},
+      STRTYPE = #{record.strtype,jdbcType=VARCHAR},
+      DUTYTYPE = #{record.dutytype,jdbcType=VARCHAR},
+      STATMODE = #{record.statmode,jdbcType=VARCHAR},
+      D8DATE = #{record.d8date,jdbcType=VARCHAR},
+      PRODCOUNTRY = #{record.prodcountry,jdbcType=VARCHAR},
+      D8DECLNO = #{record.d8declno,jdbcType=VARCHAR},
+      NWGHT = #{record.nwght,jdbcType=DECIMAL},
+      OEXDECLNO = #{record.oexdeclno,jdbcType=VARCHAR},
+      OEXITEMNO = #{record.oexitemno,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="idv.heimlich.springboot.entity.po.Decldetail">
+    update PCLMSMGR.DECLDETAIL
+    <set>
+      <if test="prdtno != null">
+        PRDTNO = #{prdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="descrip != null">
+        DESCRIP = #{descrip,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        BRAND = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        MODEL = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="spec != null">
+        SPEC = #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null">
+        QTY = #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="unit != null">
+        UNIT = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="uprice != null">
+        UPRICE = #{uprice,jdbcType=DECIMAL},
+      </if>
+      <if test="cur != null">
+        CUR = #{cur,jdbcType=VARCHAR},
+      </if>
+      <if test="valueamt != null">
+        VALUEAMT = #{valueamt,jdbcType=DECIMAL},
+      </if>
+      <if test="valueqty != null">
+        VALUEQTY = #{valueqty,jdbcType=DECIMAL},
+      </if>
+      <if test="dutyrate != null">
+        DUTYRATE = #{dutyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="unitduty != null">
+        UNITDUTY = #{unitduty,jdbcType=DECIMAL},
+      </if>
+      <if test="odeclno != null">
+        ODECLNO = #{odeclno,jdbcType=VARCHAR},
+      </if>
+      <if test="oitemno != null">
+        OITEMNO = #{oitemno,jdbcType=DECIMAL},
+      </if>
+      <if test="ccccode != null">
+        CCCCODE = #{ccccode,jdbcType=VARCHAR},
+      </if>
+      <if test="comdtaxrate != null">
+        COMDTAXRATE = #{comdtaxrate,jdbcType=DECIMAL},
+      </if>
+      <if test="strtype != null">
+        STRTYPE = #{strtype,jdbcType=VARCHAR},
+      </if>
+      <if test="dutytype != null">
+        DUTYTYPE = #{dutytype,jdbcType=VARCHAR},
+      </if>
+      <if test="statmode != null">
+        STATMODE = #{statmode,jdbcType=VARCHAR},
+      </if>
+      <if test="d8date != null">
+        D8DATE = #{d8date,jdbcType=VARCHAR},
+      </if>
+      <if test="prodcountry != null">
+        PRODCOUNTRY = #{prodcountry,jdbcType=VARCHAR},
+      </if>
+      <if test="d8declno != null">
+        D8DECLNO = #{d8declno,jdbcType=VARCHAR},
+      </if>
+      <if test="nwght != null">
+        NWGHT = #{nwght,jdbcType=DECIMAL},
+      </if>
+      <if test="oexdeclno != null">
+        OEXDECLNO = #{oexdeclno,jdbcType=VARCHAR},
+      </if>
+      <if test="oexitemno != null">
+        OEXITEMNO = #{oexitemno,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and DECLNO = #{declno,jdbcType=VARCHAR}
+      and ITEMNO = #{itemno,jdbcType=DECIMAL}
+      and MSGTYPE = #{msgtype,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.Decldetail">
+    update PCLMSMGR.DECLDETAIL
+    set PRDTNO = #{prdtno,jdbcType=VARCHAR},
+      DESCRIP = #{descrip,jdbcType=VARCHAR},
+      BRAND = #{brand,jdbcType=VARCHAR},
+      MODEL = #{model,jdbcType=VARCHAR},
+      SPEC = #{spec,jdbcType=VARCHAR},
+      QTY = #{qty,jdbcType=DECIMAL},
+      UNIT = #{unit,jdbcType=VARCHAR},
+      UPRICE = #{uprice,jdbcType=DECIMAL},
+      CUR = #{cur,jdbcType=VARCHAR},
+      VALUEAMT = #{valueamt,jdbcType=DECIMAL},
+      VALUEQTY = #{valueqty,jdbcType=DECIMAL},
+      DUTYRATE = #{dutyrate,jdbcType=DECIMAL},
+      UNITDUTY = #{unitduty,jdbcType=DECIMAL},
+      ODECLNO = #{odeclno,jdbcType=VARCHAR},
+      OITEMNO = #{oitemno,jdbcType=DECIMAL},
+      CCCCODE = #{ccccode,jdbcType=VARCHAR},
+      COMDTAXRATE = #{comdtaxrate,jdbcType=DECIMAL},
+      STRTYPE = #{strtype,jdbcType=VARCHAR},
+      DUTYTYPE = #{dutytype,jdbcType=VARCHAR},
+      STATMODE = #{statmode,jdbcType=VARCHAR},
+      D8DATE = #{d8date,jdbcType=VARCHAR},
+      PRODCOUNTRY = #{prodcountry,jdbcType=VARCHAR},
+      D8DECLNO = #{d8declno,jdbcType=VARCHAR},
+      NWGHT = #{nwght,jdbcType=DECIMAL},
+      OEXDECLNO = #{oexdeclno,jdbcType=VARCHAR},
+      OEXITEMNO = #{oexitemno,jdbcType=DECIMAL}
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and DECLNO = #{declno,jdbcType=VARCHAR}
+      and ITEMNO = #{itemno,jdbcType=DECIMAL}
+      and MSGTYPE = #{msgtype,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idv.heimlich.springboot.entity.mapper.ProductMapper">
+  <resultMap id="BaseResultMap" type="idv.heimlich.springboot.entity.po.Product">
+    <id column="BONDNO" jdbcType="VARCHAR" property="bondno" />
+    <id column="CTMCODE" jdbcType="VARCHAR" property="ctmcode" />
+    <id column="PRDTNO" jdbcType="VARCHAR" property="prdtno" />
+    <result column="DESCRIP" jdbcType="VARCHAR" property="descrip" />
+    <result column="UNIT" jdbcType="CHAR" property="unit" />
+    <result column="REFPRDTNO" jdbcType="VARCHAR" property="refprdtno" />
+    <result column="REVDATE" jdbcType="CHAR" property="revdate" />
+    <result column="CCCCODE" jdbcType="CHAR" property="ccccode" />
+    <result column="DUTYRATE" jdbcType="DECIMAL" property="dutyrate" />
+    <result column="COMDTAXRATE" jdbcType="DECIMAL" property="comdtaxrate" />
+    <result column="BRAND" jdbcType="VARCHAR" property="brand" />
+    <result column="MODEL" jdbcType="VARCHAR" property="model" />
+    <result column="SPEC" jdbcType="VARCHAR" property="spec" />
+    <result column="UPRICE" jdbcType="DECIMAL" property="uprice" />
+    <result column="CUR" jdbcType="VARCHAR" property="cur" />
+    <result column="CARRYFREEQTY" jdbcType="DECIMAL" property="carryfreeqty" />
+    <result column="CARRYDUTYQTY" jdbcType="DECIMAL" property="carrydutyqty" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BONDNO, CTMCODE, PRDTNO, DESCRIP, UNIT, REFPRDTNO, REVDATE, CCCCODE, DUTYRATE, COMDTAXRATE, 
+    BRAND, MODEL, SPEC, UPRICE, CUR, CARRYFREEQTY, CARRYDUTYQTY
+  </sql>
+  <select id="selectByExample" parameterType="idv.heimlich.springboot.entity.po.ProductExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.PRODUCT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.ProductKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.PRODUCT
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and CTMCODE = #{ctmcode,jdbcType=VARCHAR}
+      and PRDTNO = #{prdtno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.ProductKey">
+    delete from PCLMSMGR.PRODUCT
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and CTMCODE = #{ctmcode,jdbcType=VARCHAR}
+      and PRDTNO = #{prdtno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="idv.heimlich.springboot.entity.po.ProductExample">
+    delete from PCLMSMGR.PRODUCT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="idv.heimlich.springboot.entity.po.Product">
+    insert into PCLMSMGR.PRODUCT (BONDNO, CTMCODE, PRDTNO, 
+      DESCRIP, UNIT, REFPRDTNO, 
+      REVDATE, CCCCODE, DUTYRATE, 
+      COMDTAXRATE, BRAND, MODEL, 
+      SPEC, UPRICE, CUR, 
+      CARRYFREEQTY, CARRYDUTYQTY)
+    values (#{bondno,jdbcType=VARCHAR}, #{ctmcode,jdbcType=VARCHAR}, #{prdtno,jdbcType=VARCHAR}, 
+      #{descrip,jdbcType=VARCHAR}, #{unit,jdbcType=CHAR}, #{refprdtno,jdbcType=VARCHAR}, 
+      #{revdate,jdbcType=CHAR}, #{ccccode,jdbcType=CHAR}, #{dutyrate,jdbcType=DECIMAL}, 
+      #{comdtaxrate,jdbcType=DECIMAL}, #{brand,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, 
+      #{spec,jdbcType=VARCHAR}, #{uprice,jdbcType=DECIMAL}, #{cur,jdbcType=VARCHAR}, 
+      #{carryfreeqty,jdbcType=DECIMAL}, #{carrydutyqty,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="idv.heimlich.springboot.entity.po.Product">
+    insert into PCLMSMGR.PRODUCT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        BONDNO,
+      </if>
+      <if test="ctmcode != null">
+        CTMCODE,
+      </if>
+      <if test="prdtno != null">
+        PRDTNO,
+      </if>
+      <if test="descrip != null">
+        DESCRIP,
+      </if>
+      <if test="unit != null">
+        UNIT,
+      </if>
+      <if test="refprdtno != null">
+        REFPRDTNO,
+      </if>
+      <if test="revdate != null">
+        REVDATE,
+      </if>
+      <if test="ccccode != null">
+        CCCCODE,
+      </if>
+      <if test="dutyrate != null">
+        DUTYRATE,
+      </if>
+      <if test="comdtaxrate != null">
+        COMDTAXRATE,
+      </if>
+      <if test="brand != null">
+        BRAND,
+      </if>
+      <if test="model != null">
+        MODEL,
+      </if>
+      <if test="spec != null">
+        SPEC,
+      </if>
+      <if test="uprice != null">
+        UPRICE,
+      </if>
+      <if test="cur != null">
+        CUR,
+      </if>
+      <if test="carryfreeqty != null">
+        CARRYFREEQTY,
+      </if>
+      <if test="carrydutyqty != null">
+        CARRYDUTYQTY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        #{bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="ctmcode != null">
+        #{ctmcode,jdbcType=VARCHAR},
+      </if>
+      <if test="prdtno != null">
+        #{prdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="descrip != null">
+        #{descrip,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=CHAR},
+      </if>
+      <if test="refprdtno != null">
+        #{refprdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="revdate != null">
+        #{revdate,jdbcType=CHAR},
+      </if>
+      <if test="ccccode != null">
+        #{ccccode,jdbcType=CHAR},
+      </if>
+      <if test="dutyrate != null">
+        #{dutyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="comdtaxrate != null">
+        #{comdtaxrate,jdbcType=DECIMAL},
+      </if>
+      <if test="brand != null">
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="spec != null">
+        #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="uprice != null">
+        #{uprice,jdbcType=DECIMAL},
+      </if>
+      <if test="cur != null">
+        #{cur,jdbcType=VARCHAR},
+      </if>
+      <if test="carryfreeqty != null">
+        #{carryfreeqty,jdbcType=DECIMAL},
+      </if>
+      <if test="carrydutyqty != null">
+        #{carrydutyqty,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="idv.heimlich.springboot.entity.po.ProductExample" resultType="java.lang.Long">
+    select count(*) from PCLMSMGR.PRODUCT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update PCLMSMGR.PRODUCT
+    <set>
+      <if test="record.bondno != null">
+        BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctmcode != null">
+        CTMCODE = #{record.ctmcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prdtno != null">
+        PRDTNO = #{record.prdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.descrip != null">
+        DESCRIP = #{record.descrip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null">
+        UNIT = #{record.unit,jdbcType=CHAR},
+      </if>
+      <if test="record.refprdtno != null">
+        REFPRDTNO = #{record.refprdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.revdate != null">
+        REVDATE = #{record.revdate,jdbcType=CHAR},
+      </if>
+      <if test="record.ccccode != null">
+        CCCCODE = #{record.ccccode,jdbcType=CHAR},
+      </if>
+      <if test="record.dutyrate != null">
+        DUTYRATE = #{record.dutyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.comdtaxrate != null">
+        COMDTAXRATE = #{record.comdtaxrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.brand != null">
+        BRAND = #{record.brand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null">
+        MODEL = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spec != null">
+        SPEC = #{record.spec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uprice != null">
+        UPRICE = #{record.uprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cur != null">
+        CUR = #{record.cur,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carryfreeqty != null">
+        CARRYFREEQTY = #{record.carryfreeqty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.carrydutyqty != null">
+        CARRYDUTYQTY = #{record.carrydutyqty,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update PCLMSMGR.PRODUCT
+    set BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      CTMCODE = #{record.ctmcode,jdbcType=VARCHAR},
+      PRDTNO = #{record.prdtno,jdbcType=VARCHAR},
+      DESCRIP = #{record.descrip,jdbcType=VARCHAR},
+      UNIT = #{record.unit,jdbcType=CHAR},
+      REFPRDTNO = #{record.refprdtno,jdbcType=VARCHAR},
+      REVDATE = #{record.revdate,jdbcType=CHAR},
+      CCCCODE = #{record.ccccode,jdbcType=CHAR},
+      DUTYRATE = #{record.dutyrate,jdbcType=DECIMAL},
+      COMDTAXRATE = #{record.comdtaxrate,jdbcType=DECIMAL},
+      BRAND = #{record.brand,jdbcType=VARCHAR},
+      MODEL = #{record.model,jdbcType=VARCHAR},
+      SPEC = #{record.spec,jdbcType=VARCHAR},
+      UPRICE = #{record.uprice,jdbcType=DECIMAL},
+      CUR = #{record.cur,jdbcType=VARCHAR},
+      CARRYFREEQTY = #{record.carryfreeqty,jdbcType=DECIMAL},
+      CARRYDUTYQTY = #{record.carrydutyqty,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="idv.heimlich.springboot.entity.po.Product">
+    update PCLMSMGR.PRODUCT
+    <set>
+      <if test="descrip != null">
+        DESCRIP = #{descrip,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        UNIT = #{unit,jdbcType=CHAR},
+      </if>
+      <if test="refprdtno != null">
+        REFPRDTNO = #{refprdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="revdate != null">
+        REVDATE = #{revdate,jdbcType=CHAR},
+      </if>
+      <if test="ccccode != null">
+        CCCCODE = #{ccccode,jdbcType=CHAR},
+      </if>
+      <if test="dutyrate != null">
+        DUTYRATE = #{dutyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="comdtaxrate != null">
+        COMDTAXRATE = #{comdtaxrate,jdbcType=DECIMAL},
+      </if>
+      <if test="brand != null">
+        BRAND = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        MODEL = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="spec != null">
+        SPEC = #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="uprice != null">
+        UPRICE = #{uprice,jdbcType=DECIMAL},
+      </if>
+      <if test="cur != null">
+        CUR = #{cur,jdbcType=VARCHAR},
+      </if>
+      <if test="carryfreeqty != null">
+        CARRYFREEQTY = #{carryfreeqty,jdbcType=DECIMAL},
+      </if>
+      <if test="carrydutyqty != null">
+        CARRYDUTYQTY = #{carrydutyqty,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and CTMCODE = #{ctmcode,jdbcType=VARCHAR}
+      and PRDTNO = #{prdtno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.Product">
+    update PCLMSMGR.PRODUCT
+    set DESCRIP = #{descrip,jdbcType=VARCHAR},
+      UNIT = #{unit,jdbcType=CHAR},
+      REFPRDTNO = #{refprdtno,jdbcType=VARCHAR},
+      REVDATE = #{revdate,jdbcType=CHAR},
+      CCCCODE = #{ccccode,jdbcType=CHAR},
+      DUTYRATE = #{dutyrate,jdbcType=DECIMAL},
+      COMDTAXRATE = #{comdtaxrate,jdbcType=DECIMAL},
+      BRAND = #{brand,jdbcType=VARCHAR},
+      MODEL = #{model,jdbcType=VARCHAR},
+      SPEC = #{spec,jdbcType=VARCHAR},
+      UPRICE = #{uprice,jdbcType=DECIMAL},
+      CUR = #{cur,jdbcType=VARCHAR},
+      CARRYFREEQTY = #{carryfreeqty,jdbcType=DECIMAL},
+      CARRYDUTYQTY = #{carrydutyqty,jdbcType=DECIMAL}
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and CTMCODE = #{ctmcode,jdbcType=VARCHAR}
+      and PRDTNO = #{prdtno,jdbcType=VARCHAR}
+  </update>
+</mapper>

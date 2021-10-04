@@ -1,0 +1,812 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idv.heimlich.springboot.entity.mapper.OutdetailMapper">
+  <resultMap id="BaseResultMap" type="idv.heimlich.springboot.entity.po.Outdetail">
+    <id column="BONDNO" jdbcType="VARCHAR" property="bondno" />
+    <id column="REFBILLNO" jdbcType="VARCHAR" property="refbillno" />
+    <id column="ITEM" jdbcType="DECIMAL" property="item" />
+    <id column="OUTPOST" jdbcType="VARCHAR" property="outpost" />
+    <result column="PRDTNO" jdbcType="VARCHAR" property="prdtno" />
+    <result column="ROUTQTY" jdbcType="DECIMAL" property="routqty" />
+    <result column="OUTUNIT" jdbcType="VARCHAR" property="outunit" />
+    <result column="OUTDATE" jdbcType="VARCHAR" property="outdate" />
+    <result column="BATCHNO" jdbcType="VARCHAR" property="batchno" />
+    <result column="STOCKNO" jdbcType="VARCHAR" property="stockno" />
+    <result column="DECLTYPE" jdbcType="VARCHAR" property="decltype" />
+    <result column="DECLNO" jdbcType="VARCHAR" property="declno" />
+    <result column="ITEMNO" jdbcType="DECIMAL" property="itemno" />
+    <result column="ODECLNO" jdbcType="VARCHAR" property="odeclno" />
+    <result column="OITEMNO" jdbcType="DECIMAL" property="oitemno" />
+    <result column="OUTSTATUS" jdbcType="VARCHAR" property="outstatus" />
+    <result column="OUTRMKS" jdbcType="VARCHAR" property="outrmks" />
+    <result column="CONFIRMDATE" jdbcType="CHAR" property="confirmdate" />
+    <result column="DESCRIP" jdbcType="VARCHAR" property="descrip" />
+    <result column="MONTHNO" jdbcType="VARCHAR" property="monthno" />
+    <result column="USERID" jdbcType="VARCHAR" property="userid" />
+    <result column="TRADEPRDTNO" jdbcType="VARCHAR" property="tradeprdtno" />
+    <result column="NWGHT" jdbcType="DECIMAL" property="nwght" />
+    <result column="GROSS" jdbcType="DECIMAL" property="gross" />
+    <result column="OUTSTRNO" jdbcType="VARCHAR" property="outstrno" />
+    <result column="UNITPRICE" jdbcType="DECIMAL" property="unitprice" />
+    <result column="CCCCODE" jdbcType="CHAR" property="ccccode" />
+    <result column="RLSTIME" jdbcType="VARCHAR" property="rlstime" />
+    <result column="DUTYRATE" jdbcType="DECIMAL" property="dutyrate" />
+    <result column="PONO" jdbcType="VARCHAR" property="pono" />
+    <result column="INVNO" jdbcType="VARCHAR" property="invno" />
+    <result column="COUNTNO" jdbcType="DECIMAL" property="countno" />
+    <result column="MAWB" jdbcType="VARCHAR" property="mawb" />
+    <result column="VESSELNO" jdbcType="VARCHAR" property="vesselno" />
+    <result column="DUTYTYPE" jdbcType="VARCHAR" property="dutytype" />
+    <result column="OPTYPE" jdbcType="VARCHAR" property="optype" />
+    <result column="STATMODE" jdbcType="VARCHAR" property="statmode" />
+    <result column="OUTRMKS2" jdbcType="VARCHAR" property="outrmks2" />
+    <result column="OREFBILLNO" jdbcType="VARCHAR" property="orefbillno" />
+    <result column="OITEM" jdbcType="DECIMAL" property="oitem" />
+    <result column="DECLDATE" jdbcType="VARCHAR" property="decldate" />
+    <result column="INVOICE" jdbcType="VARCHAR" property="invoice" />
+    <result column="MOITEMNO" jdbcType="DECIMAL" property="moitemno" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BONDNO, REFBILLNO, ITEM, OUTPOST, PRDTNO, ROUTQTY, OUTUNIT, OUTDATE, BATCHNO, STOCKNO, 
+    DECLTYPE, DECLNO, ITEMNO, ODECLNO, OITEMNO, OUTSTATUS, OUTRMKS, CONFIRMDATE, DESCRIP, 
+    MONTHNO, USERID, TRADEPRDTNO, NWGHT, GROSS, OUTSTRNO, UNITPRICE, CCCCODE, RLSTIME, 
+    DUTYRATE, PONO, INVNO, COUNTNO, MAWB, VESSELNO, DUTYTYPE, OPTYPE, STATMODE, OUTRMKS2, 
+    OREFBILLNO, OITEM, DECLDATE, INVOICE, MOITEMNO
+  </sql>
+  <select id="selectByExample" parameterType="idv.heimlich.springboot.entity.po.OutdetailExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.OUTDETAIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.OutdetailKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.OUTDETAIL
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and REFBILLNO = #{refbillno,jdbcType=VARCHAR}
+      and ITEM = #{item,jdbcType=DECIMAL}
+      and OUTPOST = #{outpost,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.OutdetailKey">
+    delete from PCLMSMGR.OUTDETAIL
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and REFBILLNO = #{refbillno,jdbcType=VARCHAR}
+      and ITEM = #{item,jdbcType=DECIMAL}
+      and OUTPOST = #{outpost,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="idv.heimlich.springboot.entity.po.OutdetailExample">
+    delete from PCLMSMGR.OUTDETAIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="idv.heimlich.springboot.entity.po.Outdetail">
+    insert into PCLMSMGR.OUTDETAIL (BONDNO, REFBILLNO, ITEM, 
+      OUTPOST, PRDTNO, ROUTQTY, 
+      OUTUNIT, OUTDATE, BATCHNO, 
+      STOCKNO, DECLTYPE, DECLNO, 
+      ITEMNO, ODECLNO, OITEMNO, 
+      OUTSTATUS, OUTRMKS, CONFIRMDATE, 
+      DESCRIP, MONTHNO, USERID, 
+      TRADEPRDTNO, NWGHT, GROSS, 
+      OUTSTRNO, UNITPRICE, CCCCODE, 
+      RLSTIME, DUTYRATE, PONO, 
+      INVNO, COUNTNO, MAWB, 
+      VESSELNO, DUTYTYPE, OPTYPE, 
+      STATMODE, OUTRMKS2, OREFBILLNO, 
+      OITEM, DECLDATE, INVOICE, 
+      MOITEMNO)
+    values (#{bondno,jdbcType=VARCHAR}, #{refbillno,jdbcType=VARCHAR}, #{item,jdbcType=DECIMAL}, 
+      #{outpost,jdbcType=VARCHAR}, #{prdtno,jdbcType=VARCHAR}, #{routqty,jdbcType=DECIMAL}, 
+      #{outunit,jdbcType=VARCHAR}, #{outdate,jdbcType=VARCHAR}, #{batchno,jdbcType=VARCHAR}, 
+      #{stockno,jdbcType=VARCHAR}, #{decltype,jdbcType=VARCHAR}, #{declno,jdbcType=VARCHAR}, 
+      #{itemno,jdbcType=DECIMAL}, #{odeclno,jdbcType=VARCHAR}, #{oitemno,jdbcType=DECIMAL}, 
+      #{outstatus,jdbcType=VARCHAR}, #{outrmks,jdbcType=VARCHAR}, #{confirmdate,jdbcType=CHAR}, 
+      #{descrip,jdbcType=VARCHAR}, #{monthno,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, 
+      #{tradeprdtno,jdbcType=VARCHAR}, #{nwght,jdbcType=DECIMAL}, #{gross,jdbcType=DECIMAL}, 
+      #{outstrno,jdbcType=VARCHAR}, #{unitprice,jdbcType=DECIMAL}, #{ccccode,jdbcType=CHAR}, 
+      #{rlstime,jdbcType=VARCHAR}, #{dutyrate,jdbcType=DECIMAL}, #{pono,jdbcType=VARCHAR}, 
+      #{invno,jdbcType=VARCHAR}, #{countno,jdbcType=DECIMAL}, #{mawb,jdbcType=VARCHAR}, 
+      #{vesselno,jdbcType=VARCHAR}, #{dutytype,jdbcType=VARCHAR}, #{optype,jdbcType=VARCHAR}, 
+      #{statmode,jdbcType=VARCHAR}, #{outrmks2,jdbcType=VARCHAR}, #{orefbillno,jdbcType=VARCHAR}, 
+      #{oitem,jdbcType=DECIMAL}, #{decldate,jdbcType=VARCHAR}, #{invoice,jdbcType=VARCHAR}, 
+      #{moitemno,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="idv.heimlich.springboot.entity.po.Outdetail">
+    insert into PCLMSMGR.OUTDETAIL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        BONDNO,
+      </if>
+      <if test="refbillno != null">
+        REFBILLNO,
+      </if>
+      <if test="item != null">
+        ITEM,
+      </if>
+      <if test="outpost != null">
+        OUTPOST,
+      </if>
+      <if test="prdtno != null">
+        PRDTNO,
+      </if>
+      <if test="routqty != null">
+        ROUTQTY,
+      </if>
+      <if test="outunit != null">
+        OUTUNIT,
+      </if>
+      <if test="outdate != null">
+        OUTDATE,
+      </if>
+      <if test="batchno != null">
+        BATCHNO,
+      </if>
+      <if test="stockno != null">
+        STOCKNO,
+      </if>
+      <if test="decltype != null">
+        DECLTYPE,
+      </if>
+      <if test="declno != null">
+        DECLNO,
+      </if>
+      <if test="itemno != null">
+        ITEMNO,
+      </if>
+      <if test="odeclno != null">
+        ODECLNO,
+      </if>
+      <if test="oitemno != null">
+        OITEMNO,
+      </if>
+      <if test="outstatus != null">
+        OUTSTATUS,
+      </if>
+      <if test="outrmks != null">
+        OUTRMKS,
+      </if>
+      <if test="confirmdate != null">
+        CONFIRMDATE,
+      </if>
+      <if test="descrip != null">
+        DESCRIP,
+      </if>
+      <if test="monthno != null">
+        MONTHNO,
+      </if>
+      <if test="userid != null">
+        USERID,
+      </if>
+      <if test="tradeprdtno != null">
+        TRADEPRDTNO,
+      </if>
+      <if test="nwght != null">
+        NWGHT,
+      </if>
+      <if test="gross != null">
+        GROSS,
+      </if>
+      <if test="outstrno != null">
+        OUTSTRNO,
+      </if>
+      <if test="unitprice != null">
+        UNITPRICE,
+      </if>
+      <if test="ccccode != null">
+        CCCCODE,
+      </if>
+      <if test="rlstime != null">
+        RLSTIME,
+      </if>
+      <if test="dutyrate != null">
+        DUTYRATE,
+      </if>
+      <if test="pono != null">
+        PONO,
+      </if>
+      <if test="invno != null">
+        INVNO,
+      </if>
+      <if test="countno != null">
+        COUNTNO,
+      </if>
+      <if test="mawb != null">
+        MAWB,
+      </if>
+      <if test="vesselno != null">
+        VESSELNO,
+      </if>
+      <if test="dutytype != null">
+        DUTYTYPE,
+      </if>
+      <if test="optype != null">
+        OPTYPE,
+      </if>
+      <if test="statmode != null">
+        STATMODE,
+      </if>
+      <if test="outrmks2 != null">
+        OUTRMKS2,
+      </if>
+      <if test="orefbillno != null">
+        OREFBILLNO,
+      </if>
+      <if test="oitem != null">
+        OITEM,
+      </if>
+      <if test="decldate != null">
+        DECLDATE,
+      </if>
+      <if test="invoice != null">
+        INVOICE,
+      </if>
+      <if test="moitemno != null">
+        MOITEMNO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        #{bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="refbillno != null">
+        #{refbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="item != null">
+        #{item,jdbcType=DECIMAL},
+      </if>
+      <if test="outpost != null">
+        #{outpost,jdbcType=VARCHAR},
+      </if>
+      <if test="prdtno != null">
+        #{prdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="routqty != null">
+        #{routqty,jdbcType=DECIMAL},
+      </if>
+      <if test="outunit != null">
+        #{outunit,jdbcType=VARCHAR},
+      </if>
+      <if test="outdate != null">
+        #{outdate,jdbcType=VARCHAR},
+      </if>
+      <if test="batchno != null">
+        #{batchno,jdbcType=VARCHAR},
+      </if>
+      <if test="stockno != null">
+        #{stockno,jdbcType=VARCHAR},
+      </if>
+      <if test="decltype != null">
+        #{decltype,jdbcType=VARCHAR},
+      </if>
+      <if test="declno != null">
+        #{declno,jdbcType=VARCHAR},
+      </if>
+      <if test="itemno != null">
+        #{itemno,jdbcType=DECIMAL},
+      </if>
+      <if test="odeclno != null">
+        #{odeclno,jdbcType=VARCHAR},
+      </if>
+      <if test="oitemno != null">
+        #{oitemno,jdbcType=DECIMAL},
+      </if>
+      <if test="outstatus != null">
+        #{outstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="outrmks != null">
+        #{outrmks,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmdate != null">
+        #{confirmdate,jdbcType=CHAR},
+      </if>
+      <if test="descrip != null">
+        #{descrip,jdbcType=VARCHAR},
+      </if>
+      <if test="monthno != null">
+        #{monthno,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeprdtno != null">
+        #{tradeprdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="nwght != null">
+        #{nwght,jdbcType=DECIMAL},
+      </if>
+      <if test="gross != null">
+        #{gross,jdbcType=DECIMAL},
+      </if>
+      <if test="outstrno != null">
+        #{outstrno,jdbcType=VARCHAR},
+      </if>
+      <if test="unitprice != null">
+        #{unitprice,jdbcType=DECIMAL},
+      </if>
+      <if test="ccccode != null">
+        #{ccccode,jdbcType=CHAR},
+      </if>
+      <if test="rlstime != null">
+        #{rlstime,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyrate != null">
+        #{dutyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="pono != null">
+        #{pono,jdbcType=VARCHAR},
+      </if>
+      <if test="invno != null">
+        #{invno,jdbcType=VARCHAR},
+      </if>
+      <if test="countno != null">
+        #{countno,jdbcType=DECIMAL},
+      </if>
+      <if test="mawb != null">
+        #{mawb,jdbcType=VARCHAR},
+      </if>
+      <if test="vesselno != null">
+        #{vesselno,jdbcType=VARCHAR},
+      </if>
+      <if test="dutytype != null">
+        #{dutytype,jdbcType=VARCHAR},
+      </if>
+      <if test="optype != null">
+        #{optype,jdbcType=VARCHAR},
+      </if>
+      <if test="statmode != null">
+        #{statmode,jdbcType=VARCHAR},
+      </if>
+      <if test="outrmks2 != null">
+        #{outrmks2,jdbcType=VARCHAR},
+      </if>
+      <if test="orefbillno != null">
+        #{orefbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="oitem != null">
+        #{oitem,jdbcType=DECIMAL},
+      </if>
+      <if test="decldate != null">
+        #{decldate,jdbcType=VARCHAR},
+      </if>
+      <if test="invoice != null">
+        #{invoice,jdbcType=VARCHAR},
+      </if>
+      <if test="moitemno != null">
+        #{moitemno,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="idv.heimlich.springboot.entity.po.OutdetailExample" resultType="java.lang.Long">
+    select count(*) from PCLMSMGR.OUTDETAIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update PCLMSMGR.OUTDETAIL
+    <set>
+      <if test="record.bondno != null">
+        BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refbillno != null">
+        REFBILLNO = #{record.refbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.item != null">
+        ITEM = #{record.item,jdbcType=DECIMAL},
+      </if>
+      <if test="record.outpost != null">
+        OUTPOST = #{record.outpost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prdtno != null">
+        PRDTNO = #{record.prdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.routqty != null">
+        ROUTQTY = #{record.routqty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.outunit != null">
+        OUTUNIT = #{record.outunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outdate != null">
+        OUTDATE = #{record.outdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchno != null">
+        BATCHNO = #{record.batchno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stockno != null">
+        STOCKNO = #{record.stockno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.decltype != null">
+        DECLTYPE = #{record.decltype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.declno != null">
+        DECLNO = #{record.declno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemno != null">
+        ITEMNO = #{record.itemno,jdbcType=DECIMAL},
+      </if>
+      <if test="record.odeclno != null">
+        ODECLNO = #{record.odeclno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oitemno != null">
+        OITEMNO = #{record.oitemno,jdbcType=DECIMAL},
+      </if>
+      <if test="record.outstatus != null">
+        OUTSTATUS = #{record.outstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outrmks != null">
+        OUTRMKS = #{record.outrmks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.confirmdate != null">
+        CONFIRMDATE = #{record.confirmdate,jdbcType=CHAR},
+      </if>
+      <if test="record.descrip != null">
+        DESCRIP = #{record.descrip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monthno != null">
+        MONTHNO = #{record.monthno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null">
+        USERID = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tradeprdtno != null">
+        TRADEPRDTNO = #{record.tradeprdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nwght != null">
+        NWGHT = #{record.nwght,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gross != null">
+        GROSS = #{record.gross,jdbcType=DECIMAL},
+      </if>
+      <if test="record.outstrno != null">
+        OUTSTRNO = #{record.outstrno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitprice != null">
+        UNITPRICE = #{record.unitprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ccccode != null">
+        CCCCODE = #{record.ccccode,jdbcType=CHAR},
+      </if>
+      <if test="record.rlstime != null">
+        RLSTIME = #{record.rlstime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dutyrate != null">
+        DUTYRATE = #{record.dutyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.pono != null">
+        PONO = #{record.pono,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invno != null">
+        INVNO = #{record.invno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countno != null">
+        COUNTNO = #{record.countno,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mawb != null">
+        MAWB = #{record.mawb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vesselno != null">
+        VESSELNO = #{record.vesselno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dutytype != null">
+        DUTYTYPE = #{record.dutytype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optype != null">
+        OPTYPE = #{record.optype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.statmode != null">
+        STATMODE = #{record.statmode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outrmks2 != null">
+        OUTRMKS2 = #{record.outrmks2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orefbillno != null">
+        OREFBILLNO = #{record.orefbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oitem != null">
+        OITEM = #{record.oitem,jdbcType=DECIMAL},
+      </if>
+      <if test="record.decldate != null">
+        DECLDATE = #{record.decldate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoice != null">
+        INVOICE = #{record.invoice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moitemno != null">
+        MOITEMNO = #{record.moitemno,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update PCLMSMGR.OUTDETAIL
+    set BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      REFBILLNO = #{record.refbillno,jdbcType=VARCHAR},
+      ITEM = #{record.item,jdbcType=DECIMAL},
+      OUTPOST = #{record.outpost,jdbcType=VARCHAR},
+      PRDTNO = #{record.prdtno,jdbcType=VARCHAR},
+      ROUTQTY = #{record.routqty,jdbcType=DECIMAL},
+      OUTUNIT = #{record.outunit,jdbcType=VARCHAR},
+      OUTDATE = #{record.outdate,jdbcType=VARCHAR},
+      BATCHNO = #{record.batchno,jdbcType=VARCHAR},
+      STOCKNO = #{record.stockno,jdbcType=VARCHAR},
+      DECLTYPE = #{record.decltype,jdbcType=VARCHAR},
+      DECLNO = #{record.declno,jdbcType=VARCHAR},
+      ITEMNO = #{record.itemno,jdbcType=DECIMAL},
+      ODECLNO = #{record.odeclno,jdbcType=VARCHAR},
+      OITEMNO = #{record.oitemno,jdbcType=DECIMAL},
+      OUTSTATUS = #{record.outstatus,jdbcType=VARCHAR},
+      OUTRMKS = #{record.outrmks,jdbcType=VARCHAR},
+      CONFIRMDATE = #{record.confirmdate,jdbcType=CHAR},
+      DESCRIP = #{record.descrip,jdbcType=VARCHAR},
+      MONTHNO = #{record.monthno,jdbcType=VARCHAR},
+      USERID = #{record.userid,jdbcType=VARCHAR},
+      TRADEPRDTNO = #{record.tradeprdtno,jdbcType=VARCHAR},
+      NWGHT = #{record.nwght,jdbcType=DECIMAL},
+      GROSS = #{record.gross,jdbcType=DECIMAL},
+      OUTSTRNO = #{record.outstrno,jdbcType=VARCHAR},
+      UNITPRICE = #{record.unitprice,jdbcType=DECIMAL},
+      CCCCODE = #{record.ccccode,jdbcType=CHAR},
+      RLSTIME = #{record.rlstime,jdbcType=VARCHAR},
+      DUTYRATE = #{record.dutyrate,jdbcType=DECIMAL},
+      PONO = #{record.pono,jdbcType=VARCHAR},
+      INVNO = #{record.invno,jdbcType=VARCHAR},
+      COUNTNO = #{record.countno,jdbcType=DECIMAL},
+      MAWB = #{record.mawb,jdbcType=VARCHAR},
+      VESSELNO = #{record.vesselno,jdbcType=VARCHAR},
+      DUTYTYPE = #{record.dutytype,jdbcType=VARCHAR},
+      OPTYPE = #{record.optype,jdbcType=VARCHAR},
+      STATMODE = #{record.statmode,jdbcType=VARCHAR},
+      OUTRMKS2 = #{record.outrmks2,jdbcType=VARCHAR},
+      OREFBILLNO = #{record.orefbillno,jdbcType=VARCHAR},
+      OITEM = #{record.oitem,jdbcType=DECIMAL},
+      DECLDATE = #{record.decldate,jdbcType=VARCHAR},
+      INVOICE = #{record.invoice,jdbcType=VARCHAR},
+      MOITEMNO = #{record.moitemno,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="idv.heimlich.springboot.entity.po.Outdetail">
+    update PCLMSMGR.OUTDETAIL
+    <set>
+      <if test="prdtno != null">
+        PRDTNO = #{prdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="routqty != null">
+        ROUTQTY = #{routqty,jdbcType=DECIMAL},
+      </if>
+      <if test="outunit != null">
+        OUTUNIT = #{outunit,jdbcType=VARCHAR},
+      </if>
+      <if test="outdate != null">
+        OUTDATE = #{outdate,jdbcType=VARCHAR},
+      </if>
+      <if test="batchno != null">
+        BATCHNO = #{batchno,jdbcType=VARCHAR},
+      </if>
+      <if test="stockno != null">
+        STOCKNO = #{stockno,jdbcType=VARCHAR},
+      </if>
+      <if test="decltype != null">
+        DECLTYPE = #{decltype,jdbcType=VARCHAR},
+      </if>
+      <if test="declno != null">
+        DECLNO = #{declno,jdbcType=VARCHAR},
+      </if>
+      <if test="itemno != null">
+        ITEMNO = #{itemno,jdbcType=DECIMAL},
+      </if>
+      <if test="odeclno != null">
+        ODECLNO = #{odeclno,jdbcType=VARCHAR},
+      </if>
+      <if test="oitemno != null">
+        OITEMNO = #{oitemno,jdbcType=DECIMAL},
+      </if>
+      <if test="outstatus != null">
+        OUTSTATUS = #{outstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="outrmks != null">
+        OUTRMKS = #{outrmks,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmdate != null">
+        CONFIRMDATE = #{confirmdate,jdbcType=CHAR},
+      </if>
+      <if test="descrip != null">
+        DESCRIP = #{descrip,jdbcType=VARCHAR},
+      </if>
+      <if test="monthno != null">
+        MONTHNO = #{monthno,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        USERID = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeprdtno != null">
+        TRADEPRDTNO = #{tradeprdtno,jdbcType=VARCHAR},
+      </if>
+      <if test="nwght != null">
+        NWGHT = #{nwght,jdbcType=DECIMAL},
+      </if>
+      <if test="gross != null">
+        GROSS = #{gross,jdbcType=DECIMAL},
+      </if>
+      <if test="outstrno != null">
+        OUTSTRNO = #{outstrno,jdbcType=VARCHAR},
+      </if>
+      <if test="unitprice != null">
+        UNITPRICE = #{unitprice,jdbcType=DECIMAL},
+      </if>
+      <if test="ccccode != null">
+        CCCCODE = #{ccccode,jdbcType=CHAR},
+      </if>
+      <if test="rlstime != null">
+        RLSTIME = #{rlstime,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyrate != null">
+        DUTYRATE = #{dutyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="pono != null">
+        PONO = #{pono,jdbcType=VARCHAR},
+      </if>
+      <if test="invno != null">
+        INVNO = #{invno,jdbcType=VARCHAR},
+      </if>
+      <if test="countno != null">
+        COUNTNO = #{countno,jdbcType=DECIMAL},
+      </if>
+      <if test="mawb != null">
+        MAWB = #{mawb,jdbcType=VARCHAR},
+      </if>
+      <if test="vesselno != null">
+        VESSELNO = #{vesselno,jdbcType=VARCHAR},
+      </if>
+      <if test="dutytype != null">
+        DUTYTYPE = #{dutytype,jdbcType=VARCHAR},
+      </if>
+      <if test="optype != null">
+        OPTYPE = #{optype,jdbcType=VARCHAR},
+      </if>
+      <if test="statmode != null">
+        STATMODE = #{statmode,jdbcType=VARCHAR},
+      </if>
+      <if test="outrmks2 != null">
+        OUTRMKS2 = #{outrmks2,jdbcType=VARCHAR},
+      </if>
+      <if test="orefbillno != null">
+        OREFBILLNO = #{orefbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="oitem != null">
+        OITEM = #{oitem,jdbcType=DECIMAL},
+      </if>
+      <if test="decldate != null">
+        DECLDATE = #{decldate,jdbcType=VARCHAR},
+      </if>
+      <if test="invoice != null">
+        INVOICE = #{invoice,jdbcType=VARCHAR},
+      </if>
+      <if test="moitemno != null">
+        MOITEMNO = #{moitemno,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and REFBILLNO = #{refbillno,jdbcType=VARCHAR}
+      and ITEM = #{item,jdbcType=DECIMAL}
+      and OUTPOST = #{outpost,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.Outdetail">
+    update PCLMSMGR.OUTDETAIL
+    set PRDTNO = #{prdtno,jdbcType=VARCHAR},
+      ROUTQTY = #{routqty,jdbcType=DECIMAL},
+      OUTUNIT = #{outunit,jdbcType=VARCHAR},
+      OUTDATE = #{outdate,jdbcType=VARCHAR},
+      BATCHNO = #{batchno,jdbcType=VARCHAR},
+      STOCKNO = #{stockno,jdbcType=VARCHAR},
+      DECLTYPE = #{decltype,jdbcType=VARCHAR},
+      DECLNO = #{declno,jdbcType=VARCHAR},
+      ITEMNO = #{itemno,jdbcType=DECIMAL},
+      ODECLNO = #{odeclno,jdbcType=VARCHAR},
+      OITEMNO = #{oitemno,jdbcType=DECIMAL},
+      OUTSTATUS = #{outstatus,jdbcType=VARCHAR},
+      OUTRMKS = #{outrmks,jdbcType=VARCHAR},
+      CONFIRMDATE = #{confirmdate,jdbcType=CHAR},
+      DESCRIP = #{descrip,jdbcType=VARCHAR},
+      MONTHNO = #{monthno,jdbcType=VARCHAR},
+      USERID = #{userid,jdbcType=VARCHAR},
+      TRADEPRDTNO = #{tradeprdtno,jdbcType=VARCHAR},
+      NWGHT = #{nwght,jdbcType=DECIMAL},
+      GROSS = #{gross,jdbcType=DECIMAL},
+      OUTSTRNO = #{outstrno,jdbcType=VARCHAR},
+      UNITPRICE = #{unitprice,jdbcType=DECIMAL},
+      CCCCODE = #{ccccode,jdbcType=CHAR},
+      RLSTIME = #{rlstime,jdbcType=VARCHAR},
+      DUTYRATE = #{dutyrate,jdbcType=DECIMAL},
+      PONO = #{pono,jdbcType=VARCHAR},
+      INVNO = #{invno,jdbcType=VARCHAR},
+      COUNTNO = #{countno,jdbcType=DECIMAL},
+      MAWB = #{mawb,jdbcType=VARCHAR},
+      VESSELNO = #{vesselno,jdbcType=VARCHAR},
+      DUTYTYPE = #{dutytype,jdbcType=VARCHAR},
+      OPTYPE = #{optype,jdbcType=VARCHAR},
+      STATMODE = #{statmode,jdbcType=VARCHAR},
+      OUTRMKS2 = #{outrmks2,jdbcType=VARCHAR},
+      OREFBILLNO = #{orefbillno,jdbcType=VARCHAR},
+      OITEM = #{oitem,jdbcType=DECIMAL},
+      DECLDATE = #{decldate,jdbcType=VARCHAR},
+      INVOICE = #{invoice,jdbcType=VARCHAR},
+      MOITEMNO = #{moitemno,jdbcType=DECIMAL}
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and REFBILLNO = #{refbillno,jdbcType=VARCHAR}
+      and ITEM = #{item,jdbcType=DECIMAL}
+      and OUTPOST = #{outpost,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idv.heimlich.springboot.entity.mapper.FuncinfMapper">
+  <resultMap id="BaseResultMap" type="idv.heimlich.springboot.entity.po.Funcinf">
+    <id column="FUNCID" jdbcType="VARCHAR" property="funcid" />
+    <result column="FUNCNAME" jdbcType="VARCHAR" property="funcname" />
+    <result column="CODENAME" jdbcType="VARCHAR" property="codename" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    FUNCID, FUNCNAME, CODENAME
+  </sql>
+  <select id="selectByExample" parameterType="idv.heimlich.springboot.entity.po.FuncinfExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.FUNCINF
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.FUNCINF
+    where FUNCID = #{funcid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from PCLMSMGR.FUNCINF
+    where FUNCID = #{funcid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="idv.heimlich.springboot.entity.po.FuncinfExample">
+    delete from PCLMSMGR.FUNCINF
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="idv.heimlich.springboot.entity.po.Funcinf">
+    insert into PCLMSMGR.FUNCINF (FUNCID, FUNCNAME, CODENAME
+      )
+    values (#{funcid,jdbcType=VARCHAR}, #{funcname,jdbcType=VARCHAR}, #{codename,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="idv.heimlich.springboot.entity.po.Funcinf">
+    insert into PCLMSMGR.FUNCINF
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="funcid != null">
+        FUNCID,
+      </if>
+      <if test="funcname != null">
+        FUNCNAME,
+      </if>
+      <if test="codename != null">
+        CODENAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="funcid != null">
+        #{funcid,jdbcType=VARCHAR},
+      </if>
+      <if test="funcname != null">
+        #{funcname,jdbcType=VARCHAR},
+      </if>
+      <if test="codename != null">
+        #{codename,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="idv.heimlich.springboot.entity.po.FuncinfExample" resultType="java.lang.Long">
+    select count(*) from PCLMSMGR.FUNCINF
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update PCLMSMGR.FUNCINF
+    <set>
+      <if test="record.funcid != null">
+        FUNCID = #{record.funcid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.funcname != null">
+        FUNCNAME = #{record.funcname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codename != null">
+        CODENAME = #{record.codename,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update PCLMSMGR.FUNCINF
+    set FUNCID = #{record.funcid,jdbcType=VARCHAR},
+      FUNCNAME = #{record.funcname,jdbcType=VARCHAR},
+      CODENAME = #{record.codename,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="idv.heimlich.springboot.entity.po.Funcinf">
+    update PCLMSMGR.FUNCINF
+    <set>
+      <if test="funcname != null">
+        FUNCNAME = #{funcname,jdbcType=VARCHAR},
+      </if>
+      <if test="codename != null">
+        CODENAME = #{codename,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FUNCID = #{funcid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.Funcinf">
+    update PCLMSMGR.FUNCINF
+    set FUNCNAME = #{funcname,jdbcType=VARCHAR},
+      CODENAME = #{codename,jdbcType=VARCHAR}
+    where FUNCID = #{funcid,jdbcType=VARCHAR}
+  </update>
+</mapper>

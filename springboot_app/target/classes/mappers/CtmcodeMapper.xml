@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idv.heimlich.springboot.entity.mapper.CtmcodeMapper">
+  <resultMap id="BaseResultMap" type="idv.heimlich.springboot.entity.po.Ctmcode">
+    <id column="BONDNO" jdbcType="VARCHAR" property="bondno" />
+    <id column="CTMCODE" jdbcType="VARCHAR" property="ctmcode" />
+    <result column="CTMNAME" jdbcType="VARCHAR" property="ctmname" />
+    <result column="CTMID" jdbcType="VARCHAR" property="ctmid" />
+    <result column="CTMBAN" jdbcType="VARCHAR" property="ctmban" />
+    <result column="CTMENGNAME" jdbcType="VARCHAR" property="ctmengname" />
+    <result column="CTMADD" jdbcType="VARCHAR" property="ctmadd" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BONDNO, CTMCODE, CTMNAME, CTMID, CTMBAN, CTMENGNAME, CTMADD
+  </sql>
+  <select id="selectByExample" parameterType="idv.heimlich.springboot.entity.po.CtmcodeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.CTMCODE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.CtmcodeKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.CTMCODE
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and CTMCODE = #{ctmcode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.CtmcodeKey">
+    delete from PCLMSMGR.CTMCODE
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and CTMCODE = #{ctmcode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="idv.heimlich.springboot.entity.po.CtmcodeExample">
+    delete from PCLMSMGR.CTMCODE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="idv.heimlich.springboot.entity.po.Ctmcode">
+    insert into PCLMSMGR.CTMCODE (BONDNO, CTMCODE, CTMNAME, 
+      CTMID, CTMBAN, CTMENGNAME, 
+      CTMADD)
+    values (#{bondno,jdbcType=VARCHAR}, #{ctmcode,jdbcType=VARCHAR}, #{ctmname,jdbcType=VARCHAR}, 
+      #{ctmid,jdbcType=VARCHAR}, #{ctmban,jdbcType=VARCHAR}, #{ctmengname,jdbcType=VARCHAR}, 
+      #{ctmadd,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="idv.heimlich.springboot.entity.po.Ctmcode">
+    insert into PCLMSMGR.CTMCODE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        BONDNO,
+      </if>
+      <if test="ctmcode != null">
+        CTMCODE,
+      </if>
+      <if test="ctmname != null">
+        CTMNAME,
+      </if>
+      <if test="ctmid != null">
+        CTMID,
+      </if>
+      <if test="ctmban != null">
+        CTMBAN,
+      </if>
+      <if test="ctmengname != null">
+        CTMENGNAME,
+      </if>
+      <if test="ctmadd != null">
+        CTMADD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bondno != null">
+        #{bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="ctmcode != null">
+        #{ctmcode,jdbcType=VARCHAR},
+      </if>
+      <if test="ctmname != null">
+        #{ctmname,jdbcType=VARCHAR},
+      </if>
+      <if test="ctmid != null">
+        #{ctmid,jdbcType=VARCHAR},
+      </if>
+      <if test="ctmban != null">
+        #{ctmban,jdbcType=VARCHAR},
+      </if>
+      <if test="ctmengname != null">
+        #{ctmengname,jdbcType=VARCHAR},
+      </if>
+      <if test="ctmadd != null">
+        #{ctmadd,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="idv.heimlich.springboot.entity.po.CtmcodeExample" resultType="java.lang.Long">
+    select count(*) from PCLMSMGR.CTMCODE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update PCLMSMGR.CTMCODE
+    <set>
+      <if test="record.bondno != null">
+        BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctmcode != null">
+        CTMCODE = #{record.ctmcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctmname != null">
+        CTMNAME = #{record.ctmname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctmid != null">
+        CTMID = #{record.ctmid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctmban != null">
+        CTMBAN = #{record.ctmban,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctmengname != null">
+        CTMENGNAME = #{record.ctmengname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctmadd != null">
+        CTMADD = #{record.ctmadd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update PCLMSMGR.CTMCODE
+    set BONDNO = #{record.bondno,jdbcType=VARCHAR},
+      CTMCODE = #{record.ctmcode,jdbcType=VARCHAR},
+      CTMNAME = #{record.ctmname,jdbcType=VARCHAR},
+      CTMID = #{record.ctmid,jdbcType=VARCHAR},
+      CTMBAN = #{record.ctmban,jdbcType=VARCHAR},
+      CTMENGNAME = #{record.ctmengname,jdbcType=VARCHAR},
+      CTMADD = #{record.ctmadd,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="idv.heimlich.springboot.entity.po.Ctmcode">
+    update PCLMSMGR.CTMCODE
+    <set>
+      <if test="ctmname != null">
+        CTMNAME = #{ctmname,jdbcType=VARCHAR},
+      </if>
+      <if test="ctmid != null">
+        CTMID = #{ctmid,jdbcType=VARCHAR},
+      </if>
+      <if test="ctmban != null">
+        CTMBAN = #{ctmban,jdbcType=VARCHAR},
+      </if>
+      <if test="ctmengname != null">
+        CTMENGNAME = #{ctmengname,jdbcType=VARCHAR},
+      </if>
+      <if test="ctmadd != null">
+        CTMADD = #{ctmadd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and CTMCODE = #{ctmcode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.Ctmcode">
+    update PCLMSMGR.CTMCODE
+    set CTMNAME = #{ctmname,jdbcType=VARCHAR},
+      CTMID = #{ctmid,jdbcType=VARCHAR},
+      CTMBAN = #{ctmban,jdbcType=VARCHAR},
+      CTMENGNAME = #{ctmengname,jdbcType=VARCHAR},
+      CTMADD = #{ctmadd,jdbcType=VARCHAR}
+    where BONDNO = #{bondno,jdbcType=VARCHAR}
+      and CTMCODE = #{ctmcode,jdbcType=VARCHAR}
+  </update>
+</mapper>

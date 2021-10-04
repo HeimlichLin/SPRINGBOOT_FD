@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="idv.heimlich.springboot.entity.mapper.AnnounceMapper">
+  <resultMap id="BaseResultMap" type="idv.heimlich.springboot.entity.po.Announce">
+    <id column="SERIALNO" jdbcType="DECIMAL" property="serialno" />
+    <result column="PUBLISHER" jdbcType="VARCHAR" property="publisher" />
+    <result column="ANNOUNCEDATE" jdbcType="VARCHAR" property="announcedate" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="CONTENT" jdbcType="VARCHAR" property="content" />
+    <result column="ISDISPLAY" jdbcType="VARCHAR" property="isdisplay" />
+    <result column="URL01" jdbcType="VARCHAR" property="url01" />
+    <result column="URL02" jdbcType="VARCHAR" property="url02" />
+    <result column="URL03" jdbcType="VARCHAR" property="url03" />
+    <result column="AUTHID" jdbcType="VARCHAR" property="authid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SERIALNO, PUBLISHER, ANNOUNCEDATE, TITLE, CONTENT, ISDISPLAY, URL01, URL02, URL03, 
+    AUTHID
+  </sql>
+  <select id="selectByExample" parameterType="idv.heimlich.springboot.entity.po.AnnounceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.ANNOUNCE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Short" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PCLMSMGR.ANNOUNCE
+    where SERIALNO = #{serialno,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short">
+    delete from PCLMSMGR.ANNOUNCE
+    where SERIALNO = #{serialno,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="idv.heimlich.springboot.entity.po.AnnounceExample">
+    delete from PCLMSMGR.ANNOUNCE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="idv.heimlich.springboot.entity.po.Announce">
+    insert into PCLMSMGR.ANNOUNCE (SERIALNO, PUBLISHER, ANNOUNCEDATE, 
+      TITLE, CONTENT, ISDISPLAY, 
+      URL01, URL02, URL03, 
+      AUTHID)
+    values (#{serialno,jdbcType=DECIMAL}, #{publisher,jdbcType=VARCHAR}, #{announcedate,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{isdisplay,jdbcType=VARCHAR}, 
+      #{url01,jdbcType=VARCHAR}, #{url02,jdbcType=VARCHAR}, #{url03,jdbcType=VARCHAR}, 
+      #{authid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="idv.heimlich.springboot.entity.po.Announce">
+    insert into PCLMSMGR.ANNOUNCE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="serialno != null">
+        SERIALNO,
+      </if>
+      <if test="publisher != null">
+        PUBLISHER,
+      </if>
+      <if test="announcedate != null">
+        ANNOUNCEDATE,
+      </if>
+      <if test="title != null">
+        TITLE,
+      </if>
+      <if test="content != null">
+        CONTENT,
+      </if>
+      <if test="isdisplay != null">
+        ISDISPLAY,
+      </if>
+      <if test="url01 != null">
+        URL01,
+      </if>
+      <if test="url02 != null">
+        URL02,
+      </if>
+      <if test="url03 != null">
+        URL03,
+      </if>
+      <if test="authid != null">
+        AUTHID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="serialno != null">
+        #{serialno,jdbcType=DECIMAL},
+      </if>
+      <if test="publisher != null">
+        #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="announcedate != null">
+        #{announcedate,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="isdisplay != null">
+        #{isdisplay,jdbcType=VARCHAR},
+      </if>
+      <if test="url01 != null">
+        #{url01,jdbcType=VARCHAR},
+      </if>
+      <if test="url02 != null">
+        #{url02,jdbcType=VARCHAR},
+      </if>
+      <if test="url03 != null">
+        #{url03,jdbcType=VARCHAR},
+      </if>
+      <if test="authid != null">
+        #{authid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="idv.heimlich.springboot.entity.po.AnnounceExample" resultType="java.lang.Long">
+    select count(*) from PCLMSMGR.ANNOUNCE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update PCLMSMGR.ANNOUNCE
+    <set>
+      <if test="record.serialno != null">
+        SERIALNO = #{record.serialno,jdbcType=DECIMAL},
+      </if>
+      <if test="record.publisher != null">
+        PUBLISHER = #{record.publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="record.announcedate != null">
+        ANNOUNCEDATE = #{record.announcedate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        CONTENT = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdisplay != null">
+        ISDISPLAY = #{record.isdisplay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url01 != null">
+        URL01 = #{record.url01,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url02 != null">
+        URL02 = #{record.url02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url03 != null">
+        URL03 = #{record.url03,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authid != null">
+        AUTHID = #{record.authid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update PCLMSMGR.ANNOUNCE
+    set SERIALNO = #{record.serialno,jdbcType=DECIMAL},
+      PUBLISHER = #{record.publisher,jdbcType=VARCHAR},
+      ANNOUNCEDATE = #{record.announcedate,jdbcType=VARCHAR},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      CONTENT = #{record.content,jdbcType=VARCHAR},
+      ISDISPLAY = #{record.isdisplay,jdbcType=VARCHAR},
+      URL01 = #{record.url01,jdbcType=VARCHAR},
+      URL02 = #{record.url02,jdbcType=VARCHAR},
+      URL03 = #{record.url03,jdbcType=VARCHAR},
+      AUTHID = #{record.authid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="idv.heimlich.springboot.entity.po.Announce">
+    update PCLMSMGR.ANNOUNCE
+    <set>
+      <if test="publisher != null">
+        PUBLISHER = #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="announcedate != null">
+        ANNOUNCEDATE = #{announcedate,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="isdisplay != null">
+        ISDISPLAY = #{isdisplay,jdbcType=VARCHAR},
+      </if>
+      <if test="url01 != null">
+        URL01 = #{url01,jdbcType=VARCHAR},
+      </if>
+      <if test="url02 != null">
+        URL02 = #{url02,jdbcType=VARCHAR},
+      </if>
+      <if test="url03 != null">
+        URL03 = #{url03,jdbcType=VARCHAR},
+      </if>
+      <if test="authid != null">
+        AUTHID = #{authid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SERIALNO = #{serialno,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="idv.heimlich.springboot.entity.po.Announce">
+    update PCLMSMGR.ANNOUNCE
+    set PUBLISHER = #{publisher,jdbcType=VARCHAR},
+      ANNOUNCEDATE = #{announcedate,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      ISDISPLAY = #{isdisplay,jdbcType=VARCHAR},
+      URL01 = #{url01,jdbcType=VARCHAR},
+      URL02 = #{url02,jdbcType=VARCHAR},
+      URL03 = #{url03,jdbcType=VARCHAR},
+      AUTHID = #{authid,jdbcType=VARCHAR}
+    where SERIALNO = #{serialno,jdbcType=DECIMAL}
+  </update>
+</mapper>
